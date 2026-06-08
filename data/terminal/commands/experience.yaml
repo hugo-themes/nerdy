@@ -1,0 +1,18 @@
+name: experience
+label: Experience
+description: Professional work history
+quick: true
+weight: 30
+roles:
+  - title: Senior Software Engineer
+    company: Tech Innovators Inc.
+    period: Jan 2022 - Present
+    highlights:
+      - Led the migration of legacy monolithic architecture to microservices.
+      - Mentored junior developers and established CI/CD best practices.
+  - title: Full-Stack Developer
+    company: Creative Solutions Agency
+    period: Mar 2019 - Dec 2021
+    highlights:
+      - Developed customized React-based web applications for diverse clients.
+      - Designed and optimized PostgreSQL databases handling over 1M+ daily queries.

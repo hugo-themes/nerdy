@@ -1,0 +1,28 @@
+{{ $commands := hugo.Data.terminal.commands }}
+{{ $config := hugo.Data.terminal.config }}
+<div class="hidden" aria-hidden="true">
+  <template
+    data-terminal-command="help"
+    data-label="Help"
+    data-description="List available commands"
+    data-weight="0"
+  >{{ partial "terminal/commands/help.html" (dict "commands" $commands "builtins" $config.builtins) }}</template>
+
+  <template
+    data-terminal-command="whoami"
+    data-label="Whoami"
+    data-description="Print current user"
+    data-weight="90"
+  >{{ partial "terminal/commands/whoami.html" $config }}</template>
+
+  {{ range $name, $command := $commands }}
+    {{ $partial := printf "terminal/commands/%s.html" $name }}
+    <template
+      data-terminal-command="{{ $name }}"
+      data-label="{{ $command.label | default (title $name) }}"
+      data-description="{{ $command.description }}"
+      data-quick="{{ cond (eq $command.quick true) "true" "false" }}"
+      data-weight="{{ $command.weight | default 999 }}"
+    >{{ partial $partial $command }}</template>
+  {{ end }}
+</div>

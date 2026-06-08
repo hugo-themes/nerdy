@@ -1,0 +1,34 @@
+baseURL: "https://example.org/"
+locale: en-us
+title: Nerdy
+disableKinds:
+  - taxonomy
+  - term
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+build:
+  buildStats:
+    enable: true
+  cachebusters:
+    - source: 'assets/notwatching/hugo_stats\.json'
+      target: css
+    - source: '(postcss|tailwind)\.config\.(js|mjs|ts)'
+      target: css
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: layouts
+      target: layouts
+    - source: archetypes
+      target: archetypes
+    - disableWatch: true
+      source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
+menus:
+  main:
+    - name: Home
+      pageRef: /
+      weight: 10

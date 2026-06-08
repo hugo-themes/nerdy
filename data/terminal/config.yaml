@@ -1,0 +1,16 @@
+user: guest
+host: MacBook-Pro
+directory: "~"
+window_title: "guest — -bash — 80x24"
+auto_command: help
+builtins:
+  - name: clear
+    description: Clear terminal output
+  - name: whoami
+    description: Print current user
+  - name: date
+    description: Display current system date
+  - name: echo
+    description: Print text back to the terminal
+  - name: sudo
+    description: Try elevated privileges

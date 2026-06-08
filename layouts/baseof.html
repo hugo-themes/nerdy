@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "en" }}" x-data="themeToggle">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="min-h-screen bg-background text-foreground">
+    {{ partial "header.html" . }}
+    <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </body>
+</html>

@@ -1,0 +1,12 @@
+name = "Nerdy"
+license = "MIT"
+licenselink = "https://github.com/hugo-themes/nerdy/blob/main/LICENSE"
+description = "A Hugo theme template with Tailwind CSS and Alpine.js."
+homepage = "https://github.com/hugo-themes/nerdy"
+tags = ["blog", "tailwindcss", "alpinejs", "responsive", "dark-mode"]
+features = ["tailwindcss", "alpinejs", "dark-mode"]
+min_version = "0.128.0"
+
+[author]
+  name = "Hugo Themes"
+  homepage = "https://github.com/hugo-themes"

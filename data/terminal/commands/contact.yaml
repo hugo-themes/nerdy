@@ -1,0 +1,18 @@
+name: contact
+label: Contact
+description: How to reach me
+quick: true
+weight: 50
+intro: Let's build something awesome together!
+email: hello@yourdomain.com
+links:
+  - label: GitHub
+    text: https://github.com/yourusername
+    url: https://github.com/yourusername
+  - label: LinkedIn
+    text: https://linkedin.com/in/yourusername
+    url: https://linkedin.com/in/yourusername
+  - label: Twitter
+    text: "@yourhandle"
+    url: https://twitter.com/yourhandle
+outro: Drop me a line or run the commands above to explore more.

@@ -1,0 +1,82 @@
+{{ $config := hugo.Data.terminal.config }}
+{{ $terminalConfig := dict
+  "user" ($config.user | default "guest")
+  "host" ($config.host | default "MacBook-Pro")
+  "directory" ($config.directory | default "~")
+  "autoCommand" ($config.auto_command | default "help")
+}}
+
+<section class="min-h-[calc(100vh-12rem)] rounded-3xl bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] p-2 font-mono text-sm text-gray-100 shadow-2xl md:p-8 md:text-base">
+  <div
+    class="relative z-10 mx-auto flex h-[min(42rem,calc(100vh-14rem))] min-h-[34rem] w-full max-w-5xl flex-col overflow-hidden rounded-xl border border-[#404040] bg-[rgba(30,30,30,0.85)] shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-1 ring-black/50 backdrop-blur-md"
+    x-data='terminalPortfolio({{ $terminalConfig | jsonify }})'
+    x-on:click="focusInput()"
+    x-cloak
+  >
+    <div class="relative flex h-10 shrink-0 items-center gap-2 border-b border-black/20 bg-[#2d2d2d] px-4">
+      <div class="h-3.5 w-3.5 rounded-full border border-black/10 bg-[#ff5f56] shadow-sm"></div>
+      <div class="h-3.5 w-3.5 rounded-full border border-black/10 bg-[#ffbd2e] shadow-sm"></div>
+      <div class="h-3.5 w-3.5 rounded-full border border-black/10 bg-[#27c93f] shadow-sm"></div>
+      <div class="pointer-events-none absolute inset-x-0 text-center font-sans text-xs font-bold tracking-wide text-gray-400">
+        {{ $config.window_title | default "guest — -bash — 80x24" }}
+      </div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto scroll-smooth p-4 text-gray-100 md:p-6" x-ref="container">
+      <div class="w-full">
+        <template x-for="(entry, index) in history" :key="index">
+          <div>
+            <div class="mb-1" x-show="entry.type === 'command'">
+              <span class="mr-2 font-bold text-gray-100">
+                <span x-text="`${prompt.user}@${prompt.host}`"></span>
+                <span class="text-[#3B8EEA]" x-text="prompt.directory"></span>
+                %
+              </span>
+              <span class="text-gray-100" x-text="entry.command"></span>
+            </div>
+            <div x-show="entry.type === 'output'" x-html="entry.html"></div>
+          </div>
+        </template>
+      </div>
+
+      <div class="relative mt-2 flex cursor-text items-center" x-on:click.stop="focusInput()">
+        <span class="mr-2 font-bold text-gray-100">
+          <span x-text="`${prompt.user}@${prompt.host}`"></span>
+          <span class="text-[#3B8EEA]" x-text="prompt.directory"></span>
+          %
+        </span>
+        <span class="whitespace-pre text-gray-100" x-text="input"></span>
+        <span class="ml-0.5 block h-[1.2em] w-2.5 animate-pulse bg-gray-400"></span>
+        <input
+          class="absolute left-0 top-0 h-full w-full cursor-text border-none bg-transparent text-transparent opacity-0 outline-none ring-0"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          x-ref="input"
+          x-model="input"
+          x-on:keydown.enter.prevent="submit()"
+          x-bind:disabled="isProcessing"
+        >
+      </div>
+    </div>
+
+    <div class="flex h-14 shrink-0 items-center gap-3 overflow-x-auto whitespace-nowrap border-t border-[#404040] bg-[#2d2d2d]/80 px-4 backdrop-blur">
+      <div class="mr-2 hidden select-none font-sans text-xs uppercase tracking-widest text-gray-400 md:block">Quick Links:</div>
+      <template x-for="command in quickCommands" :key="command.name">
+        <button
+          class="rounded border border-gray-600 bg-gray-700/50 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-100 transition-colors hover:bg-gray-600 active:scale-95"
+          type="button"
+          x-text="command.label"
+          x-on:click.stop="runQuickCommand(command.name)"
+        ></button>
+      </template>
+      <button
+        class="ml-auto rounded bg-transparent px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-400 transition-colors hover:bg-gray-700 active:scale-95"
+        type="button"
+        x-on:click.stop="runQuickCommand('clear')"
+      >Clear</button>
+    </div>
+
+    {{ partial "terminal/command-manager.html" . }}
+  </div>
+</section>

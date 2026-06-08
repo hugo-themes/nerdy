@@ -1,0 +1,6 @@
+<pre class="font-mono whitespace-pre-wrap leading-relaxed">{{ .intro }}
+
+{{ with .email }}<span class="text-cyan-400">Email:</span>      <a class="pointer-events-auto relative z-50 text-[#f1fa8c] underline hover:text-yellow-100" href="mailto:{{ . }}">{{ . }}</a>
+{{ end }}{{ range .links }}<span class="text-cyan-400">{{ .label }}:</span>     <a class="pointer-events-auto relative z-50 text-blue-400 underline hover:text-blue-300" href="{{ .url | safeURL }}" target="_blank" rel="noopener noreferrer">{{ .text | default .url }}</a>
+{{ end }}
+{{ .outro }}</pre>

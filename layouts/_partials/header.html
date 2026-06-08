@@ -1,0 +1,13 @@
+<header class="border-b border-border bg-background/80 backdrop-blur">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+    <a class="text-lg font-bold" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+    <div class="flex items-center gap-4">
+      {{ range site.Menus.main }}
+        <a class="text-sm font-medium text-muted-foreground hover:text-foreground" href="{{ .URL }}">{{ .Name }}</a>
+      {{ end }}
+      <button class="rounded-md border border-border px-3 py-2 text-sm" type="button" x-on:click="toggle()" x-text="dark ? 'Light' : 'Dark'">
+        Theme
+      </button>
+    </div>
+  </nav>
+</header>

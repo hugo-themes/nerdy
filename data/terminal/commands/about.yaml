@@ -1,0 +1,14 @@
+name: about
+label: About
+description: Information about me
+quick: true
+weight: 10
+greeting: Hello, World!
+person_name: "[Your Name]"
+role: Full-Stack Developer
+summary: I specialize in writing clean, efficient, and robust code.
+details:
+  - My journey in software development started with a fascination for how things work under the hood. Today, I build scalable web applications, design RESTful APIs, and occasionally tinker with system-level programming.
+quote:
+  text: First, solve the problem. Then, write the code.
+  author: John Johnson

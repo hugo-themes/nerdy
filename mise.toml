@@ -1,0 +1,23 @@
+[tools]
+go = "latest"
+hugo = "latest"
+node = "latest"
+npm = "latest"
+
+[tasks.install]
+description = "Install dependencies"
+run = "npm install"
+
+[tasks.build]
+description = "Build site"
+run = "hugo --minify --gc"
+depends = ["install"]
+
+[tasks.server]
+description = "Run Hugo server in watch mode"
+run = "hugo server --buildDrafts --watch"
+depends = ["install"]
+
+[tasks.update]
+description = "Update node dependencies"
+run = "npm update"

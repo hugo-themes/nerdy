@@ -1,0 +1,35 @@
+name: skills
+label: Skills
+description: My technical stack
+quick: true
+weight: 20
+categories:
+  - key: core_languages
+    items:
+      - JavaScript
+      - TypeScript
+      - Python
+      - HTML/CSS
+  - key: frontend
+    items:
+      - React.js
+      - Next.js
+      - Tailwind CSS
+      - Redux
+  - key: backend
+    items:
+      - Node.js
+      - Express
+      - Django
+      - REST APIs
+  - key: database
+    items:
+      - PostgreSQL
+      - MongoDB
+      - Redis
+  - key: devops_tools
+    items:
+      - Git
+      - Docker
+      - AWS
+      - Linux / Bash

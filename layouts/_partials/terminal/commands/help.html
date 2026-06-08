@@ -1,0 +1,7 @@
+<pre class="font-mono whitespace-pre-wrap leading-relaxed">Available commands:
+{{- range sort .commands "weight" }}
+  <span class="font-bold text-cyan-400">{{ .name }}</span>{{ strings.Repeat (sub 12 (len .name)) " " }}<span class="text-gray-400">- {{ .description }}</span>
+{{- end }}
+{{- range .builtins }}
+  <span class="font-bold text-cyan-400">{{ .name }}</span>{{ strings.Repeat (sub 12 (len .name)) " " }}<span class="text-gray-400">- {{ .description }}</span>
+{{- end }}</pre>
