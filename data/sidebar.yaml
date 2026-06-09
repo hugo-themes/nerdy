@@ -26,16 +26,16 @@ sections:
     items:
       - label: Experience
         value: 5+ yrs
-        accent: text-emerald-300
+        accent: text-emerald-700 dark:text-emerald-300
       - label: Focus
         value: Scalable Backends
-        accent: text-cyan-300
+        accent: text-cyan-700 dark:text-cyan-300
       - label: Debugging
         value: Persistent
-        accent: text-yellow-200
+        accent: text-amber-700 dark:text-yellow-200
       - label: Architecture
         value: Pragmatic
-        accent: text-purple-300
+        accent: text-purple-700 dark:text-purple-300
   - id: core-stack
     type: tags
     title: Core Stack

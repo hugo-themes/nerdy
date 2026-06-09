@@ -2,34 +2,34 @@
 {{ with $sidebar }}
   <aside class="flex flex-col gap-6 lg:sticky lg:top-12 lg:col-span-4 lg:h-fit lg:self-start">
     {{ with .profile }}
-      <section class="rounded-2xl border border-slate-700/80 bg-slate-800/80 p-6 shadow-xl backdrop-blur-md">
+      <section class="rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-xl shadow-slate-200/60 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/80 dark:shadow-black/20">
         <div class="mb-6 flex items-center gap-4">
-          <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-600 bg-slate-900/70">
-            <span class="font-mono text-2xl text-cyan-300">{{ .avatar | default "{}" }}</span>
+          <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-100/80 dark:border-slate-600 dark:bg-slate-900/70">
+            <span class="font-mono text-2xl text-cyan-700 dark:text-cyan-300">{{ .avatar | default "{}" }}</span>
           </div>
           <div>
-            <h1 class="text-xl font-bold tracking-tight text-white">{{ .name }}</h1>
-            <p class="mt-1 font-mono text-sm text-cyan-300">{{ .title }}</p>
+            <h1 class="text-xl font-bold tracking-tight text-slate-950 dark:text-white">{{ .name }}</h1>
+            <p class="mt-1 font-mono text-sm text-cyan-700 dark:text-cyan-300">{{ .title }}</p>
           </div>
         </div>
 
-        {{ with .description }}<p class="mb-6 text-sm leading-relaxed text-slate-400">{{ . }}</p>{{ end }}
+        {{ with .description }}<p class="mb-6 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{{ . }}</p>{{ end }}
 
         {{ with .status }}
-          <div class="mb-6 flex flex-col gap-2 rounded-lg border border-slate-700 bg-slate-900/45 p-4 font-mono text-xs shadow-inner">
+          <div class="mb-6 flex flex-col gap-2 rounded-lg border border-slate-200 bg-slate-50/80 p-4 font-mono text-xs shadow-inner dark:border-slate-700 dark:bg-slate-900/45">
             <div class="flex items-center gap-3">
-              <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,0.95)]"></span>
-              <span class="text-slate-300">{{ .label }}: <span class="font-bold text-white">{{ .value }}</span></span>
+              <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.75)] dark:bg-emerald-300 dark:shadow-[0_0_10px_rgba(110,231,183,0.95)]"></span>
+              <span class="text-slate-700 dark:text-slate-300">{{ .label }}: <span class="font-bold text-slate-950 dark:text-white">{{ .value }}</span></span>
             </div>
-            <div class="pl-5 text-slate-400">└─ {{ .preference_label }}: <span class="text-cyan-300">{{ .preference }}</span></div>
+            <div class="pl-5 text-slate-600 dark:text-slate-400">└─ {{ .preference_label }}: <span class="text-cyan-700 dark:text-cyan-300">{{ .preference }}</span></div>
           </div>
         {{ end }}
 
         {{ with .links }}
           <div class="flex flex-col gap-3">
             {{ range . }}
-              <a class="group flex items-center gap-3 text-sm text-slate-400 transition-colors hover:text-white" href="{{ .url }}" {{ if hasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
-                <span class="transition-colors group-hover:text-cyan-300">{{ partial "home/icon.html" (dict "name" .icon "class" "h-5 w-5") }}</span>
+              <a class="group flex items-center gap-3 text-sm text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-400 dark:hover:text-white" href="{{ .url }}" {{ if hasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
+                <span class="transition-colors group-hover:text-cyan-700 dark:group-hover:text-cyan-300">{{ partial "home/icon.html" (dict "name" .icon "class" "h-5 w-5") }}</span>
                 {{ .label }}
               </a>
             {{ end }}
@@ -40,30 +40,30 @@
 
     {{ range .sections }}
       {{ if eq .type "stats" }}
-        <section class="rounded-2xl border border-slate-700/80 bg-slate-800/80 p-6 shadow-xl backdrop-blur-md">
-          <h2 class="mb-4 font-mono text-xs font-bold uppercase tracking-widest text-slate-500">{{ .title }}</h2>
+        <section class="rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-xl shadow-slate-200/60 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/80 dark:shadow-black/20">
+          <h2 class="mb-4 font-mono text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-500">{{ .title }}</h2>
           <div class="space-y-3 font-mono text-xs">
             {{ range .items }}
-              <div class="flex items-center justify-between gap-4 border-b border-slate-700/50 pb-2 last:border-b-0 last:pb-0">
-                <span class="text-slate-400">{{ .label }}:</span>
+              <div class="flex items-center justify-between gap-4 border-b border-slate-200/80 pb-2 last:border-b-0 last:pb-0 dark:border-slate-700/50">
+                <span class="text-slate-600 dark:text-slate-400">{{ .label }}:</span>
                 <span class="text-right font-bold {{ .accent }}">{{ .value }}</span>
               </div>
             {{ end }}
           </div>
         </section>
       {{ else if eq .type "tags" }}
-        <section class="rounded-2xl border border-slate-700/80 bg-slate-800/80 p-6 shadow-xl backdrop-blur-md">
-          <h2 class="mb-4 font-mono text-xs font-bold uppercase tracking-widest text-slate-500">{{ .title }}</h2>
+        <section class="rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-xl shadow-slate-200/60 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/80 dark:shadow-black/20">
+          <h2 class="mb-4 font-mono text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-500">{{ .title }}</h2>
           <div class="flex flex-wrap gap-2">
             {{ range .items }}
-              <span class="rounded-md border border-slate-700 bg-slate-900/70 px-3 py-1 font-mono text-xs text-cyan-300">{{ . }}</span>
+              <span class="rounded-md border border-slate-200 bg-slate-100/90 px-3 py-1 font-mono text-xs text-cyan-700 dark:border-slate-700 dark:bg-slate-900/70 dark:text-cyan-300">{{ . }}</span>
             {{ end }}
           </div>
         </section>
       {{ else if eq .type "theme_toggle" }}
-        <button class="group mt-2 flex w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-2 font-mono text-xs text-slate-400 transition hover:border-slate-500 hover:text-white active:scale-95" type="button" x-on:click="toggle()">
-          <span class="transition-colors group-hover:text-cyan-300" x-show="dark">{{ partial "home/icon.html" (dict "name" "moon" "class" "h-4 w-4") }}</span>
-          <span class="transition-colors group-hover:text-yellow-300" x-show="!dark">{{ partial "home/icon.html" (dict "name" "sun" "class" "h-4 w-4") }}</span>
+        <button class="group mt-2 flex w-full items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white/70 px-4 py-2 font-mono text-xs text-slate-600 transition hover:border-slate-400 hover:text-slate-950 active:scale-95 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white" type="button" x-on:click="toggle()">
+          <span class="transition-colors group-hover:text-cyan-700 dark:group-hover:text-cyan-300" x-show="dark">{{ partial "home/icon.html" (dict "name" "moon" "class" "h-4 w-4") }}</span>
+          <span class="transition-colors group-hover:text-yellow-600 dark:group-hover:text-yellow-300" x-show="!dark">{{ partial "home/icon.html" (dict "name" "sun" "class" "h-4 w-4") }}</span>
           <span x-text="dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">Switch to Light Mode</span>
         </button>
       {{ end }}

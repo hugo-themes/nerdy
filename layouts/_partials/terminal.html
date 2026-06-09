@@ -6,35 +6,35 @@
   "autoCommand" ($config.auto_command | default "help")
 }}
 
-<div class="relative font-mono text-sm text-slate-100">
-  <div class="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-cyan-400/15 via-indigo-500/10 to-fuchsia-500/15 blur-2xl"></div>
+<div class="relative font-mono text-sm text-slate-900 dark:text-slate-100">
+  <div class="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-cyan-300/20 via-indigo-300/15 to-fuchsia-300/15 blur-2xl dark:from-cyan-400/15 dark:via-indigo-500/10 dark:to-fuchsia-500/15"></div>
   <div
-    class="relative z-10 flex h-[540px] min-h-[540px] max-h-[540px] w-full flex-col overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-950/95 shadow-2xl ring-1 ring-black/50 backdrop-blur-md"
+    class="relative z-10 flex h-[540px] min-h-[540px] max-h-[540px] w-full flex-col overflow-hidden rounded-2xl border border-slate-300/90 bg-slate-50/95 shadow-2xl shadow-slate-300/40 ring-1 ring-slate-900/10 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-950/95 dark:shadow-black/30 dark:ring-black/50"
     x-data='terminalPortfolio({{ $terminalConfig | jsonify }})'
     x-on:theme-changed.window="recordThemeChange($event.detail.dark)"
     x-on:click="focusInput()"
     x-cloak
   >
-    <div class="relative flex h-10 shrink-0 items-center gap-2 border-b border-slate-700/80 bg-slate-800 px-4">
+    <div class="relative flex h-10 shrink-0 items-center gap-2 border-b border-slate-300 bg-slate-200/80 px-4 dark:border-slate-700/80 dark:bg-slate-800">
       <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#ff5f56] shadow-sm"></div>
       <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#ffbd2e] shadow-sm"></div>
       <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#27c93f] shadow-sm"></div>
-      <div class="pointer-events-none absolute inset-x-0 text-center font-sans text-xs font-medium tracking-wide text-slate-400">
+      <div class="pointer-events-none absolute inset-x-0 text-center font-sans text-xs font-medium tracking-wide text-slate-500 dark:text-slate-400">
         {{ $config.window_title | default "guest — -bash — 80x24" }}
       </div>
     </div>
 
-    <div class="min-h-0 flex-1 overflow-y-auto scroll-smooth p-4 text-slate-100 md:p-6" x-ref="container">
+    <div class="min-h-0 flex-1 overflow-y-auto scroll-smooth p-4 text-slate-900 dark:text-slate-100 md:p-6" x-ref="container">
       <div class="w-full">
         <template x-for="(entry, index) in history" :key="index">
           <div>
             <div class="mb-1" x-show="entry.type === 'command'">
-              <span class="mr-2 font-bold text-slate-100">
+              <span class="mr-2 font-bold text-slate-900 dark:text-slate-100">
                 <span x-text="`${prompt.user}@${prompt.host}`"></span>
-                <span class="text-cyan-300" x-text="prompt.directory"></span>
+                <span class="text-cyan-700 dark:text-cyan-300" x-text="prompt.directory"></span>
                 %
               </span>
-              <span class="text-slate-100" x-text="entry.command"></span>
+              <span class="text-slate-900 dark:text-slate-100" x-text="entry.command"></span>
             </div>
             <div x-show="entry.type === 'output'" x-html="entry.html"></div>
           </div>
@@ -42,13 +42,13 @@
       </div>
 
       <div class="relative mt-2 flex cursor-text items-center" x-on:click.stop="focusInput()">
-        <span class="mr-2 font-bold text-slate-100">
+        <span class="mr-2 font-bold text-slate-900 dark:text-slate-100">
           <span x-text="`${prompt.user}@${prompt.host}`"></span>
-          <span class="text-cyan-300" x-text="prompt.directory"></span>
+          <span class="text-cyan-700 dark:text-cyan-300" x-text="prompt.directory"></span>
           %
         </span>
-        <span class="whitespace-pre text-slate-100" x-text="input"></span>
-        <span class="ml-0.5 block h-[1.2em] w-2 animate-pulse bg-slate-400"></span>
+        <span class="whitespace-pre text-slate-900 dark:text-slate-100" x-text="input"></span>
+        <span class="ml-0.5 block h-[1.2em] w-2 animate-pulse bg-slate-500 dark:bg-slate-400"></span>
         <input
           class="absolute left-0 top-0 h-full w-full cursor-text border-none bg-transparent text-transparent opacity-0 outline-none ring-0"
           type="text"
@@ -62,18 +62,18 @@
       </div>
     </div>
 
-    <div class="hide-scrollbar flex h-12 shrink-0 items-center gap-2 overflow-x-auto whitespace-nowrap border-t border-slate-700/80 bg-slate-800/50 px-4">
+    <div class="hide-scrollbar flex h-12 shrink-0 items-center gap-2 overflow-x-auto whitespace-nowrap border-t border-slate-300 bg-slate-200/70 px-4 dark:border-slate-700/80 dark:bg-slate-800/50">
       <div class="mr-2 hidden select-none font-sans text-[10px] font-bold uppercase tracking-widest text-slate-500 sm:block">Quick_Cmds:</div>
       <template x-for="command in quickCommands" :key="command.name">
         <button
-          class="rounded border border-slate-600 bg-slate-700/50 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-300 transition-colors hover:bg-slate-600 active:scale-95"
+          class="rounded border border-slate-300 bg-slate-100 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-700 transition-colors hover:bg-white active:scale-95 dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-300 dark:hover:bg-slate-600"
           type="button"
           x-text="command.label"
           x-on:click.stop="runQuickCommand(command.name)"
         ></button>
       </template>
       <button
-        class="ml-auto rounded bg-transparent px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-400 transition-colors hover:bg-slate-700/50 active:scale-95"
+        class="ml-auto rounded bg-transparent px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-600 transition-colors hover:bg-slate-100 active:scale-95 dark:text-slate-400 dark:hover:bg-slate-700/50"
         type="button"
         x-on:click.stop="runQuickCommand('clear')"
       >Clear</button>

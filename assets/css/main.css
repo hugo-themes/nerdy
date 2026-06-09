@@ -5,6 +5,8 @@
 
 @source "hugo_stats.json";
 @source "../js/**/*.js";
+@source "../../layouts/**/*.html";
+@source "../../data/**/*.{yaml,yml}";
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -75,9 +77,15 @@
 @layer utilities {
   .bg-grid {
     background-image:
+      linear-gradient(to right, rgb(15 23 42 / 8%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(15 23 42 / 8%) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .dark .bg-grid {
+    background-image:
       linear-gradient(to right, rgb(51 65 85 / 20%) 1px, transparent 1px),
       linear-gradient(to bottom, rgb(51 65 85 / 20%) 1px, transparent 1px);
-    background-size: 40px 40px;
   }
 
   .hide-scrollbar {
@@ -89,8 +97,125 @@
     display: none;
   }
 
-  .light-theme {
-    filter: invert(1) hue-rotate(180deg);
-    background-color: #f8fafc;
+  .toc-active .toc-bar {
+    width: 1.25rem;
+    background-color: rgb(8 145 178);
+  }
+
+  .dark .toc-active .toc-bar {
+    background-color: rgb(34 211 238);
+  }
+
+  .toc-active .toc-text {
+    color: rgb(15 23 42);
+    font-weight: 700;
+  }
+
+  .dark .toc-active .toc-text {
+    color: rgb(248 250 252);
+  }
+}
+
+@layer components {
+  .nerdy-prose {
+    --tw-prose-body: rgb(71 85 105);
+    --tw-prose-headings: rgb(15 23 42);
+    --tw-prose-lead: rgb(71 85 105);
+    --tw-prose-links: rgb(14 116 144);
+    --tw-prose-bold: rgb(15 23 42);
+    --tw-prose-counters: rgb(100 116 139);
+    --tw-prose-bullets: rgb(8 145 178);
+    --tw-prose-hr: rgb(203 213 225);
+    --tw-prose-quotes: rgb(71 85 105);
+    --tw-prose-quote-borders: rgb(16 185 129);
+    --tw-prose-captions: rgb(100 116 139);
+    --tw-prose-code: rgb(190 24 93);
+    --tw-prose-pre-code: rgb(226 232 240);
+    --tw-prose-pre-bg: rgb(15 23 42);
+    --tw-prose-th-borders: rgb(203 213 225);
+    --tw-prose-td-borders: rgb(226 232 240);
+  }
+
+  .dark .nerdy-prose {
+    --tw-prose-body: rgb(203 213 225);
+    --tw-prose-headings: rgb(241 245 249);
+    --tw-prose-lead: rgb(203 213 225);
+    --tw-prose-links: rgb(103 232 249);
+    --tw-prose-bold: rgb(226 232 240);
+    --tw-prose-counters: rgb(148 163 184);
+    --tw-prose-bullets: rgb(34 211 238);
+    --tw-prose-hr: rgb(51 65 85);
+    --tw-prose-quotes: rgb(148 163 184);
+    --tw-prose-quote-borders: rgb(74 222 128);
+    --tw-prose-captions: rgb(148 163 184);
+    --tw-prose-code: rgb(244 114 182);
+    --tw-prose-pre-code: rgb(226 232 240);
+    --tw-prose-pre-bg: rgb(15 23 42);
+    --tw-prose-th-borders: rgb(51 65 85);
+    --tw-prose-td-borders: rgb(30 41 59);
+  }
+
+  .nerdy-prose :where(a):not(:where(.not-prose, .not-prose *)) {
+    border-bottom: 1px solid rgb(8 145 178 / 40%);
+    text-decoration: none;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+
+  .nerdy-prose :where(a:hover):not(:where(.not-prose, .not-prose *)) {
+    border-color: rgb(8 145 178 / 80%);
+  }
+
+  .nerdy-prose :where(h2, h3):not(:where(.not-prose, .not-prose *)) {
+    scroll-margin-top: 6rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .nerdy-prose :where(h2, h3):not(:where(.not-prose, .not-prose *))::before {
+    margin-right: 0.5rem;
+    color: rgb(14 116 144 / 70%);
+    font-weight: 700;
+  }
+
+  .dark .nerdy-prose :where(h2, h3):not(:where(.not-prose, .not-prose *))::before {
+    color: rgb(103 232 249 / 70%);
+  }
+
+  .nerdy-prose :where(h2):not(:where(.not-prose, .not-prose *))::before {
+    content: "##";
+  }
+
+  .nerdy-prose :where(h3):not(:where(.not-prose, .not-prose *))::before {
+    content: "###";
+    color: rgb(180 83 9 / 80%);
+  }
+
+  .dark .nerdy-prose :where(h3):not(:where(.not-prose, .not-prose *))::before {
+    color: rgb(253 224 71 / 80%);
+  }
+
+  .nerdy-prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *)) {
+    border-radius: 0.25rem;
+    background-color: rgb(226 232 240 / 80%);
+    padding: 0.2em 0.4em;
+    font-weight: 400;
+  }
+
+  .dark .nerdy-prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *)) {
+    background-color: rgb(30 41 59);
+  }
+
+  .nerdy-prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::before,
+  .nerdy-prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::after {
+    content: "";
+  }
+
+  .nerdy-prose :where(pre):not(:where(.not-prose, .not-prose *)) {
+    border: 1px solid rgb(51 65 85);
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 40px rgb(15 23 42 / 12%);
+  }
+
+  .dark .nerdy-prose :where(pre):not(:where(.not-prose, .not-prose *)) {
+    box-shadow: 0 20px 40px rgb(0 0 0 / 25%);
   }
 }

@@ -1,0 +1,146 @@
+{{- $pages := .pages -}}
+{{- $count := len $pages -}}
+{{- $tablePath := .tablePath | default "./" -}}
+{{- $pageCount := div (add $count 9) 10 -}}
+{{- if lt $pageCount 1 }}{{ $pageCount = 1 }}{{ end -}}
+
+<section>
+  <div class="mb-6 flex items-center gap-3">
+    <span class="text-cyan-700 dark:text-cyan-300">{{ partial "home/icon.html" (dict "name" "document" "class" "h-5 w-5") }}</span>
+    <h2 class="font-mono text-xl font-bold text-slate-950 dark:text-white">&gt;&gt; Recent Posts</h2>
+  </div>
+
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+    {{ range first 3 $pages }}
+      <a class="group relative flex min-h-52 flex-col justify-between overflow-hidden rounded-xl border border-slate-200/80 bg-white/75 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/40 hover:bg-white dark:border-slate-700 dark:bg-slate-800/60 dark:hover:border-cyan-300/40 dark:hover:bg-slate-800/80" href="{{ .RelPermalink }}">
+        <div>
+          <div class="mb-3 flex items-center justify-between gap-3">
+            {{ if not .Date.IsZero }}<time class="font-mono text-[10px] text-slate-500" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+            {{ with .Params.topic }}<span class="rounded border border-cyan-500/20 bg-cyan-100 px-2 py-0.5 font-mono text-[10px] text-cyan-700 dark:bg-cyan-300/10 dark:text-cyan-300">{{ . }}</span>{{ end }}
+          </div>
+          <h3 class="mb-2 text-base font-bold leading-snug text-slate-900 transition-colors group-hover:text-cyan-700 dark:text-slate-100 dark:group-hover:text-cyan-300">{{ .Title }}</h3>
+          {{ with .Summary }}<p class="mb-4 line-clamp-3 text-xs leading-5 text-slate-600 dark:text-slate-400">{{ . | plainify }}</p>{{ end }}
+        </div>
+        <div class="mt-4 flex items-center justify-between border-t border-slate-200 pt-3 font-mono text-[11px] dark:border-slate-700/50">
+          <span class="text-slate-500">{{ .ReadingTime }} min read</span>
+          <span class="flex items-center gap-1 text-cyan-700 dark:text-cyan-300">Read <span class="transition-transform group-hover:translate-x-1">-&gt;</span></span>
+        </div>
+      </a>
+    {{ else }}
+      <div class="rounded-xl border border-dashed border-slate-300 bg-white/50 p-5 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/20 dark:text-slate-400 md:col-span-3">
+        No posts found yet.
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<section>
+  <div class="mb-6 flex items-center gap-3">
+    <svg class="h-5 w-5 text-amber-700 dark:text-[#f1fa8c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+    <h2 class="font-mono text-xl font-bold text-slate-950 dark:text-white">&gt;&gt; Post Serieses</h2>
+  </div>
+
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+    {{ $seriesCount := 0 }}
+    {{ range $seriesGroup := ($pages.GroupByParam "series") }}
+      {{ if $seriesGroup.Key }}
+        {{ $seriesCount = add $seriesCount 1 }}
+        {{ $seriesPages := $seriesGroup.Pages.ByWeight }}
+        {{ $firstPage := index $seriesPages 0 }}
+        <article class="group relative overflow-hidden rounded-xl border border-slate-200/80 bg-white/70 p-5 transition-colors hover:border-purple-500/40 dark:border-slate-700 dark:bg-slate-800/40 dark:hover:border-purple-400/40">
+          <div class="absolute left-0 top-0 h-full w-1 bg-purple-500"></div>
+          <div class="mb-3 flex items-center justify-between gap-3">
+            <span class="rounded-full bg-purple-100 px-2.5 py-1 font-mono text-[10px] font-bold text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">ACTIVE SERIES</span>
+            <span class="font-mono text-xs text-slate-500">{{ len $seriesPages }} Parts</span>
+          </div>
+          <h3 class="mb-2 text-lg font-bold text-slate-900 transition-colors group-hover:text-purple-700 dark:text-slate-100 dark:group-hover:text-purple-300">{{ $seriesGroup.Key }}</h3>
+          {{ with $firstPage.Summary }}<p class="mb-4 text-xs leading-relaxed text-slate-600 dark:text-slate-400">{{ . | plainify }}</p>{{ end }}
+          <div class="flex items-center justify-between border-t border-slate-200 pt-2 font-mono text-xs dark:border-slate-800">
+            <span class="text-slate-500">Progress: <span class="font-bold text-slate-700 dark:text-slate-300">{{ len $seriesPages }} / {{ len $seriesPages }} posts</span></span>
+            <a class="text-cyan-700 hover:underline dark:text-cyan-300" href="{{ $firstPage.RelPermalink }}">Start Reading -&gt;</a>
+          </div>
+        </article>
+      {{ end }}
+    {{ end }}
+    {{ if eq $seriesCount 0 }}
+      <div class="rounded-xl border border-dashed border-slate-300 bg-white/50 p-5 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/20 dark:text-slate-400 md:col-span-2">
+        No post series detected. Add <code class="font-mono">series</code> to post front matter to populate this area.
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<section>
+  <div class="mb-6 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <svg class="h-5 w-5 text-emerald-700 dark:text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+      <h2 class="font-mono text-xl font-bold text-slate-950 dark:text-white">&gt;&gt; All Posts</h2>
+    </div>
+    <span class="font-mono text-xs text-slate-500">Showing {{ $count }} posts</span>
+  </div>
+
+  <div class="overflow-hidden rounded-xl border border-slate-300 bg-slate-50/95 font-mono text-xs shadow-2xl shadow-slate-300/30 dark:border-slate-700 dark:bg-slate-950/95 dark:shadow-black/30">
+    <div class="flex items-center justify-between gap-4 border-b border-slate-300 bg-slate-200/80 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800">
+      <div class="flex min-w-0 items-center gap-3">
+        <div class="flex shrink-0 gap-1.5">
+          <div class="h-3 w-3 rounded-full bg-[#ff5f56]"></div>
+          <div class="h-3 w-3 rounded-full bg-[#ffbd2e]"></div>
+          <div class="h-3 w-3 rounded-full bg-[#27c93f]"></div>
+        </div>
+        <div class="truncate font-bold text-slate-600 dark:text-slate-400">{{ $tablePath }}</div>
+      </div>
+      <span class="shrink-0 text-[10px] text-slate-500">guest@portfolio: ~/posts</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[680px] whitespace-nowrap text-left">
+        <thead>
+          <tr class="border-b border-slate-300 bg-slate-100/80 text-slate-500 dark:border-slate-700/80 dark:bg-slate-900/40">
+            <th class="px-4 py-2 font-semibold">Posted At</th>
+            <th class="px-4 py-2 font-semibold">Reading Time</th>
+            <th class="px-4 py-2 font-semibold">Title</th>
+            <th class="px-4 py-2 font-semibold">Tags</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 text-slate-700 dark:divide-slate-700/40 dark:text-slate-300">
+          {{ range $rowIndex, $post := $pages }}
+            {{ $pageNumber := add (div $rowIndex 10) 1 }}
+            <tr class="transition-colors hover:bg-slate-100/80 dark:hover:bg-slate-800/40" x-show="currentPage === {{ $pageNumber }}">
+              <td class="px-4 py-3 text-slate-600 dark:text-slate-400">{{ if not $post.Date.IsZero }}{{ $post.Date.Format "2006-01-02" }}{{ else }}n/a{{ end }}</td>
+              <td class="px-4 py-3 text-slate-500">{{ $post.ReadingTime }} min read</td>
+              <td class="px-4 py-3 font-bold">
+                <a class="text-slate-950 hover:text-cyan-700 hover:underline dark:text-white dark:hover:text-cyan-300" href="{{ $post.RelPermalink }}">{{ $post.Title }}</a>
+              </td>
+              <td class="px-4 py-3">
+                {{ with $post.Params.tags }}
+                  <div class="flex flex-wrap gap-1.5">
+                    {{ range . }}
+                      <span class="rounded border border-cyan-500/20 bg-cyan-100 px-2 py-0.5 text-[10px] text-cyan-700 dark:bg-cyan-300/10 dark:text-cyan-300">#{{ . }}</span>
+                    {{ end }}
+                  </div>
+                {{ else }}
+                  <span class="text-slate-500">—</span>
+                {{ end }}
+              </td>
+            </tr>
+          {{ else }}
+            <tr>
+              <td class="px-4 py-6 text-center text-slate-500" colspan="4">No posts found yet.</td>
+            </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-300 bg-slate-100/80 px-4 py-3 dark:border-slate-700/80 dark:bg-slate-900/40">
+      <span class="text-[10px] text-slate-500">10 posts per page · Page <span x-text="currentPage"></span> of {{ $pageCount }}</span>
+      <div class="flex flex-wrap gap-1.5">
+        <button class="rounded border px-2 py-1 text-[10px] transition-colors disabled:cursor-not-allowed disabled:opacity-40" type="button" x-on:click="currentPage = Math.max(1, currentPage - 1)" x-bind:disabled="currentPage === 1">Prev</button>
+        {{ range seq 1 $pageCount }}
+          <button class="rounded border px-2 py-1 text-[10px] transition-colors" type="button" x-on:click="currentPage = {{ . }}" x-bind:class="currentPage === {{ . }} ? 'border-cyan-500 bg-cyan-100 text-cyan-700 dark:bg-cyan-300/10 dark:text-cyan-300' : 'border-slate-300 text-slate-500 hover:text-slate-950 dark:border-slate-700 dark:hover:text-white'">{{ . }}</button>
+        {{ end }}
+        <button class="rounded border px-2 py-1 text-[10px] transition-colors disabled:cursor-not-allowed disabled:opacity-40" type="button" x-on:click="currentPage = Math.min({{ $pageCount }}, currentPage + 1)" x-bind:disabled="currentPage === {{ $pageCount }}">Next</button>
+      </div>
+    </div>
+  </div>
+</section>

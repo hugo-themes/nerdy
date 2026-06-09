@@ -10,19 +10,19 @@
       {{ range $posts }}
         {{ partial "home/recent-post-card.html" . }}
       {{ end }}
-      <a class="group flex items-center justify-center rounded-xl border border-dashed border-slate-700/80 bg-slate-800/20 p-5 transition-all duration-300 hover:border-cyan-300/50 hover:bg-slate-800/40" href="{{ relURL (printf "%s/" $section) }}">
-        <span class="font-mono text-sm text-slate-500 transition-colors group-hover:text-cyan-300">{{ .view_all_label | default "View All Logs ->" }}</span>
+      <a class="group flex items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white/50 p-5 transition-all duration-300 hover:border-cyan-500/50 hover:bg-white/80 dark:border-slate-700/80 dark:bg-slate-800/20 dark:hover:border-cyan-300/50 dark:hover:bg-slate-800/40" href="{{ relURL (printf "%s/" $section) }}">
+        <span class="font-mono text-sm text-slate-600 transition-colors group-hover:text-cyan-700 dark:text-slate-500 dark:group-hover:text-cyan-300">{{ .view_all_label | default "View All Logs ->" }}</span>
       </a>
     {{ else if gt (len $fallbackPosts) 0 }}
       {{ range $fallbackPosts }}
         {{ partial "home/recent-post-data-card.html" . }}
       {{ end }}
-      <a class="group flex items-center justify-center rounded-xl border border-dashed border-slate-700/80 bg-slate-800/20 p-5 transition-all duration-300 hover:border-cyan-300/50 hover:bg-slate-800/40" href="{{ relURL (printf "%s/" $section) }}">
-        <span class="font-mono text-sm text-slate-500 transition-colors group-hover:text-cyan-300">{{ .view_all_label | default "View All Logs ->" }}</span>
+      <a class="group flex items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white/50 p-5 transition-all duration-300 hover:border-cyan-500/50 hover:bg-white/80 dark:border-slate-700/80 dark:bg-slate-800/20 dark:hover:border-cyan-300/50 dark:hover:bg-slate-800/40" href="{{ relURL (printf "%s/" $section) }}">
+        <span class="font-mono text-sm text-slate-600 transition-colors group-hover:text-cyan-700 dark:text-slate-500 dark:group-hover:text-cyan-300">{{ .view_all_label | default "View All Logs ->" }}</span>
       </a>
     {{ else }}
-      <div class="rounded-xl border border-dashed border-slate-700/80 bg-slate-800/20 p-5 text-sm text-slate-400 sm:col-span-2">
-        No logs yet. Add Markdown files under <code class="font-mono text-slate-200">content/{{ $section }}</code> and they will appear here automatically.
+      <div class="rounded-xl border border-dashed border-slate-300 bg-white/50 p-5 text-sm text-slate-600 dark:border-slate-700/80 dark:bg-slate-800/20 dark:text-slate-400 sm:col-span-2">
+        No logs yet. Add Markdown files under <code class="font-mono text-slate-900 dark:text-slate-200">content/{{ $section }}</code> and they will appear here automatically.
       </div>
     {{ end }}
   </div>

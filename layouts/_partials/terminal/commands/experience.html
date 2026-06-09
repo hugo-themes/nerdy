@@ -1,5 +1,5 @@
-<pre class="font-mono whitespace-pre-wrap leading-relaxed">{{ range .roles }}<span class="font-bold text-[#4AF626]">{{ .title }}</span> @ <span class="text-purple-400">{{ .company }}</span>
-<span class="text-sm text-gray-400">{{ .period }}</span>
-{{ range .highlights }}<span class="text-yellow-300">-</span> {{ . }}
+<pre class="font-mono whitespace-pre-wrap leading-relaxed">{{ range .roles }}<span class="font-bold text-emerald-700 dark:text-[#4AF626]">{{ .title }}</span> @ <span class="text-purple-700 dark:text-purple-400">{{ .company }}</span>
+<span class="text-sm text-slate-500 dark:text-gray-400">{{ .period }}</span>
+{{ range .highlights }}<span class="text-amber-600 dark:text-yellow-300">-</span> {{ . }}
 {{ end }}
 {{ end }}</pre>

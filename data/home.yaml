@@ -2,10 +2,11 @@ sections:
   - id: featured-projects
     type: projects
     icon: code
-    title: Featured_Projects.exe
+    title: Featured Projects
     items:
       - title: Nexus API Gateway
-        description: A high-performance API gateway built in Go, capable of handling 50k+ req/sec with dynamic routing and rate limiting.
+        description: A high-performance API gateway built in Go, capable of handling
+          50k+ req/sec with dynamic routing and rate limiting.
         accent: purple
         links:
           - label: Code
@@ -15,7 +16,8 @@ sections:
             url: https://demo.example.com/nexus-api-gateway
             icon: external
       - title: NetOps CLI
-        description: A terminal-based toolkit written in Rust for diagnosing network latencies and container connectivity.
+        description: A terminal-based toolkit written in Rust for diagnosing network
+          latencies and container connectivity.
         accent: cyan
         links:
           - label: Code
@@ -24,21 +26,23 @@ sections:
   - id: recent-logs
     type: recent_posts
     icon: document
-    title: Recent_Logs.md
+    title: Recent Posts
     limit: 3
     section: posts
     view_all_label: View All Logs ->
     items:
       - date: 2026-06-02
         title: Understanding the Event Loop in Node.js
-        description: A deep dive into libuv, microtask queues, and how asynchronous code actually runs under the hood.
+        description: A deep dive into libuv, microtask queues, and how asynchronous code
+          actually runs under the hood.
         url: "#"
         tags:
           - backend
           - nodejs
       - date: 2026-05-15
         title: "Monolith to Microservices: A Post-Mortem"
-        description: Lessons learned from breaking apart a 5-year-old legacy application without breaking production.
+        description: Lessons learned from breaking apart a 5-year-old legacy application
+          without breaking production.
         url: "#"
         accent: purple
         tags:
@@ -46,7 +50,8 @@ sections:
           - devops
       - date: 2026-04-28
         title: Why I still use Vim in 2026
-        description: Exploring the philosophy of terminal-based editors and my ultimate dotfiles configuration.
+        description: Exploring the philosophy of terminal-based editors and my ultimate
+          dotfiles configuration.
         url: "#"
         accent: emerald
         tags:
@@ -55,12 +60,21 @@ sections:
   - id: activity-changelog
     type: activity
     icon: clock
-    title: Activity_Changelog.log
+    title: Activity Log
     items:
       - date: Today
         active: true
-        html: 'Merged PR <a href="#" class="text-cyan-300 hover:underline">#1042</a> in <span class="font-mono text-purple-300 bg-purple-400/10 px-1 rounded">facebook/react</span>: Improved hook dependency bailout optimization for edge cases.'
+        html: 'Merged PR <a href="#" class="text-cyan-700 hover:underline
+          dark:text-cyan-300">#1042</a> in <span class="font-mono
+          text-purple-700 bg-purple-100 px-1 rounded dark:bg-purple-400/10
+          dark:text-purple-300">facebook/react</span>: Improved hook dependency
+          bailout optimization for edge cases.'
       - date: 3 Days Ago
-        html: 'Released <span class="font-bold text-slate-200">v2.3.5</span> of <a href="#" class="text-cyan-300 hover:underline">cli-task-manager</a>. Added cloud synchronization and AES-256 encryption for local storage.'
+        html: 'Released <span class="font-bold text-slate-900
+          dark:text-slate-200">v2.3.5</span> of <a href="#" class="text-cyan-700
+          hover:underline dark:text-cyan-300">cli-task-manager</a>. Added cloud
+          synchronization and AES-256 encryption for local storage.'
       - date: Last Month
-        html: 'Speaker at <span class="font-bold text-sky-300">NodeConf 2026</span>. Gave a talk on: <span class="italic">"Scaling Event Loops to the Moon"</span>.'
+        html: 'Speaker at <span class="font-bold text-sky-700
+          dark:text-sky-300">NodeConf 2026</span>. Gave a talk on: <span
+          class="italic">"Scaling Event Loops to the Moon"</span>.'
