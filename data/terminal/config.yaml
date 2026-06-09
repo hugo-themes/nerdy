@@ -1,8 +1,8 @@
 user: guest
-host: MacBook-Pro
+host: portfolio
 directory: "~"
-window_title: "guest — -bash — 80x24"
-auto_command: help
+window_title: "guest@portfolio:~"
+auto_command: about
 builtins:
   - name: clear
     description: Clear terminal output

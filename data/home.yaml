@@ -1,0 +1,66 @@
+sections:
+  - id: featured-projects
+    type: projects
+    icon: code
+    title: Featured_Projects.exe
+    items:
+      - title: Nexus API Gateway
+        description: A high-performance API gateway built in Go, capable of handling 50k+ req/sec with dynamic routing and rate limiting.
+        accent: purple
+        links:
+          - label: Code
+            url: https://github.com/yourusername/nexus-api-gateway
+            icon: github
+          - label: Live Demo
+            url: https://demo.example.com/nexus-api-gateway
+            icon: external
+      - title: NetOps CLI
+        description: A terminal-based toolkit written in Rust for diagnosing network latencies and container connectivity.
+        accent: cyan
+        links:
+          - label: Code
+            url: https://github.com/yourusername/netops-cli
+            icon: github
+  - id: recent-logs
+    type: recent_posts
+    icon: document
+    title: Recent_Logs.md
+    limit: 3
+    section: posts
+    view_all_label: View All Logs ->
+    items:
+      - date: 2026-06-02
+        title: Understanding the Event Loop in Node.js
+        description: A deep dive into libuv, microtask queues, and how asynchronous code actually runs under the hood.
+        url: "#"
+        tags:
+          - backend
+          - nodejs
+      - date: 2026-05-15
+        title: "Monolith to Microservices: A Post-Mortem"
+        description: Lessons learned from breaking apart a 5-year-old legacy application without breaking production.
+        url: "#"
+        accent: purple
+        tags:
+          - architecture
+          - devops
+      - date: 2026-04-28
+        title: Why I still use Vim in 2026
+        description: Exploring the philosophy of terminal-based editors and my ultimate dotfiles configuration.
+        url: "#"
+        accent: emerald
+        tags:
+          - productivity
+          - linux
+  - id: activity-changelog
+    type: activity
+    icon: clock
+    title: Activity_Changelog.log
+    items:
+      - date: Today
+        active: true
+        html: 'Merged PR <a href="#" class="text-cyan-300 hover:underline">#1042</a> in <span class="font-mono text-purple-300 bg-purple-400/10 px-1 rounded">facebook/react</span>: Improved hook dependency bailout optimization for edge cases.'
+      - date: 3 Days Ago
+        html: 'Released <span class="font-bold text-slate-200">v2.3.5</span> of <a href="#" class="text-cyan-300 hover:underline">cli-task-manager</a>. Added cloud synchronization and AES-256 encryption for local storage.'
+      - date: Last Month
+        html: 'Speaker at <span class="font-bold text-sky-300">NodeConf 2026</span>. Gave a talk on: <span class="italic">"Scaling Event Loops to the Moon"</span>.'

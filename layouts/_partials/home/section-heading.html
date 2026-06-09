@@ -1,0 +1,6 @@
+<div class="mb-6 flex items-center gap-3">
+  <span class="text-cyan-300">
+    {{ partial "home/icon.html" (dict "name" (.icon | default "code") "class" "h-5 w-5") }}
+  </span>
+  <h2 class="font-mono text-xl font-bold text-white">&gt;&gt; {{ .title }}</h2>
+</div>

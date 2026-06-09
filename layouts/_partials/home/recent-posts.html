@@ -1,0 +1,29 @@
+{{ $section := .section | default "posts" }}
+{{ $limit := .limit | default 3 }}
+{{ $posts := first $limit ((where site.RegularPages "Section" $section).ByDate.Reverse) }}
+{{ $fallbackPosts := .items | default slice }}
+
+<section class="mt-8" id="{{ .id }}">
+  {{ partial "home/section-heading.html" . }}
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    {{ if gt (len $posts) 0 }}
+      {{ range $posts }}
+        {{ partial "home/recent-post-card.html" . }}
+      {{ end }}
+      <a class="group flex items-center justify-center rounded-xl border border-dashed border-slate-700/80 bg-slate-800/20 p-5 transition-all duration-300 hover:border-cyan-300/50 hover:bg-slate-800/40" href="{{ relURL (printf "%s/" $section) }}">
+        <span class="font-mono text-sm text-slate-500 transition-colors group-hover:text-cyan-300">{{ .view_all_label | default "View All Logs ->" }}</span>
+      </a>
+    {{ else if gt (len $fallbackPosts) 0 }}
+      {{ range $fallbackPosts }}
+        {{ partial "home/recent-post-data-card.html" . }}
+      {{ end }}
+      <a class="group flex items-center justify-center rounded-xl border border-dashed border-slate-700/80 bg-slate-800/20 p-5 transition-all duration-300 hover:border-cyan-300/50 hover:bg-slate-800/40" href="{{ relURL (printf "%s/" $section) }}">
+        <span class="font-mono text-sm text-slate-500 transition-colors group-hover:text-cyan-300">{{ .view_all_label | default "View All Logs ->" }}</span>
+      </a>
+    {{ else }}
+      <div class="rounded-xl border border-dashed border-slate-700/80 bg-slate-800/20 p-5 text-sm text-slate-400 sm:col-span-2">
+        No logs yet. Add Markdown files under <code class="font-mono text-slate-200">content/{{ $section }}</code> and they will appear here automatically.
+      </div>
+    {{ end }}
+  </div>
+</section>

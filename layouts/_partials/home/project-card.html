@@ -1,0 +1,25 @@
+{{ $accent := .accent | default "cyan" }}
+{{ $hoverClass := "hover:border-cyan-400/50" }}
+{{ $titleClass := "group-hover:text-cyan-300" }}
+{{ if eq $accent "purple" }}
+  {{ $hoverClass = "hover:border-purple-400/50" }}
+  {{ $titleClass = "group-hover:text-purple-300" }}
+{{ else if eq $accent "emerald" }}
+  {{ $hoverClass = "hover:border-emerald-400/50" }}
+  {{ $titleClass = "group-hover:text-emerald-300" }}
+{{ end }}
+
+<article class="group relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-800/60 p-5 transition-colors {{ $hoverClass }}">
+  <h3 class="mb-2 text-lg font-bold text-slate-200 transition-colors {{ $titleClass }}">{{ .title }}</h3>
+  <p class="mb-4 line-clamp-2 text-sm leading-6 text-slate-400">{{ .description }}</p>
+  {{ with .links }}
+    <div class="flex flex-wrap gap-4">
+      {{ range . }}
+        <a class="flex items-center gap-1 font-mono text-xs text-cyan-300 hover:underline" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+          {{ partial "home/icon.html" (dict "name" .icon "class" "h-3 w-3") }}
+          {{ .label }}
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+</article>

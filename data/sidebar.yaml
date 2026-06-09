@@ -1,0 +1,50 @@
+profile:
+  name: "[Your Name]"
+  title: Full-Stack Developer
+  avatar: "{}"
+  description: Building scalable systems and elegant interfaces. Obsessed with clean code and modern web architectures.
+  status:
+    label: Status
+    value: Open to Senior Roles
+    preference_label: Pref
+    preference: 100% Remote / Async
+  links:
+    - icon: github
+      label: github.com/yourusername
+      url: https://github.com/yourusername
+    - icon: linkedin
+      label: linkedin.com/in/yourusername
+      url: https://linkedin.com/in/yourusername
+    - icon: mail
+      label: hello@yourdomain.com
+      url: mailto:hello@yourdomain.com
+
+sections:
+  - id: profile-stats
+    type: stats
+    title: Profile Stats
+    items:
+      - label: Experience
+        value: 5+ yrs
+        accent: text-emerald-300
+      - label: Focus
+        value: Scalable Backends
+        accent: text-cyan-300
+      - label: Debugging
+        value: Persistent
+        accent: text-yellow-200
+      - label: Architecture
+        value: Pragmatic
+        accent: text-purple-300
+  - id: core-stack
+    type: tags
+    title: Core Stack
+    items:
+      - React
+      - Node.js
+      - TypeScript
+      - Python
+      - PostgreSQL
+      - Docker
+  - id: theme-toggle
+    type: theme_toggle

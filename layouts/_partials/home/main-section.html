@@ -1,0 +1,7 @@
+{{ if eq .type "projects" }}
+  {{ partial "home/projects.html" . }}
+{{ else if eq .type "recent_posts" }}
+  {{ partial "home/recent-posts.html" . }}
+{{ else if eq .type "activity" }}
+  {{ partial "home/activity.html" . }}
+{{ end }}

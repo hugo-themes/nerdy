@@ -52,4 +52,45 @@
   [x-cloak] {
     display: none !important;
   }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.446 0.043 257.281);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.554 0.046 257.417);
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(51 65 85 / 20%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(51 65 85 / 20%) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .light-theme {
+    filter: invert(1) hue-rotate(180deg);
+    background-color: #f8fafc;
+  }
 }

@@ -1,11 +1,14 @@
-<header class="border-b border-border bg-background/80 backdrop-blur">
-  <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Main navigation">
-    <a class="text-lg font-bold" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+<header class="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+    <a class="group inline-flex items-center gap-2 text-lg font-bold" href="{{ site.Home.RelPermalink }}">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 font-mono text-sm text-primary transition group-hover:scale-105">~/</span>
+      <span>{{ site.Title }}</span>
+    </a>
     <div class="flex items-center gap-4">
       {{ range site.Menus.main }}
         <a class="text-sm font-medium text-muted-foreground hover:text-foreground" href="{{ .URL }}">{{ .Name }}</a>
       {{ end }}
-      <button class="rounded-md border border-border px-3 py-2 text-sm" type="button" x-on:click="toggle()" x-text="dark ? 'Light' : 'Dark'">
+      <button class="rounded-full border border-border bg-card/80 px-3 py-2 text-sm font-medium shadow-sm transition hover:border-primary/60 hover:text-primary" type="button" x-on:click="toggle()" x-text="dark ? 'Light' : 'Dark'">
         Theme
       </button>
     </div>

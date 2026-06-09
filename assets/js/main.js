@@ -15,6 +15,7 @@ Alpine.data('themeToggle', () => ({
     this.dark = !this.dark;
     localStorage.setItem('theme', this.dark ? 'dark' : 'light');
     this.apply();
+    window.dispatchEvent(new CustomEvent('theme-changed', { detail: { dark: this.dark } }));
   },
   apply() {
     document.documentElement.classList.toggle('dark', this.dark);
@@ -72,16 +73,17 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
 
     const now = new Date();
     const bootMessages = [
-      `Last login: ${now.toString().split(' GMT')[0]} on ttys000`,
+      'System initializing...',
+      'Loading profile modules: OK',
       `Restored session: ${now.toDateString()}`,
     ];
 
     for (const message of bootMessages) {
-      this.pushOutput(`<div class="mb-1 text-gray-400">${this.escapeHtml(message)}</div>`);
-      await this.wait(50);
+      this.pushOutput(`<div class="mb-1 text-xs text-slate-500">${this.escapeHtml(message)}</div>`);
+      await this.wait(100);
     }
 
-    this.pushOutput('<div class="mb-4 mt-2 text-gray-400">Type <span class="font-bold text-gray-100">help</span> to see available commands.</div>');
+    this.pushOutput('<div class="mb-4 mt-2 text-slate-400">Type <span class="font-bold text-cyan-300">help</span> to see available commands.</div>');
 
     this.isProcessing = false;
     this.bootCompleted = true;
@@ -90,6 +92,12 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
     if (this.autoCommand) {
       await this.processCommand(this.autoCommand, true);
     }
+  },
+
+  recordThemeChange(isDark) {
+    if (!this.bootCompleted) return;
+    const mode = isDark ? 'Dark' : 'Light';
+    this.pushOutput(`<div class="mb-4 text-xs italic text-slate-400">[System] Theme switched to ${mode} mode.</div>`);
   },
 
   async submit() {
@@ -139,11 +147,11 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
     if (!command) return '';
 
     if (command === 'date') {
-      return `<div class="mb-4 text-gray-300">${this.escapeHtml(new Date().toString())}</div>`;
+      return `<div class="mb-4 text-slate-300">${this.escapeHtml(new Date().toString())}</div>`;
     }
 
     if (command === 'echo') {
-      return `<div class="mb-4 text-gray-300">${this.escapeHtml(args.slice(1).join(' '))}</div>`;
+      return `<div class="mb-4 text-slate-300">${this.escapeHtml(args.slice(1).join(' '))}</div>`;
     }
 
     if (command === 'sudo') {
@@ -151,7 +159,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
     }
 
     if (this.commands[command]) {
-      return `<div class="mb-4 text-gray-300">${this.commands[command].html}</div>`;
+      return `<div class="mb-4 text-slate-300">${this.commands[command].html}</div>`;
     }
 
     return `<div class="mb-4 text-red-400">bash: ${this.escapeHtml(command)}: command not found. Type 'help' to see available commands.</div>`;

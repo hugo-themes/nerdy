@@ -4,10 +4,9 @@
     {{ partial "head.html" . }}
   </head>
   <body class="min-h-screen bg-background text-foreground">
-    {{ partial "header.html" . }}
-    <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <main class="{{ if .IsHome }}w-full{{ else }}mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8{{ end }}">
       {{ block "main" . }}{{ end }}
     </main>
-    {{ partial "footer.html" . }}
+    {{ if not .IsHome }}{{ partial "footer.html" . }}{{ end }}
   </body>
 </html>
