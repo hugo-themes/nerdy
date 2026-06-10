@@ -1,11 +1,11 @@
 {{ define "main" }}
   {{ $home := hugo.Data.home }}
 
-  <div class="bg-grid relative isolate min-h-screen overflow-x-clip bg-slate-50 pb-12 text-slate-700 dark:bg-[#0B1121] dark:text-slate-300">
-    <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.14),transparent_28rem),radial-gradient(circle_at_75%_12%,rgba(99,102,241,0.12),transparent_30rem),radial-gradient(circle_at_15%_18%,rgba(217,70,239,0.08),transparent_24rem)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.16),transparent_28rem),radial-gradient(circle_at_75%_12%,rgba(99,102,241,0.16),transparent_30rem),radial-gradient(circle_at_15%_18%,rgba(217,70,239,0.10),transparent_24rem)]"></div>
-    <div class="pointer-events-none absolute left-1/2 top-0 -z-10 h-64 w-full max-w-4xl -translate-x-1/2 bg-cyan-200/40 blur-[100px] dark:bg-cyan-300/10"></div>
+  <div class="nerdy-page-surface nerdy-page-surface--home">
+    <div class="nerdy-ambient-bg"></div>
+    <div class="nerdy-top-glow"></div>
 
-    <div class="relative z-10 mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8 lg:pt-20">
+    <div class="nerdy-container pt-12 lg:pt-20">
       <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12">
         {{ partial "home/sidebar.html" . }}
 

@@ -1,0 +1,25 @@
+<nav class="mt-16 grid gap-4 border-t border-slate-200 pt-8 dark:border-slate-700 md:grid-cols-2" aria-label="Post navigation">
+  {{ with .PrevInSection }}
+    <a class="group nerdy-nav-card" href="{{ .RelPermalink }}">
+      <div class="mb-2 flex items-center gap-2 font-mono text-xs text-accent-cyan">
+        <span class="transition-transform group-hover:-translate-x-1">&lt;-</span>
+        <span>Previous_Log</span>
+      </div>
+      <div class="font-bold leading-snug text-slate-950 dark:text-slate-100">{{ .Title }}</div>
+      {{ if not .Date.IsZero }}<time class="mt-2 block font-mono text-[11px] nerdy-muted-soft" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+    </a>
+  {{ else }}
+    <div class="hidden md:block"></div>
+  {{ end }}
+
+  {{ with .NextInSection }}
+    <a class="group nerdy-nav-card text-right" href="{{ .RelPermalink }}">
+      <div class="mb-2 flex items-center justify-end gap-2 font-mono text-xs text-accent-cyan">
+        <span>Next_Log</span>
+        <span class="transition-transform group-hover:translate-x-1">-&gt;</span>
+      </div>
+      <div class="font-bold leading-snug text-slate-950 dark:text-slate-100">{{ .Title }}</div>
+      {{ if not .Date.IsZero }}<time class="mt-2 block font-mono text-[11px] nerdy-muted-soft" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+    </a>
+  {{ end }}
+</nav>

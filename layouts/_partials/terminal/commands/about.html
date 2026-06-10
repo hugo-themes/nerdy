@@ -1,9 +1,9 @@
-<pre class="font-mono whitespace-pre-wrap leading-relaxed"><span class="text-purple-700 dark:text-purple-400">{{ .greeting }}</span> I'm <span class="font-bold text-emerald-700 dark:text-[#4AF626]">{{ .person_name }}</span>, a passionate <span class="text-cyan-700 dark:text-cyan-400">{{ .role }}</span>.
+<pre class="font-mono whitespace-pre-wrap leading-relaxed"><span class="text-accent-purple">{{ .greeting }}</span> I'm <span class="font-bold text-accent-emerald">{{ .person_name }}</span>, a passionate <span class="text-accent-cyan">{{ .role }}</span>.
 {{ .summary }}
 
 {{ range .details -}}
 {{ . }}
 {{ end }}
 {{ with .quote }}
-&gt; <span class="italic text-slate-500 dark:text-gray-500">"{{ .text }}"{{ with .author }} - {{ . }}{{ end }}</span>
+&gt; <span class="italic nerdy-muted-soft">"{{ .text }}"{{ with .author }} - {{ . }}{{ end }}</span>
 {{ end }}</pre>

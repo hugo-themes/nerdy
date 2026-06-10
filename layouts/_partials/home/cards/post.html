@@ -1,0 +1,47 @@
+{{- $page := .page -}}
+{{- $item := .item -}}
+{{- $title := "" -}}
+{{- $url := "#" -}}
+{{- $summary := "" -}}
+{{- $date := "" -}}
+{{- $datetime := "" -}}
+{{- $tags := slice -}}
+{{- $accent := "cyan" -}}
+
+{{- with $page -}}
+  {{- $title = .Title -}}
+  {{- $url = .RelPermalink -}}
+  {{- with .Summary }}{{ $summary = . | plainify }}{{ end -}}
+  {{- if not .Date.IsZero -}}
+    {{- $date = .Date.Format "2006-01-02" -}}
+    {{- $datetime = $date -}}
+  {{- end -}}
+  {{- with .Params.tags }}{{ $tags = . }}{{ end -}}
+{{- end -}}
+
+{{- with $item -}}
+  {{- $title = .title -}}
+  {{- $url = .url | default "#" -}}
+  {{- $summary = .description | default "" -}}
+  {{- with .date -}}
+    {{- $date = . -}}
+    {{- $datetime = . -}}
+  {{- end -}}
+  {{- with .tags }}{{ $tags = . }}{{ end -}}
+  {{- $accent = .accent | default "cyan" -}}
+{{- end -}}
+
+{{- $accentClasses := partial "components/accent-classes.html" $accent -}}
+
+<a class="group nerdy-card nerdy-card-hover {{ $accentClasses.card }} relative block overflow-hidden p-5" href="{{ $url }}">
+  {{ with $date }}<time class="mb-2 block font-mono text-xs nerdy-muted-soft" datetime="{{ $datetime }}">{{ . }}</time>{{ end }}
+  <h3 class="mb-2 text-lg font-semibold nerdy-card-title {{ $accentClasses.title }}">{{ $title }}</h3>
+  {{ with $summary }}<p class="mb-4 line-clamp-2 text-sm leading-6 nerdy-muted">{{ . }}</p>{{ end }}
+  {{ with $tags }}
+    <div class="flex flex-wrap gap-2">
+      {{ range first 3 . }}
+        <span class="{{ $accentClasses.chip }}">#{{ . }}</span>
+      {{ end }}
+    </div>
+  {{ end }}
+</a>

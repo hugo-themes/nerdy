@@ -1,7 +1,7 @@
 {{ if eq .type "projects" }}
-  {{ partial "home/projects.html" . }}
+  {{ partial "home/sections/projects.html" . }}
 {{ else if eq .type "recent_posts" }}
-  {{ partial "home/recent-posts.html" . }}
+  {{ partial "home/sections/recent-posts.html" . }}
 {{ else if eq .type "activity" }}
-  {{ partial "home/activity.html" . }}
+  {{ partial "home/sections/activity.html" . }}
 {{ end }}

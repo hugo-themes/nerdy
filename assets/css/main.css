@@ -20,6 +20,13 @@
   --color-border: var(--border);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-emerald: var(--accent-emerald);
+  --color-accent-amber: var(--accent-amber);
 }
 
 @layer base {
@@ -33,6 +40,13 @@
     --border: oklch(0.922 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
+    --surface: oklch(0.985 0.006 247.858);
+    --surface-muted: oklch(0.96 0.012 247.858);
+    --surface-elevated: oklch(1 0 0);
+    --accent-cyan: oklch(0.52 0.105 223.128);
+    --accent-purple: oklch(0.496 0.265 301.924);
+    --accent-emerald: oklch(0.596 0.145 163.225);
+    --accent-amber: oklch(0.666 0.179 58.318);
   }
 
   .dark {
@@ -45,6 +59,13 @@
     --border: oklch(1 0 0 / 10%);
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
+    --surface: oklch(0.155 0.045 265.08);
+    --surface-muted: oklch(0.205 0.045 265.08);
+    --surface-elevated: oklch(0.23 0.04 265.08);
+    --accent-cyan: oklch(0.865 0.127 207.078);
+    --accent-purple: oklch(0.827 0.119 306.383);
+    --accent-emerald: oklch(0.845 0.143 164.978);
+    --accent-amber: oklch(0.905 0.182 98.111);
   }
 
   body {
@@ -75,14 +96,16 @@
 }
 
 @layer utilities {
-  .bg-grid {
+  .bg-grid,
+  .nerdy-page-surface {
     background-image:
       linear-gradient(to right, rgb(15 23 42 / 8%) 1px, transparent 1px),
       linear-gradient(to bottom, rgb(15 23 42 / 8%) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
-  .dark .bg-grid {
+  .dark .bg-grid,
+  .dark .nerdy-page-surface {
     background-image:
       linear-gradient(to right, rgb(51 65 85 / 20%) 1px, transparent 1px),
       linear-gradient(to bottom, rgb(51 65 85 / 20%) 1px, transparent 1px);
@@ -117,6 +140,153 @@
 }
 
 @layer components {
+  .nerdy-page-surface {
+    @apply relative isolate min-h-screen overflow-x-clip bg-surface pb-20 text-slate-700 selection:bg-accent-cyan/30 selection:text-slate-950 dark:text-slate-300 dark:selection:text-white;
+  }
+
+  .nerdy-page-surface--home {
+    @apply pb-12;
+  }
+
+  .nerdy-ambient-bg {
+    background-image:
+      radial-gradient(circle at 50% 0%, rgb(14 165 233 / 14%), transparent 28rem),
+      radial-gradient(circle at 78% 12%, rgb(99 102 241 / 12%), transparent 30rem),
+      radial-gradient(circle at 16% 22%, rgb(217 70 239 / 8%), transparent 24rem);
+    @apply pointer-events-none absolute inset-0 -z-10;
+  }
+
+  .dark .nerdy-ambient-bg {
+    background-image:
+      radial-gradient(circle at 50% 0%, rgb(34 211 238 / 16%), transparent 28rem),
+      radial-gradient(circle at 78% 12%, rgb(99 102 241 / 16%), transparent 30rem),
+      radial-gradient(circle at 16% 22%, rgb(217 70 239 / 10%), transparent 24rem);
+  }
+
+  .nerdy-top-glow {
+    @apply pointer-events-none absolute left-1/2 top-0 -z-10 h-64 w-full max-w-4xl -translate-x-1/2 bg-accent-cyan/20 blur-[110px] dark:bg-accent-cyan/10;
+  }
+
+  .nerdy-container {
+    @apply relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .nerdy-card {
+    @apply rounded-xl border border-slate-200/80 bg-white/75 shadow-sm backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/50;
+  }
+
+  .nerdy-card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:bg-white dark:hover:bg-slate-800/75;
+  }
+
+  .nerdy-card-accent-cyan {
+    @apply hover:border-accent-cyan/50;
+  }
+
+  .nerdy-card-accent-purple {
+    @apply hover:border-accent-purple/50;
+  }
+
+  .nerdy-card-accent-emerald {
+    @apply hover:border-accent-emerald/50;
+  }
+
+  .nerdy-card-accent-amber {
+    @apply hover:border-accent-amber/50;
+  }
+
+  .nerdy-card-dashed {
+    @apply rounded-xl border border-dashed border-slate-300 bg-white/50 backdrop-blur-md transition-all duration-300 hover:border-accent-cyan/50 hover:bg-white/80 dark:border-slate-700/80 dark:bg-slate-800/20 dark:hover:bg-slate-800/45;
+  }
+
+  .nerdy-sidebar-card {
+    @apply rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-xl shadow-slate-200/60 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/75 dark:shadow-black/20;
+  }
+
+  .nerdy-window {
+    @apply overflow-hidden rounded-xl border border-slate-300 bg-slate-50/95 font-mono text-xs shadow-2xl shadow-slate-300/30 dark:border-slate-700 dark:bg-slate-950/95 dark:shadow-black/30;
+  }
+
+  .nerdy-window-bar {
+    @apply flex items-center justify-between gap-4 border-b border-slate-300 bg-slate-200/80 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800;
+  }
+
+  .nerdy-window-dot {
+    @apply h-3 w-3 rounded-full;
+  }
+
+  .nerdy-section-heading {
+    @apply mb-6 flex items-center gap-3;
+  }
+
+  .nerdy-section-title {
+    @apply font-mono text-xl font-bold text-slate-950 dark:text-white;
+  }
+
+  .nerdy-card-title {
+    @apply text-slate-900 transition-colors dark:text-slate-100;
+  }
+
+  .nerdy-title-accent-cyan {
+    @apply group-hover:text-accent-cyan;
+  }
+
+  .nerdy-title-accent-purple {
+    @apply group-hover:text-accent-purple;
+  }
+
+  .nerdy-title-accent-emerald {
+    @apply group-hover:text-accent-emerald;
+  }
+
+  .nerdy-title-accent-amber {
+    @apply group-hover:text-accent-amber;
+  }
+
+  .nerdy-muted {
+    @apply text-slate-600 dark:text-slate-400;
+  }
+
+  .nerdy-muted-soft {
+    @apply text-slate-500 dark:text-slate-500;
+  }
+
+  .nerdy-link {
+    @apply text-accent-cyan transition-colors hover:underline;
+  }
+
+  .nerdy-chip {
+    @apply rounded border px-2 py-0.5 font-mono text-[10px];
+  }
+
+  .nerdy-chip-cyan {
+    @apply border-accent-cyan/20 bg-accent-cyan/10 text-accent-cyan;
+  }
+
+  .nerdy-chip-purple {
+    @apply border-accent-purple/20 bg-accent-purple/10 text-accent-purple;
+  }
+
+  .nerdy-chip-emerald {
+    @apply border-accent-emerald/20 bg-accent-emerald/10 text-accent-emerald;
+  }
+
+  .nerdy-chip-amber {
+    @apply border-accent-amber/20 bg-accent-amber/10 text-accent-amber;
+  }
+
+  .nerdy-button {
+    @apply rounded-lg border border-slate-300 bg-white/70 px-4 py-2 font-mono text-xs text-slate-600 transition-all hover:border-slate-400 hover:text-slate-950 active:scale-95 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white;
+  }
+
+  .nerdy-icon-button {
+    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-white/80 text-slate-600 transition-all hover:border-slate-400 hover:text-slate-950 active:scale-95 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white;
+  }
+
+  .nerdy-nav-card {
+    @apply rounded-xl border border-slate-200/80 bg-white/70 p-4 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent-cyan/40 hover:bg-white dark:border-slate-700/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/70;
+  }
+
   .nerdy-prose {
     --tw-prose-body: rgb(71 85 105);
     --tw-prose-headings: rgb(15 23 42);

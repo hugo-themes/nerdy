@@ -26,16 +26,16 @@ sections:
     items:
       - label: Experience
         value: 5+ yrs
-        accent: text-emerald-700 dark:text-emerald-300
+        accent: emerald
       - label: Focus
         value: Scalable Backends
-        accent: text-cyan-700 dark:text-cyan-300
+        accent: cyan
       - label: Debugging
         value: Persistent
-        accent: text-amber-700 dark:text-yellow-200
+        accent: amber
       - label: Architecture
         value: Pragmatic
-        accent: text-purple-700 dark:text-purple-300
+        accent: purple
   - id: core-stack
     type: tags
     title: Core Stack
@@ -46,5 +46,3 @@ sections:
       - Python
       - PostgreSQL
       - Docker
-  - id: theme-toggle
-    type: theme_toggle

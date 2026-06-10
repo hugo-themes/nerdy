@@ -5,7 +5,7 @@
   </header>
   <div class="grid gap-4">
     {{ range .Pages }}
-      <a class="rounded-2xl border border-border bg-card p-5 text-card-foreground transition hover:border-primary" href="{{ .RelPermalink }}">
+      <a class="group nerdy-card nerdy-card-hover nerdy-card-accent-cyan p-5 text-card-foreground" href="{{ .RelPermalink }}">
         <h2 class="text-xl font-semibold">{{ .Title }}</h2>
         {{ with .Summary }}<p class="mt-2 text-muted-foreground">{{ . }}</p>{{ end }}
       </a>

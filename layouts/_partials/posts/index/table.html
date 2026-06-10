@@ -1,0 +1,77 @@
+{{- $pages := .pages -}}
+{{- $count := len $pages -}}
+{{- $tablePath := .tablePath | default "./" -}}
+{{- $pageCount := div (add $count 9) 10 -}}
+{{- if lt $pageCount 1 }}{{ $pageCount = 1 }}{{ end -}}
+
+<section>
+  <div class="mb-6 flex items-center justify-between gap-4">
+    {{ partial "components/section-heading.html" (dict "icon" "list" "title" "All Posts" "accent" "emerald" "class" "mb-0") }}
+    <span class="font-mono text-xs nerdy-muted-soft">Showing {{ $count }} posts</span>
+  </div>
+
+  <div class="nerdy-window">
+    <div class="nerdy-window-bar">
+      <div class="flex min-w-0 items-center gap-3">
+        <div class="flex shrink-0 gap-1.5">
+          <div class="nerdy-window-dot bg-[#ff5f56]"></div>
+          <div class="nerdy-window-dot bg-[#ffbd2e]"></div>
+          <div class="nerdy-window-dot bg-[#27c93f]"></div>
+        </div>
+        <div class="truncate font-bold nerdy-muted">{{ $tablePath }}</div>
+      </div>
+      <span class="shrink-0 text-[10px] nerdy-muted-soft">guest@portfolio: ~/posts</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[680px] whitespace-nowrap text-left">
+        <thead>
+          <tr class="border-b border-slate-300 bg-slate-100/80 nerdy-muted-soft dark:border-slate-700/80 dark:bg-slate-900/40">
+            <th class="px-4 py-2 font-semibold">Posted At</th>
+            <th class="px-4 py-2 font-semibold">Reading Time</th>
+            <th class="px-4 py-2 font-semibold">Title</th>
+            <th class="px-4 py-2 font-semibold">Tags</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 text-slate-700 dark:divide-slate-700/40 dark:text-slate-300">
+          {{ range $rowIndex, $post := $pages }}
+            {{ $pageNumber := add (div $rowIndex 10) 1 }}
+            <tr class="transition-colors hover:bg-slate-100/80 dark:hover:bg-slate-800/40" x-show="currentPage === {{ $pageNumber }}">
+              <td class="px-4 py-3 nerdy-muted">{{ if not $post.Date.IsZero }}{{ $post.Date.Format "2006-01-02" }}{{ else }}n/a{{ end }}</td>
+              <td class="px-4 py-3 nerdy-muted-soft">{{ $post.ReadingTime }} min read</td>
+              <td class="px-4 py-3 font-bold">
+                <a class="text-slate-950 transition-colors hover:text-accent-cyan hover:underline dark:text-white" href="{{ $post.RelPermalink }}">{{ $post.Title }}</a>
+              </td>
+              <td class="px-4 py-3">
+                {{ with $post.Params.tags }}
+                  <div class="flex flex-wrap gap-1.5">
+                    {{ range . }}
+                      <span class="nerdy-chip nerdy-chip-cyan">#{{ . }}</span>
+                    {{ end }}
+                  </div>
+                {{ else }}
+                  <span class="nerdy-muted-soft">—</span>
+                {{ end }}
+              </td>
+            </tr>
+          {{ else }}
+            <tr>
+              <td class="px-4 py-6 text-center nerdy-muted-soft" colspan="4">No posts found yet.</td>
+            </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-300 bg-slate-100/80 px-4 py-3 dark:border-slate-700/80 dark:bg-slate-900/40">
+      <span class="text-[10px] nerdy-muted-soft">10 posts per page · Page <span x-text="currentPage"></span> of {{ $pageCount }}</span>
+      <div class="flex flex-wrap gap-1.5">
+        <button class="rounded border px-2 py-1 text-[10px] transition-colors disabled:cursor-not-allowed disabled:opacity-40" type="button" x-on:click="currentPage = Math.max(1, currentPage - 1)" x-bind:disabled="currentPage === 1">Prev</button>
+        {{ range seq 1 $pageCount }}
+          <button class="rounded border px-2 py-1 text-[10px] transition-colors" type="button" x-on:click="currentPage = {{ . }}" x-bind:class="currentPage === {{ . }} ? 'border-accent-cyan bg-accent-cyan/10 text-accent-cyan' : 'border-slate-300 text-slate-500 hover:text-slate-950 dark:border-slate-700 dark:hover:text-white'">{{ . }}</button>
+        {{ end }}
+        <button class="rounded border px-2 py-1 text-[10px] transition-colors disabled:cursor-not-allowed disabled:opacity-40" type="button" x-on:click="currentPage = Math.min({{ $pageCount }}, currentPage + 1)" x-bind:disabled="currentPage === {{ $pageCount }}">Next</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,8 @@
+<section class="mt-4" id="{{ .id }}">
+  {{ partial "components/section-heading.html" (dict "icon" .icon "title" .title "prefix" "<<" "suffix" ">>") }}
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+    {{ range .items }}
+      {{ partial "home/cards/project.html" . }}
+    {{ end }}
+  </div>
+</section>

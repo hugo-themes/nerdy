@@ -1,6 +1,6 @@
 <pre class="font-mono whitespace-pre-wrap leading-relaxed">{{ .intro }}
 
-{{ with .email }}<span class="text-cyan-700 dark:text-cyan-400">Email:</span>      <a class="pointer-events-auto relative z-50 text-amber-700 underline hover:text-amber-600 dark:text-[#f1fa8c] dark:hover:text-yellow-100" href="mailto:{{ . }}">{{ . }}</a>
-{{ end }}{{ range .links }}<span class="text-cyan-700 dark:text-cyan-400">{{ .label }}:</span>     <a class="pointer-events-auto relative z-50 text-blue-700 underline hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300" href="{{ .url | safeURL }}" target="_blank" rel="noopener noreferrer">{{ .text | default .url }}</a>
+{{ with .email }}<span class="text-accent-cyan">Email:</span>      <a class="pointer-events-auto relative z-50 text-accent-amber underline" href="mailto:{{ . }}">{{ . }}</a>
+{{ end }}{{ range .links }}<span class="text-accent-cyan">{{ .label }}:</span>     <a class="pointer-events-auto relative z-50 nerdy-link underline" href="{{ .url | safeURL }}" target="_blank" rel="noopener noreferrer">{{ .text | default .url }}</a>
 {{ end }}
 {{ .outro }}</pre>

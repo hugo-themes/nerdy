@@ -1,0 +1,12 @@
+<section class="nerdy-sidebar-card">
+  <h2 class="mb-4 font-mono text-xs font-bold uppercase tracking-widest nerdy-muted-soft">{{ .title }}</h2>
+  <div class="space-y-3 font-mono text-xs">
+    {{ range .items }}
+      {{ $accentClasses := partial "components/accent-classes.html" (.accent | default "cyan") }}
+      <div class="flex items-center justify-between gap-4 border-b border-slate-200/80 pb-2 last:border-b-0 last:pb-0 dark:border-slate-700/50">
+        <span class="nerdy-muted">{{ .label }}:</span>
+        <span class="text-right font-bold {{ $accentClasses.icon }}">{{ .value }}</span>
+      </div>
+    {{ end }}
+  </div>
+</section>

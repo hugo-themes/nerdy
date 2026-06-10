@@ -64,17 +64,13 @@ sections:
     items:
       - date: Today
         active: true
-        html: 'Merged PR <a href="#" class="text-cyan-700 hover:underline
-          dark:text-cyan-300">#1042</a> in <span class="font-mono
-          text-purple-700 bg-purple-100 px-1 rounded dark:bg-purple-400/10
-          dark:text-purple-300">facebook/react</span>: Improved hook dependency
+        html: 'Merged PR <a href="#" class="nerdy-link">#1042</a> in <span class="font-mono
+          text-accent-purple bg-accent-purple/10 px-1 rounded">facebook/react</span>: Improved hook dependency
           bailout optimization for edge cases.'
       - date: 3 Days Ago
         html: 'Released <span class="font-bold text-slate-900
-          dark:text-slate-200">v2.3.5</span> of <a href="#" class="text-cyan-700
-          hover:underline dark:text-cyan-300">cli-task-manager</a>. Added cloud
+          dark:text-slate-200">v2.3.5</span> of <a href="#" class="nerdy-link">cli-task-manager</a>. Added cloud
           synchronization and AES-256 encryption for local storage.'
       - date: Last Month
-        html: 'Speaker at <span class="font-bold text-sky-700
-          dark:text-sky-300">NodeConf 2026</span>. Gave a talk on: <span
+        html: 'Speaker at <span class="font-bold text-accent-cyan">NodeConf 2026</span>. Gave a talk on: <span
           class="italic">"Scaling Event Loops to the Moon"</span>.'

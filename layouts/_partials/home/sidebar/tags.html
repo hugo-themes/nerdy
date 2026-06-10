@@ -1,0 +1,8 @@
+<section class="nerdy-sidebar-card">
+  <h2 class="mb-4 font-mono text-xs font-bold uppercase tracking-widest nerdy-muted-soft">{{ .title }}</h2>
+  <div class="flex flex-wrap gap-2">
+    {{ range .items }}
+      <span class="nerdy-chip nerdy-chip-cyan">{{ . }}</span>
+    {{ end }}
+  </div>
+</section>

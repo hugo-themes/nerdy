@@ -9,23 +9,23 @@
     {{ $total := len $posts }}
     {{ $subjectGroups := $posts.GroupByParam "subject" }}
     {{ $headingPath := slice
-      (dict "tag" "a" "label" "guest@portfolio" "href" (relURL "/") "class" "text-slate-600 transition-colors hover:text-slate-950 hover:underline dark:text-slate-400 dark:hover:text-white")
+      (dict "tag" "a" "label" "guest@portfolio" "href" (relURL "/") "class" "nerdy-muted transition-colors hover:text-slate-950 hover:underline dark:hover:text-white")
       (dict "label" ":")
-      (dict "tag" "a" "label" (printf "~/%s" $section) "href" (relURL (printf "%s/" $section)) "class" "text-cyan-700 transition-colors hover:text-cyan-600 hover:underline dark:text-cyan-300 dark:hover:text-cyan-200")
+      (dict "tag" "a" "label" (printf "~/%s" $section) "href" (relURL (printf "%s/" $section)) "class" "text-accent-cyan transition-colors hover:underline")
       (dict "label" "/" "attrs" "x-show=\"activeTopic\" x-cloak")
-      (dict "label" "" "class" "text-purple-700 dark:text-purple-400" "attrs" "x-show=\"activeTopic\" x-text=\"activeSubjectLabel\" x-cloak")
+      (dict "label" "" "class" "text-accent-purple" "attrs" "x-show=\"activeTopic\" x-text=\"activeSubjectLabel\" x-cloak")
       (dict "label" "/" "attrs" "x-show=\"activeTopic\" x-cloak")
-      (dict "tag" "a" "label" "" "class" "text-amber-700 transition-colors hover:text-amber-600 hover:underline dark:text-[#f1fa8c] dark:hover:text-amber-200" "attrs" "x-show=\"activeTopic\" x-bind:href=\"'#' + activeTopic\" x-text=\"activeTopicLabel\" x-cloak")
+      (dict "tag" "a" "label" "" "class" "text-accent-amber transition-colors hover:underline" "attrs" "x-show=\"activeTopic\" x-bind:href=\"'#' + activeTopic\" x-text=\"activeTopicLabel\" x-cloak")
     }}
-    <div class="bg-grid relative isolate min-h-screen overflow-x-clip bg-slate-50 pb-20 text-slate-700 selection:bg-cyan-300/30 selection:text-slate-950 dark:bg-[#0B1121] dark:text-slate-300 dark:selection:bg-cyan-300/30 dark:selection:text-white">
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.14),transparent_30rem),radial-gradient(circle_at_80%_10%,rgba(99,102,241,0.12),transparent_30rem),radial-gradient(circle_at_16%_22%,rgba(217,70,239,0.08),transparent_24rem)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.16),transparent_30rem),radial-gradient(circle_at_80%_10%,rgba(99,102,241,0.16),transparent_30rem),radial-gradient(circle_at_16%_22%,rgba(217,70,239,0.10),transparent_24rem)]"></div>
-      <div class="pointer-events-none absolute left-1/2 top-0 -z-10 h-64 w-full max-w-4xl -translate-x-1/2 bg-cyan-200/40 blur-[120px] dark:bg-cyan-300/10"></div>
+    <div class="nerdy-page-surface">
+      <div class="nerdy-ambient-bg"></div>
+      <div class="nerdy-top-glow"></div>
 
-      <div class="relative z-10 mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8" x-data="{ expandedSubject: '', activeTopic: '', activeTopicLabel: '', activeSubjectLabel: '', currentPage: 1, init() { const topicID = decodeURIComponent(window.location.hash.replace(/^#/, '')); if (!topicID) return; const topicLink = Array.from(this.$root.querySelectorAll('[data-topic-id]')).find((link) => link.dataset.topicId === topicID); if (!topicLink) return; this.expandedSubject = topicLink.dataset.subjectId || ''; this.activeTopic = topicID; this.activeSubjectLabel = topicLink.dataset.subjectLabel || ''; this.activeTopicLabel = topicLink.dataset.topicLabel || ''; }, openSubject(id) { this.expandedSubject = this.expandedSubject === id ? '' : id }, selectTopic(topicID, subjectID, subjectLabel, topicLabel) { this.expandedSubject = subjectID; this.activeTopic = topicID; this.activeSubjectLabel = subjectLabel; this.activeTopicLabel = topicLabel; this.currentPage = 1 }, showAll() { this.activeTopic = ''; this.activeTopicLabel = ''; this.activeSubjectLabel = ''; this.currentPage = 1 } }">
-        {{ partial "posts/heading.html" (dict "path" $headingPath "title" (.Title | default "Logs") "accent" "Index" "description" .Description) }}
+      <div class="nerdy-container pt-6" x-data="{ expandedSubject: '', activeTopic: '', activeTopicLabel: '', activeSubjectLabel: '', currentPage: 1, init() { const topicID = decodeURIComponent(window.location.hash.replace(/^#/, '')); if (!topicID) return; const topicLink = Array.from(this.$root.querySelectorAll('[data-topic-id]')).find((link) => link.dataset.topicId === topicID); if (!topicLink) return; this.expandedSubject = topicLink.dataset.subjectId || ''; this.activeTopic = topicID; this.activeSubjectLabel = topicLink.dataset.subjectLabel || ''; this.activeTopicLabel = topicLink.dataset.topicLabel || ''; }, openSubject(id) { this.expandedSubject = this.expandedSubject === id ? '' : id }, selectTopic(topicID, subjectID, subjectLabel, topicLabel) { this.expandedSubject = subjectID; this.activeTopic = topicID; this.activeSubjectLabel = subjectLabel; this.activeTopicLabel = topicLabel; this.currentPage = 1 }, showAll() { this.activeTopic = ''; this.activeTopicLabel = ''; this.activeSubjectLabel = ''; this.currentPage = 1 } }">
+        {{ partial "posts/components/heading.html" (dict "path" $headingPath "title" (.Title | default "Logs") "accent" "Index" "description" .Description) }}
 
         <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
-          {{ partial "posts/sidebar.html" (dict "section" $section "subjectGroups" $subjectGroups "mode" "section") }}
+          {{ partial "posts/components/sidebar.html" (dict "section" $section "subjectGroups" $subjectGroups "mode" "section") }}
 
           <main class="flex flex-col gap-10 lg:col-span-9">
             <div class="flex flex-col gap-10" x-show="activeTopic" x-cloak>
@@ -36,14 +36,14 @@
                   {{ $topicID := printf "subject-%s-topic-%s" ($subjectName | urlize) ($topicName | urlize) }}
                   {{ $topicPages := $topicGroup.Pages.ByDate.Reverse }}
                   <div class="flex flex-col gap-10" x-show="activeTopic === {{ $topicID | jsonify }}" x-cloak>
-                    {{ partial "posts/index-content.html" (dict "pages" $topicPages "tablePath" (printf "./%s/%s/" $subjectName $topicName)) }}
+                    {{ partial "posts/index/content.html" (dict "pages" $topicPages "tablePath" (printf "./%s/%s/" $subjectName $topicName)) }}
                   </div>
                 {{ end }}
               {{ end }}
             </div>
 
             <div class="flex flex-col gap-10" x-show="!activeTopic">
-              {{ partial "posts/index-content.html" (dict "pages" $posts "tablePath" "./") }}
+              {{ partial "posts/index/content.html" (dict "pages" $posts "tablePath" "./") }}
             </div>
           </main>
         </div>

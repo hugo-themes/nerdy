@@ -83,7 +83,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
       await this.wait(100);
     }
 
-    this.pushOutput('<div class="mb-4 mt-2 text-slate-600 dark:text-slate-400">Type <span class="font-bold text-cyan-700 dark:text-cyan-300">help</span> to see available commands.</div>');
+    this.pushOutput('<div class="mb-4 mt-2 text-slate-600 dark:text-slate-400">Type <span class="font-bold text-accent-cyan">help</span> to see available commands.</div>');
 
     this.isProcessing = false;
     this.bootCompleted = true;

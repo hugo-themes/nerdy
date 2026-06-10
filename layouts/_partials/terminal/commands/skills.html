@@ -1,6 +1,6 @@
 <pre class="font-mono whitespace-pre-wrap leading-relaxed">{
 {{- $categoryCount := len .categories -}}
 {{- range $categoryIndex, $category := .categories }}
-  <span class="text-emerald-700 dark:text-[#4AF626]">"{{ $category.key }}"</span>: [{{ range $skillIndex, $skill := $category.items }}<span class="text-amber-700 dark:text-[#f1fa8c]">"{{ $skill }}"</span>{{ if lt (add $skillIndex 1) (len $category.items) }}, {{ end }}{{ end }}]{{ if lt (add $categoryIndex 1) $categoryCount }},{{ end }}
+  <span class="text-accent-emerald">"{{ $category.key }}"</span>: [{{ range $skillIndex, $skill := $category.items }}<span class="text-accent-amber">"{{ $skill }}"</span>{{ if lt (add $skillIndex 1) (len $category.items) }}, {{ end }}{{ end }}]{{ if lt (add $categoryIndex 1) $categoryCount }},{{ end }}
 {{- end }}
 }</pre>

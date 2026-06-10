@@ -1,0 +1,6 @@
+{{- $pages := .pages -}}
+{{- $tablePath := .tablePath | default "./" -}}
+
+{{ partial "posts/index/recent.html" (dict "pages" $pages) }}
+{{ partial "posts/index/series.html" (dict "pages" $pages) }}
+{{ partial "posts/index/table.html" (dict "pages" $pages "tablePath" $tablePath) }}

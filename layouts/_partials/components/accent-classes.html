@@ -1,0 +1,12 @@
+{{- $accent := . | default "cyan" -}}
+{{- if not (in (slice "cyan" "purple" "emerald" "amber") $accent) -}}
+  {{- $accent = "cyan" -}}
+{{- end -}}
+{{- $classes := dict
+  "card" (printf "nerdy-card-accent-%s" $accent)
+  "chip" (printf "nerdy-chip nerdy-chip-%s" $accent)
+  "icon" (printf "text-accent-%s" $accent)
+  "title" (printf "nerdy-title-accent-%s" $accent)
+-}}
+
+{{- return $classes -}}

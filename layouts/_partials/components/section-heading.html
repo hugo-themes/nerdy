@@ -1,0 +1,15 @@
+{{- $icon := .icon | default "code" -}}
+{{- $iconClass := .iconClass | default "h-5 w-5" -}}
+{{- $prefix := .prefix | default ">>" -}}
+{{- $suffix := .suffix | default "" -}}
+{{- $title := .title | default "Section" -}}
+{{- $accent := .accent | default "cyan" -}}
+{{- $class := .class | default "" -}}
+{{- $accentClasses := partial "components/accent-classes.html" $accent -}}
+
+<div class="nerdy-section-heading {{ $class }}">
+  <span class="{{ $accentClasses.icon }}">
+    {{ partial "components/icon.html" (dict "name" $icon "class" $iconClass) }}
+  </span>
+  <h2 class="nerdy-section-title">{{ $prefix }} {{ $title }}{{ with $suffix }} {{ . }}{{ end }}</h2>
+</div>

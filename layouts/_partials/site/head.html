@@ -2,5 +2,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
 {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
-{{ partial "utils/css.html" . }}
-{{ partial "utils/js.html" . }}
+{{ partial "site/assets/css.html" . }}
+{{ partial "site/assets/js.html" . }}

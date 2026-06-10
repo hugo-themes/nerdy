@@ -1,0 +1,17 @@
+{{- $accent := .accent | default "cyan" -}}
+{{- $accentClasses := partial "components/accent-classes.html" $accent -}}
+
+<article class="group nerdy-card nerdy-card-hover {{ $accentClasses.card }} relative overflow-hidden p-5">
+  <h3 class="mb-2 text-lg font-bold nerdy-card-title {{ $accentClasses.title }}">{{ .title }}</h3>
+  <p class="mb-4 line-clamp-2 text-sm leading-6 nerdy-muted">{{ .description }}</p>
+  {{ with .links }}
+    <div class="flex flex-wrap gap-4">
+      {{ range . }}
+        <a class="flex items-center gap-1 font-mono text-xs nerdy-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+          {{ partial "components/icon.html" (dict "name" .icon "class" "h-3 w-3") }}
+          {{ .label }}
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+</article>

@@ -1,0 +1,15 @@
+{{- $variant := .variant | default "icon" -}}
+{{- $class := .class | default "" -}}
+
+{{- if eq $variant "button" -}}
+  <button class="group nerdy-button flex w-full items-center justify-center gap-2 {{ $class }}" type="button" x-on:click="toggle()">
+    <span class="transition-colors group-hover:text-accent-cyan" x-show="dark" x-cloak>{{ partial "components/icon.html" (dict "name" "moon" "class" "h-4 w-4") }}</span>
+    <span class="transition-colors group-hover:text-accent-amber" x-show="!dark" x-cloak>{{ partial "components/icon.html" (dict "name" "sun" "class" "h-4 w-4") }}</span>
+    <span x-text="dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">Switch to Light Mode</span>
+  </button>
+{{- else -}}
+  <button class="nerdy-icon-button {{ $class }}" type="button" x-on:click="toggle()" aria-label="Toggle theme">
+    <span x-show="dark" x-cloak>{{ partial "components/icon.html" (dict "name" "moon" "class" "h-4 w-4") }}</span>
+    <span x-show="!dark" x-cloak>{{ partial "components/icon.html" (dict "name" "sun" "class" "h-4 w-4") }}</span>
+  </button>
+{{- end -}}

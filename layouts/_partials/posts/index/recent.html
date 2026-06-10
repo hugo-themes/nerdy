@@ -1,0 +1,26 @@
+{{- $pages := .pages -}}
+
+<section>
+  {{ partial "components/section-heading.html" (dict "icon" "document" "title" "Recent Posts") }}
+
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+    {{ range first 3 $pages }}
+      <a class="group nerdy-card nerdy-card-hover nerdy-card-accent-cyan relative flex min-h-52 flex-col justify-between overflow-hidden p-5" href="{{ .RelPermalink }}">
+        <div>
+          <div class="mb-3 flex items-center justify-between gap-3">
+            {{ if not .Date.IsZero }}<time class="font-mono text-[10px] nerdy-muted-soft" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+            {{ with .Params.topic }}<span class="nerdy-chip nerdy-chip-cyan">{{ . }}</span>{{ end }}
+          </div>
+          <h3 class="mb-2 text-base font-bold leading-snug nerdy-card-title nerdy-title-accent-cyan">{{ .Title }}</h3>
+          {{ with .Summary }}<p class="mb-4 line-clamp-3 text-xs leading-5 nerdy-muted">{{ . | plainify }}</p>{{ end }}
+        </div>
+        <div class="mt-4 flex items-center justify-between border-t border-slate-200 pt-3 font-mono text-[11px] dark:border-slate-700/50">
+          <span class="nerdy-muted-soft">{{ .ReadingTime }} min read</span>
+          <span class="flex items-center gap-1 text-accent-cyan">Read <span class="transition-transform group-hover:translate-x-1">-&gt;</span></span>
+        </div>
+      </a>
+    {{ else }}
+      {{ partial "components/empty-state.html" (dict "class" "md:col-span-3" "message" "No posts found yet.") }}
+    {{ end }}
+  </div>
+</section>

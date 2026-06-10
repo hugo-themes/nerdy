@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang="{{ site.Language.Locale | default "en" }}" class="scroll-smooth" x-data="themeToggle">
   <head>
-    {{ partial "head.html" . }}
+    {{ partial "site/head.html" . }}
   </head>
   <body class="min-h-screen bg-background text-foreground">
     {{ $isPostsSurface := eq .Section "posts" }}
+    {{ partial "site/theme-toggle-float.html" . }}
+    {{ if and (not .IsHome) (not $isPostsSurface) }}{{ partial "site/header.html" . }}{{ end }}
     <main class="{{ if or .IsHome $isPostsSurface }}w-full{{ else }}mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8{{ end }}">
       {{ block "main" . }}{{ end }}
     </main>
-    {{ if and (not .IsHome) (not $isPostsSurface) }}{{ partial "footer.html" . }}{{ end }}
+    {{ if and (not .IsHome) (not $isPostsSurface) }}{{ partial "site/footer.html" . }}{{ end }}
   </body>
 </html>

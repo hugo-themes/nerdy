@@ -1,7 +1,7 @@
 <pre class="font-mono whitespace-pre-wrap leading-relaxed">Available commands:
 {{- range sort .commands "weight" }}
-  <span class="font-bold text-cyan-700 dark:text-cyan-400">{{ .name }}</span>{{ strings.Repeat (sub 12 (len .name)) " " }}<span class="text-slate-600 dark:text-gray-400">- {{ .description }}</span>
+  <span class="font-bold text-accent-cyan">{{ .name }}</span>{{ strings.Repeat (sub 12 (len .name)) " " }}<span class="nerdy-muted">- {{ .description }}</span>
 {{- end }}
 {{- range .builtins }}
-  <span class="font-bold text-cyan-700 dark:text-cyan-400">{{ .name }}</span>{{ strings.Repeat (sub 12 (len .name)) " " }}<span class="text-slate-600 dark:text-gray-400">- {{ .description }}</span>
+  <span class="font-bold text-accent-cyan">{{ .name }}</span>{{ strings.Repeat (sub 12 (len .name)) " " }}<span class="nerdy-muted">- {{ .description }}</span>
 {{- end }}</pre>

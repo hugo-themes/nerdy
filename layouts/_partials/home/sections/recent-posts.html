@@ -1,0 +1,29 @@
+{{- $section := .section | default "posts" -}}
+{{- $limit := .limit | default 3 -}}
+{{- $posts := first $limit ((where site.RegularPages "Section" $section).ByDate.Reverse) -}}
+{{- $fallbackPosts := .items | default slice -}}
+{{- $hasPosts := gt (len $posts) 0 -}}
+{{- $hasFallbackPosts := gt (len $fallbackPosts) 0 -}}
+
+<section class="mt-8" id="{{ .id }}">
+  {{ partial "components/section-heading.html" (dict "icon" .icon "title" .title "prefix" "<<" "suffix" ">>") }}
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    {{ if $hasPosts }}
+      {{ range $posts }}
+        {{ partial "home/cards/post.html" (dict "page" .) }}
+      {{ end }}
+    {{ else if $hasFallbackPosts }}
+      {{ range $fallbackPosts }}
+        {{ partial "home/cards/post.html" (dict "item" .) }}
+      {{ end }}
+    {{ else }}
+      {{ partial "components/empty-state.html" (dict "class" "sm:col-span-2" "message" (printf "No logs yet. Add Markdown files under <code class=\"font-mono text-slate-900 dark:text-slate-200\">content/%s</code> and they will appear here automatically." $section)) }}
+    {{ end }}
+
+    {{ if or $hasPosts $hasFallbackPosts }}
+      <a class="group flex items-center justify-center nerdy-card-dashed p-5" href="{{ relURL (printf "%s/" $section) }}">
+        <span class="font-mono text-sm nerdy-muted transition-colors group-hover:text-accent-cyan">{{ .view_all_label | default "View All Logs ->" }}</span>
+      </a>
+    {{ end }}
+  </div>
+</section>

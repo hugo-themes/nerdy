@@ -1,0 +1,22 @@
+{{- with .Fragments.Headings -}}
+  <aside class="fixed right-2 top-[30%] z-50 md:right-8">
+    <nav class="group flex w-10 flex-col gap-1.5 overflow-hidden rounded-xl border border-transparent bg-white/35 py-4 shadow-none backdrop-blur-sm transition-all duration-300 ease-out hover:w-64 hover:border-slate-200 hover:bg-white/90 hover:shadow-2xl dark:bg-slate-800/30 dark:hover:border-slate-700 dark:hover:bg-slate-800/90" aria-label="Table of contents">
+      <div class="mb-2 whitespace-nowrap px-4 font-mono text-[10px] uppercase tracking-widest nerdy-muted-soft opacity-0 transition-opacity group-hover:opacity-100">
+        ON THIS PAGE
+      </div>
+
+      {{ range . }}
+        <a class="toc-link group/item flex w-full items-center gap-3 rounded-l px-3 py-1.5 transition-colors hover:bg-slate-100/80 dark:hover:bg-slate-800/50" href="#{{ .ID }}" data-toc-link data-target="{{ .ID }}">
+          <div class="toc-bar h-1 w-4 shrink-0 rounded-full bg-slate-400 transition-all duration-200 group-hover/item:bg-accent-cyan dark:bg-slate-600"></div>
+          <span class="toc-text whitespace-nowrap font-mono text-xs nerdy-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">{{ .Title | plainify }}</span>
+        </a>
+        {{ range .Headings }}
+          <a class="toc-link group/item flex w-full items-center gap-3 rounded-l px-3 py-1.5 transition-colors hover:bg-slate-100/80 dark:hover:bg-slate-800/50" href="#{{ .ID }}" data-toc-link data-target="{{ .ID }}">
+            <div class="toc-bar ml-2 h-1 w-2 shrink-0 rounded-full bg-slate-300 transition-all duration-200 group-hover/item:bg-accent-amber dark:bg-slate-700"></div>
+            <span class="toc-text whitespace-nowrap font-mono text-xs text-slate-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">-&gt; {{ .Title | plainify }}</span>
+          </a>
+        {{ end }}
+      {{ end }}
+    </nav>
+  </aside>
+{{- end -}}

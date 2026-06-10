@@ -1,0 +1,6 @@
+{{- $message := .message | default "Nothing to show yet." -}}
+{{- $class := .class | default "" -}}
+
+<div class="nerdy-card-dashed p-5 text-sm nerdy-muted {{ $class }}">
+  {{ $message | safeHTML }}
+</div>
