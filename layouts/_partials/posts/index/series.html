@@ -1,14 +1,34 @@
-{{- $pages := .pages -}}
+{{- $pages := .pages | default slice -}}
+{{- $seriesSections := .seriesSections | default slice -}}
+{{- $seriesItems := slice -}}
+{{- $seenSeriesKeys := slice -}}
+
+{{- range $seriesSection := $seriesSections -}}
+  {{- $seriesTitle := $seriesSection.LinkTitle | default $seriesSection.Title -}}
+  {{- $seriesKey := $seriesTitle | urlize -}}
+  {{- $seriesPages := partial "posts/utils/series-pages.html" (dict "pages" $pages "seriesSection" $seriesSection) -}}
+
+  {{- if gt (len $seriesPages) 0 -}}
+    {{- $seriesItems = $seriesItems | append (dict "key" $seriesTitle "pages" $seriesPages "weight" ($seriesSection.Weight | default 0)) -}}
+    {{- $seenSeriesKeys = $seenSeriesKeys | append $seriesKey -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $seriesGroup := ($pages.GroupByParam "series") -}}
+  {{- if $seriesGroup.Key -}}
+    {{- $seriesKey := $seriesGroup.Key | urlize -}}
+    {{- if not (in $seenSeriesKeys $seriesKey) -}}
+      {{- $seriesItems = $seriesItems | append (dict "key" $seriesGroup.Key "pages" $seriesGroup.Pages.ByWeight "weight" 0) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 
 <section>
   {{ partial "components/section-heading.html" (dict "icon" "collection" "title" "Post Serieses" "accent" "amber") }}
 
   <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-    {{ $seriesCount := 0 }}
-    {{ range $seriesGroup := ($pages.GroupByParam "series") }}
-      {{ if $seriesGroup.Key }}
-        {{ $seriesCount = add $seriesCount 1 }}
-        {{ $seriesPages := $seriesGroup.Pages.ByWeight }}
+    {{ range $seriesItem := (sort $seriesItems "weight" "asc") }}
+        {{ $seriesPages := index $seriesItem "pages" }}
         {{ $firstPage := index $seriesPages 0 }}
         <article class="group nerdy-card nerdy-card-hover nerdy-card-accent-purple relative overflow-hidden p-5">
           <div class="absolute left-0 top-0 h-full w-1 bg-accent-purple"></div>
@@ -16,17 +36,16 @@
             <span class="nerdy-chip nerdy-chip-purple rounded-full px-2.5 py-1 font-bold">ACTIVE SERIES</span>
             <span class="font-mono text-xs nerdy-muted-soft">{{ len $seriesPages }} Parts</span>
           </div>
-          <h3 class="mb-2 text-lg font-bold nerdy-card-title nerdy-title-accent-purple">{{ $seriesGroup.Key }}</h3>
+          <h3 class="mb-2 text-lg font-bold nerdy-card-title nerdy-title-accent-purple">{{ index $seriesItem "key" }}</h3>
           {{ with $firstPage.Summary }}<p class="mb-4 text-xs leading-relaxed nerdy-muted">{{ . | plainify }}</p>{{ end }}
           <div class="flex items-center justify-between border-t border-slate-200 pt-2 font-mono text-xs dark:border-slate-800">
             <span class="nerdy-muted-soft">Progress: <span class="font-bold text-slate-700 dark:text-slate-300">{{ len $seriesPages }} / {{ len $seriesPages }} posts</span></span>
             <a class="nerdy-link" href="{{ $firstPage.RelPermalink }}">Start Reading -&gt;</a>
           </div>
         </article>
-      {{ end }}
     {{ end }}
-    {{ if eq $seriesCount 0 }}
-      {{ partial "components/empty-state.html" (dict "class" "md:col-span-2" "message" "No post series detected. Add <code class=\"font-mono\">series</code> to post front matter to populate this area.") }}
+    {{ if eq (len $seriesItems) 0 }}
+      {{ partial "components/empty-state.html" (dict "class" "md:col-span-2" "message" "No post series detected. Add a series folder with <code class=\"font-mono\">_index.md</code> and matching posts to populate this area.") }}
     {{ end }}
   </div>
 </section>

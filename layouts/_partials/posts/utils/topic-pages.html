@@ -1,0 +1,31 @@
+{{- $topic := .topic -}}
+{{- $ordered := slice -}}
+
+{{- with $topic -}}
+  {{- $topicRegularPages := .RegularPages.ByWeight -}}
+
+  {{- range $page := .RegularPages.ByWeight -}}
+    {{- if not $page.Params.series -}}
+      {{- $ordered = $ordered | append $page -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- range $seriesSection := .Sections.ByWeight -}}
+    {{- $seriesCandidates := slice -}}
+    {{- range $page := $seriesSection.RegularPagesRecursive.ByWeight -}}
+      {{- $seriesCandidates = $seriesCandidates | append $page -}}
+    {{- end -}}
+    {{- range $page := $topicRegularPages -}}
+      {{- $seriesCandidates = $seriesCandidates | append $page -}}
+    {{- end -}}
+    {{- range $page := partial "posts/utils/series-pages.html" (dict "pages" $seriesCandidates "seriesSection" $seriesSection) -}}
+      {{- $ordered = $ordered | append $page -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- range $page := .RegularPages.ByWeight -}}
+    {{- $ordered = $ordered | append $page -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (partial "posts/utils/dedupe-pages.html" (dict "pages" $ordered)) -}}

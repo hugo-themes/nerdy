@@ -1,0 +1,34 @@
+{{- $sectionPage := .sectionPage -}}
+{{- $section := .section | default "posts" -}}
+{{- $ordered := slice -}}
+{{- $allPages := slice -}}
+
+{{- if $sectionPage -}}
+  {{- $allPages = $sectionPage.RegularPagesRecursive -}}
+{{- else -}}
+  {{- $allPages = where site.RegularPages "Section" $section -}}
+{{- end -}}
+
+{{- with $sectionPage -}}
+  {{- range $page := .RegularPages.ByWeight -}}
+    {{- $ordered = $ordered | append $page -}}
+  {{- end -}}
+
+  {{- range $subject := .Sections.ByWeight -}}
+    {{- range $page := $subject.RegularPages.ByWeight -}}
+      {{- $ordered = $ordered | append $page -}}
+    {{- end -}}
+
+    {{- range $topic := $subject.Sections.ByWeight -}}
+      {{- range $page := partial "posts/utils/topic-pages.html" (dict "topic" $topic) -}}
+        {{- $ordered = $ordered | append $page -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $page := $allPages.ByWeight -}}
+  {{- $ordered = $ordered | append $page -}}
+{{- end -}}
+
+{{- return (partial "posts/utils/dedupe-pages.html" (dict "pages" $ordered)) -}}

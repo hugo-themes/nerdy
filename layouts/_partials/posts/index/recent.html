@@ -1,4 +1,4 @@
-{{- $pages := .pages -}}
+{{- $pages := sort (.pages | default slice) "Date" "desc" -}}
 
 <section>
   {{ partial "components/section-heading.html" (dict "icon" "document" "title" "Recent Posts") }}

@@ -3,6 +3,7 @@ title: "Kubernetes Controllers: The Reconcile Loop in Plain English"
 date: 2026-04-10
 subject: Kubernetes
 topic: Controllers
+weight: 1
 tags:
   - kubernetes
   - controllers

@@ -3,6 +3,7 @@ title: "Go Basics: Pointers, Values, and Escape Analysis"
 date: 2026-06-09
 subject: Go
 topic: Basics
+weight: 1
 tags:
   - go
   - basics

@@ -1,6 +1,25 @@
 {{- $page := .page -}}
 {{- $series := .series -}}
-{{- $seriesPages := where site.RegularPages "Params.series" $series -}}
+{{- $seriesSections := .seriesSections | default slice -}}
+{{- $candidatePages := .pages | default slice -}}
+{{- $seriesKey := $series | urlize -}}
+{{- $seriesSection := false -}}
+
+{{- if eq (len $candidatePages) 0 -}}
+  {{- $candidatePages = where site.RegularPages "Params.series" $series -}}
+{{- end -}}
+
+{{- range $candidateSeriesSection := $seriesSections -}}
+  {{- $sectionTitle := $candidateSeriesSection.LinkTitle | default $candidateSeriesSection.Title -}}
+  {{- if eq ($sectionTitle | urlize) $seriesKey -}}
+    {{- $seriesSection = $candidateSeriesSection -}}
+    {{- range $seriesPage := $candidateSeriesSection.RegularPagesRecursive.ByWeight -}}
+      {{- $candidatePages = $candidatePages | append $seriesPage -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $seriesPages := partial "posts/utils/series-pages.html" (dict "pages" $candidatePages "series" $series "seriesSection" $seriesSection) -}}
 
 {{- if gt (len $seriesPages) 0 -}}
   <section class="nerdy-card relative mb-12 overflow-hidden border-accent-purple/30 bg-white/85 p-5 shadow-lg dark:bg-slate-950/80">
@@ -8,7 +27,7 @@
     <div class="mb-3 font-mono text-[10px] font-bold uppercase tracking-widest text-accent-purple">&gt;&gt; Series Navigation</div>
     <h2 class="mb-3 text-lg font-semibold text-slate-900 dark:text-slate-200">{{ $series }}</h2>
     <ol class="flex flex-col gap-2 font-mono text-sm nerdy-muted">
-      {{ range $index, $seriesPage := $seriesPages.ByWeight }}
+      {{ range $index, $seriesPage := $seriesPages }}
         {{ $isCurrent := eq $seriesPage.RelPermalink $page.RelPermalink }}
         <li class="flex items-center gap-3 {{ if $isCurrent }}-ml-2 rounded border border-slate-200 bg-slate-100 p-2 font-bold text-slate-950 dark:border-slate-700 dark:bg-slate-800/50 dark:text-white{{ else }}opacity-80 transition-opacity hover:opacity-100{{ end }}">
           {{ if $isCurrent }}

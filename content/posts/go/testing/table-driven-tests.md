@@ -3,6 +3,7 @@ title: "Testing Go Handlers with Table-Driven Tests"
 date: 2026-06-01
 subject: Go
 topic: Testing
+weight: 1
 tags:
   - go
   - testing

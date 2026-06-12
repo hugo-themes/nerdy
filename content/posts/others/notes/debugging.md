@@ -3,6 +3,7 @@ title: "A Debugging Notebook Beats a Perfect Memory"
 date: 2026-03-15
 subject: Others
 topic: Notes
+weight: 1
 tags:
   - productivity
   - debugging

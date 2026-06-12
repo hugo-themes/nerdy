@@ -1,0 +1,12 @@
+{{- $pages := .pages | default slice -}}
+{{- $unique := slice -}}
+{{- $seen := slice -}}
+
+{{- range $page := $pages -}}
+  {{- if not (in $seen $page.RelPermalink) -}}
+    {{- $unique = $unique | append $page -}}
+    {{- $seen = $seen | append $page.RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $unique -}}

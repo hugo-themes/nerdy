@@ -1,28 +1,68 @@
 {{ define "main" }}
   {{ $page := . }}
   {{ $section := .Section | default "posts" }}
+  {{ $sectionPage := site.GetPage (printf "/%s" $section) }}
+  {{ $subjects := slice }}
+  {{ with $sectionPage }}
+    {{ $subjects = .Sections.ByWeight }}
+  {{ end }}
   {{ $subject := "logs" }}
-  {{ with .Params.subject }}
-    {{ $subject = . }}
-  {{ else }}
-    {{ with .Params.categories }}{{ $subject = index . 0 }}{{ end }}
-  {{ end }}
   {{ $topic := .Params.topic | default (.Title | urlize | replace "-" "_") }}
-  {{ $posts := slice }}
-  {{ with site.GetPage (printf "/%s" $section) }}
-    {{ $posts = .RegularPagesRecursive }}
-  {{ else }}
-    {{ $posts = where site.RegularPages "Section" $section }}
-  {{ end }}
-  {{ $subjectGroups := $posts.GroupByParam "subject" }}
   {{ $currentSidebarSubject := "Others" }}
-  {{ with .Params.subject }}
-    {{ $currentSidebarSubject = . }}
-  {{ else }}
-    {{ with .Params.categories }}{{ $currentSidebarSubject = index . 0 }}{{ end }}
-  {{ end }}
   {{ $currentSidebarSubjectID := $currentSidebarSubject | urlize }}
   {{ $currentSidebarTopic := .Params.topic | default "Misc" }}
+  {{ $currentTopicSeriesSections := slice }}
+  {{ $currentTopicPages := slice }}
+  {{ $series := .Params.series | default "" }}
+  {{ $hasFolderSubject := false }}
+  {{ $hasFolderTopic := false }}
+
+  {{ range $subjectPage := $subjects }}
+    {{ if hasPrefix $page.RelPermalink $subjectPage.RelPermalink }}
+      {{ $hasFolderSubject = true }}
+      {{ $subject = $subjectPage.LinkTitle | default $subjectPage.Title }}
+      {{ $currentSidebarSubject = $subject }}
+
+      {{ range $topicPage := $subjectPage.Sections.ByWeight }}
+        {{ if hasPrefix $page.RelPermalink $topicPage.RelPermalink }}
+          {{ $hasFolderTopic = true }}
+          {{ $topic = $topicPage.LinkTitle | default $topicPage.Title }}
+          {{ $currentSidebarTopic = $topic }}
+          {{ $currentTopicSeriesSections = $topicPage.Sections.ByWeight }}
+          {{ $currentTopicPages = partial "posts/utils/topic-pages.html" (dict "topic" $topicPage) }}
+
+          {{ range $seriesPage := $topicPage.Sections.ByWeight }}
+            {{ if hasPrefix $page.RelPermalink $seriesPage.RelPermalink }}
+              {{ $series = $seriesPage.LinkTitle | default $seriesPage.Title }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if not $hasFolderSubject }}
+    {{ with .Params.subject }}
+      {{ $subject = . }}
+      {{ $currentSidebarSubject = . }}
+    {{ else }}
+      {{ with .Params.categories }}
+        {{ $subject = index . 0 }}
+        {{ $currentSidebarSubject = index . 0 }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if not $hasFolderTopic }}
+    {{ with .Params.topic }}
+      {{ $topic = . }}
+      {{ $currentSidebarTopic = . }}
+    {{ end }}
+  {{ end }}
+  {{ with .Params.series }}
+    {{ $series = . }}
+  {{ end }}
+
+  {{ $currentSidebarSubjectID = $currentSidebarSubject | urlize }}
   {{ $currentSidebarTopicID := printf "subject-%s-topic-%s" ($currentSidebarSubject | urlize) ($currentSidebarTopic | urlize) }}
   {{ $headingPath := slice
     (dict "tag" "a" "label" "guest@portfolio" "href" (relURL "/") "class" "nerdy-muted transition-colors hover:text-slate-950 hover:underline dark:hover:text-white")
@@ -43,11 +83,11 @@
     </div>
 
     <div class="nerdy-container grid grid-cols-1 items-start gap-8 lg:grid-cols-12" x-data="{ expandedSubject: {{ $currentSidebarSubjectID | jsonify }}, openSubject(id) { this.expandedSubject = this.expandedSubject === id ? '' : id } }">
-      {{ partial "posts/components/sidebar.html" (dict "section" $section "subjectGroups" $subjectGroups "mode" "page") }}
+      {{ partial "posts/components/sidebar.html" (dict "section" $section "subjects" $subjects "mode" "page") }}
 
       <main class="min-w-0 lg:col-span-9">
-        {{ with .Params.series }}
-          {{ partial "posts/components/series-nav.html" (dict "page" $page "series" .) }}
+        {{ with $series }}
+          {{ partial "posts/components/series-nav.html" (dict "page" $page "series" . "seriesSections" $currentTopicSeriesSections "pages" $currentTopicPages) }}
         {{ end }}
 
         <article class="nerdy-prose prose prose-slate max-w-none dark:prose-invert">

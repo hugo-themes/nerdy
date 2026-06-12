@@ -1,13 +1,25 @@
 {{ define "main" }}
     {{ $section := .Section | default "posts" }}
+    {{ $sectionPage := site.GetPage (printf "/%s" $section) }}
     {{ $posts := slice }}
-    {{ with site.GetPage (printf "/%s" $section) }}
-      {{ $posts = .RegularPagesRecursive.ByDate.Reverse }}
+    {{ if $sectionPage }}
+      {{ $posts = partial "posts/utils/weighted-pages.html" (dict "sectionPage" $sectionPage "section" $section) }}
     {{ else }}
-      {{ $posts = (where site.RegularPages "Section" $section).ByDate.Reverse }}
+      {{ $posts = (where site.RegularPages "Section" $section).ByWeight }}
     {{ end }}
     {{ $total := len $posts }}
-    {{ $subjectGroups := $posts.GroupByParam "subject" }}
+    {{ $subjects := slice }}
+    {{ with $sectionPage }}
+      {{ $subjects = .Sections.ByWeight }}
+    {{ end }}
+    {{ $seriesSections := slice }}
+    {{ range $subject := $subjects }}
+      {{ range $topic := $subject.Sections.ByWeight }}
+        {{ range $series := $topic.Sections.ByWeight }}
+          {{ $seriesSections = $seriesSections | append $series }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
     {{ $headingPath := slice
       (dict "tag" "a" "label" "guest@portfolio" "href" (relURL "/") "class" "nerdy-muted transition-colors hover:text-slate-950 hover:underline dark:hover:text-white")
       (dict "label" ":")
@@ -25,25 +37,25 @@
         {{ partial "posts/components/heading.html" (dict "path" $headingPath "title" (.Title | default "Logs") "accent" "Index" "description" .Description) }}
 
         <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
-          {{ partial "posts/components/sidebar.html" (dict "section" $section "subjectGroups" $subjectGroups "mode" "section") }}
+          {{ partial "posts/components/sidebar.html" (dict "section" $section "subjects" $subjects "mode" "section") }}
 
           <main class="flex flex-col gap-10 lg:col-span-9">
             <div class="flex flex-col gap-10" x-show="activeTopic" x-cloak>
-              {{ range $subjectGroup := $subjectGroups }}
-                {{ $subjectName := $subjectGroup.Key | default "Others" }}
-                {{ range $topicGroup := ($subjectGroup.Pages.GroupByParam "topic") }}
-                  {{ $topicName := $topicGroup.Key | default "Misc" }}
+              {{ range $subject := $subjects }}
+                {{ $subjectName := $subject.LinkTitle | default $subject.Title }}
+                {{ range $topic := $subject.Sections.ByWeight }}
+                  {{ $topicName := $topic.LinkTitle | default $topic.Title }}
                   {{ $topicID := printf "subject-%s-topic-%s" ($subjectName | urlize) ($topicName | urlize) }}
-                  {{ $topicPages := $topicGroup.Pages.ByDate.Reverse }}
+                  {{ $topicPages := partial "posts/utils/topic-pages.html" (dict "topic" $topic) }}
                   <div class="flex flex-col gap-10" x-show="activeTopic === {{ $topicID | jsonify }}" x-cloak>
-                    {{ partial "posts/index/content.html" (dict "pages" $topicPages "tablePath" (printf "./%s/%s/" $subjectName $topicName)) }}
+                    {{ partial "posts/index/content.html" (dict "pages" $topicPages "seriesSections" $topic.Sections.ByWeight "tablePath" (printf "./%s/%s/" $subjectName $topicName)) }}
                   </div>
                 {{ end }}
               {{ end }}
             </div>
 
             <div class="flex flex-col gap-10" x-show="!activeTopic">
-              {{ partial "posts/index/content.html" (dict "pages" $posts "tablePath" "./") }}
+              {{ partial "posts/index/content.html" (dict "pages" $posts "seriesSections" $seriesSections "tablePath" "./") }}
             </div>
           </main>
         </div>

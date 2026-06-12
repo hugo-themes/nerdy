@@ -1,0 +1,33 @@
+{{- $pages := .pages | default slice -}}
+{{- $seriesSection := .seriesSection | default false -}}
+{{- $seriesTitle := .series | default "" -}}
+
+{{- with $seriesSection -}}
+  {{- if not $seriesTitle -}}
+    {{- $seriesTitle = .LinkTitle | default .Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $seriesKey := $seriesTitle | urlize -}}
+{{- $matches := slice -}}
+
+{{- range $page := $pages -}}
+  {{- $matchesSeries := false -}}
+  {{- if $seriesKey -}}
+    {{- with $page.Params.series -}}
+      {{- if eq (. | urlize) $seriesKey -}}
+        {{- $matchesSeries = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $seriesSection -}}
+    {{- if hasPrefix $page.RelPermalink .RelPermalink -}}
+      {{- $matchesSeries = true -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $matchesSeries -}}
+    {{- $matches = $matches | append $page -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (partial "posts/utils/dedupe-pages.html" (dict "pages" (sort $matches "Weight" "asc"))) -}}

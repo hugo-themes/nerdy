@@ -1,6 +1,7 @@
 {{- $pages := .pages -}}
 {{- $tablePath := .tablePath | default "./" -}}
+{{- $seriesSections := .seriesSections | default slice -}}
 
 {{ partial "posts/index/recent.html" (dict "pages" $pages) }}
-{{ partial "posts/index/series.html" (dict "pages" $pages) }}
+{{ partial "posts/index/series.html" (dict "pages" $pages "seriesSections" $seriesSections) }}
 {{ partial "posts/index/table.html" (dict "pages" $pages "tablePath" $tablePath) }}

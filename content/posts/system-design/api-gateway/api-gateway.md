@@ -3,6 +3,7 @@ title: "System Design Notes: API Gateway Tradeoffs"
 date: 2026-03-28
 subject: System Design
 topic: API Gateway
+weight: 1
 tags:
   - architecture
   - system-design
