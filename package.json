@@ -9,12 +9,15 @@
     "server:local": "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch",
     "server:portless": "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch --port \"${PORT:-1313}\" --baseURL \"${PORTLESS_URL:-https://nerdy.localhost}\" --appendPort=false --liveReloadPort=443",
     "portless:trust": "PORTLESS_STATE_DIR=\"${PORTLESS_STATE_DIR:-$HOME/.portless}\" portless trust",
-    "dev": "npm run server"
+    "dev": "npm run server",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",
     "portless": "^0.14.0",
-    "tailwindcss": "^4.3.0"
+    "tailwindcss": "^4.3.0",
+    "wrangler": "^4.100.0"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
