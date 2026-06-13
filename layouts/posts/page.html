@@ -83,7 +83,7 @@
     </div>
 
     <div class="nerdy-container grid grid-cols-1 items-start gap-8 lg:grid-cols-12" x-data="{ expandedSubject: {{ $currentSidebarSubjectID | jsonify }}, openSubject(id) { this.expandedSubject = this.expandedSubject === id ? '' : id } }">
-      {{ partial "posts/components/sidebar.html" (dict "section" $section "subjects" $subjects "mode" "page") }}
+      {{ partial "posts/components/sidebar.html" (dict "section" $section "subjects" $subjects "mode" "page" "activeSubjectID" $currentSidebarSubjectID) }}
 
       <main class="min-w-0 lg:col-span-9">
         {{ with $series }}

@@ -29,7 +29,7 @@ sections:
     title: Recent Posts
     limit: 3
     section: posts
-    view_all_label: View All Logs ->
+    view_all_label: View All Posts ->
     items:
       - date: 2026-06-02
         title: Understanding the Event Loop in Node.js
@@ -64,13 +64,16 @@ sections:
     items:
       - date: Today
         active: true
-        html: 'Merged PR <a href="#" class="nerdy-link">#1042</a> in <span class="font-mono
-          text-accent-purple bg-accent-purple/10 px-1 rounded">facebook/react</span>: Improved hook dependency
-          bailout optimization for edge cases.'
+        html: 'Merged PR <a href="#" class="nerdy-link">#1042</a> in <span
+          class="font-mono text-accent-purple bg-accent-purple/10 px-1
+          rounded">facebook/react</span>: Improved hook dependency bailout
+          optimization for edge cases.'
       - date: 3 Days Ago
         html: 'Released <span class="font-bold text-slate-900
-          dark:text-slate-200">v2.3.5</span> of <a href="#" class="nerdy-link">cli-task-manager</a>. Added cloud
-          synchronization and AES-256 encryption for local storage.'
+          dark:text-slate-200">v2.3.5</span> of <a href="#"
+          class="nerdy-link">cli-task-manager</a>. Added cloud synchronization
+          and AES-256 encryption for local storage.'
       - date: Last Month
-        html: 'Speaker at <span class="font-bold text-accent-cyan">NodeConf 2026</span>. Gave a talk on: <span
-          class="italic">"Scaling Event Loops to the Moon"</span>.'
+        html: 'Speaker at <span class="font-bold text-accent-cyan">NodeConf 2026</span>.
+          Gave a talk on: <span class="italic">"Scaling Event Loops to the
+          Moon"</span>.'

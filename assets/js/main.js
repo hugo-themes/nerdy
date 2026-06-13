@@ -2,23 +2,50 @@ import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
 
+const THEME_STORAGE_KEY = 'theme';
+
+function readStoredTheme() {
+  try {
+    return localStorage.getItem(THEME_STORAGE_KEY);
+  } catch (_) {
+    return null;
+  }
+}
+
+function writeStoredTheme(theme) {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  } catch (_) {
+    // Ignore storage errors; the current page can still use the selected theme.
+  }
+}
+
+function prefersDarkTheme() {
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+}
+
+function applyTheme(dark) {
+  document.documentElement.classList.toggle('dark', dark);
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+}
+
 Alpine.data('themeToggle', () => ({
   dark: false,
   init() {
-    const stored = localStorage.getItem('theme');
+    const stored = readStoredTheme();
     this.dark = stored
       ? stored === 'dark'
-      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      : prefersDarkTheme();
     this.apply();
   },
   toggle() {
     this.dark = !this.dark;
-    localStorage.setItem('theme', this.dark ? 'dark' : 'light');
+    writeStoredTheme(this.dark ? 'dark' : 'light');
     this.apply();
     window.dispatchEvent(new CustomEvent('theme-changed', { detail: { dark: this.dark } }));
   },
   apply() {
-    document.documentElement.classList.toggle('dark', this.dark);
+    applyTheme(this.dark);
   },
 }));
 

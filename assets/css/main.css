@@ -287,6 +287,30 @@
     @apply rounded-xl border border-slate-200/80 bg-white/70 p-4 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent-cyan/40 hover:bg-white dark:border-slate-700/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/70;
   }
 
+  .post-sidebar-subject {
+    @apply flex w-full items-center gap-2 rounded-lg px-2 py-1 font-mono text-sm font-bold text-slate-700 transition-colors hover:bg-slate-100/80 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-white;
+  }
+
+  .post-sidebar-subject[aria-expanded="true"] {
+    @apply bg-accent-purple/10 text-accent-purple hover:bg-accent-purple/10 hover:text-accent-purple dark:text-accent-purple dark:hover:bg-accent-purple/10 dark:hover:text-accent-purple;
+  }
+
+  .post-sidebar-subject-chevron {
+    @apply h-4 w-4 shrink-0 -rotate-90 transition-transform;
+  }
+
+  .post-sidebar-subject[aria-expanded="true"] .post-sidebar-subject-chevron {
+    @apply rotate-0;
+  }
+
+  .post-sidebar-subject-count {
+    @apply ml-auto text-[10px] text-slate-500 dark:text-slate-500;
+  }
+
+  .post-sidebar-subject[aria-expanded="true"] .post-sidebar-subject-count {
+    @apply text-accent-purple/80 dark:text-accent-purple/80;
+  }
+
   .nerdy-prose {
     --tw-prose-body: rgb(71 85 105);
     --tw-prose-headings: rgb(15 23 42);

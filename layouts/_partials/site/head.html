@@ -1,6 +1,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
 {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+{{ with resources.Get "js/theme-scheme.js" }}
+  {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
+  {{ with . | js.Build $opts | fingerprint }}
+    <script integrity="{{ .Data.Integrity }}">
+      {{ .Content | safeJS }}
+    </script>
+  {{ end }}
+{{ end }}
 {{ partial "site/assets/css.html" . }}
 {{ partial "site/assets/js.html" . }}

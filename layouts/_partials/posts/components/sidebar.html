@@ -2,6 +2,7 @@
 {{- $subjects := .subjects | default slice -}}
 {{- $mode := .mode | default "section" -}}
 {{- $isPageMode := eq $mode "page" -}}
+{{- $activeSubjectID := .activeSubjectID | default "" -}}
 
 <aside class="rounded-2xl border border-slate-200/80 bg-white/70 p-4 shadow-xl shadow-slate-200/60 backdrop-blur-md dark:border-slate-700 dark:bg-slate-800/40 dark:shadow-black/20 lg:sticky lg:top-6 lg:col-span-3">
   <div class="mb-4 px-2 font-mono text-[10px] font-bold uppercase tracking-widest nerdy-muted-soft">
@@ -12,15 +13,16 @@
     {{ range $subject := $subjects }}
       {{ $subjectName := $subject.LinkTitle | default $subject.Title }}
       {{ $subjectID := $subjectName | urlize }}
+      {{ $isSubjectExpanded := and $isPageMode (eq $subjectID $activeSubjectID) }}
       <div>
-        <button class="flex w-full items-center gap-2 rounded-lg px-2 py-1 font-mono text-sm font-bold transition-colors" type="button" x-on:click="openSubject({{ $subjectID | jsonify }})" x-bind:aria-expanded="expandedSubject === {{ $subjectID | jsonify }}" x-bind:class="expandedSubject === {{ $subjectID | jsonify }} ? 'bg-accent-purple/10 text-accent-purple' : 'text-slate-700 hover:bg-slate-100/80 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-white'">
-          <svg class="h-4 w-4 shrink-0 transition-transform" x-bind:class="expandedSubject === {{ $subjectID | jsonify }} ? 'rotate-0' : '-rotate-90'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        <button class="post-sidebar-subject" type="button" aria-expanded="{{ $isSubjectExpanded }}" x-on:click="openSubject({{ $subjectID | jsonify }})" x-bind:aria-expanded="expandedSubject === {{ $subjectID | jsonify }}">
+          <svg class="post-sidebar-subject-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
           {{ partial "components/icon.html" (dict "name" "folder" "class" "h-5 w-5 shrink-0") }}
           <span>{{ $subjectName | humanize }}</span>
-          <span class="ml-auto text-[10px]" x-bind:class="expandedSubject === {{ $subjectID | jsonify }} ? 'text-accent-purple/80' : 'text-slate-500 dark:text-slate-500'">{{ len $subject.RegularPagesRecursive }}</span>
+          <span class="post-sidebar-subject-count">{{ len $subject.RegularPagesRecursive }}</span>
         </button>
 
-        <div class="ml-4 mt-1 space-y-1 border-l border-slate-200 pl-3 dark:border-slate-700/60" x-show="expandedSubject === {{ $subjectID | jsonify }}" x-cloak>
+        <div class="ml-4 mt-1 space-y-1 border-l border-slate-200 pl-3 dark:border-slate-700/60" x-show="expandedSubject === {{ $subjectID | jsonify }}"{{ if not $isSubjectExpanded }} x-cloak{{ end }}>
           {{ $topics := $subject.Sections.ByWeight }}
           {{ range $topicIndex, $topic := $topics }}
             {{ $topicName := $topic.LinkTitle | default $topic.Title }}
