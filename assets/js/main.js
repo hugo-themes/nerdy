@@ -325,9 +325,69 @@ function initPageShare() {
   });
 }
 
+async function copyTextToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.top = '-9999px';
+  textarea.style.opacity = '0';
+  document.body.append(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand('copy');
+  } finally {
+    textarea.remove();
+  }
+}
+
+function initCodeBlockCopy() {
+  const codeBlocks = document.querySelectorAll('.nerdy-prose pre');
+  if (!codeBlocks.length) return;
+
+  codeBlocks.forEach((pre) => {
+    if (pre.closest('.nerdy-code-block')) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'nerdy-code-block';
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'nerdy-code-copy-button';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy code to clipboard');
+
+    pre.before(wrapper);
+    wrapper.append(pre, button);
+
+    button.addEventListener('click', async () => {
+      try {
+        const code = pre.querySelector('code')?.textContent ?? pre.textContent;
+        await copyTextToClipboard(code.trimEnd());
+        button.textContent = 'Copied';
+        button.classList.add('nerdy-code-copy-button--copied');
+      } catch (_error) {
+        button.textContent = 'Failed';
+      }
+
+      window.setTimeout(() => {
+        button.textContent = 'Copy';
+        button.classList.remove('nerdy-code-copy-button--copied');
+      }, 1600);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initPostToc();
   initPageShare();
+  initCodeBlockCopy();
 });
 
 Alpine.start();

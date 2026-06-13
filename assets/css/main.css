@@ -492,4 +492,54 @@
     background-color: var(--tw-prose-pre-bg) !important;
     background-image: none !important;
   }
+
+  .nerdy-code-block {
+    position: relative;
+    margin-bottom: 1.7142857em;
+    margin-top: 1.7142857em;
+  }
+
+  .nerdy-code-block pre {
+    margin: 0;
+    padding-right: 4.75rem;
+  }
+
+  .nerdy-code-copy-button {
+    position: absolute;
+    right: 0.75rem;
+    top: 0.75rem;
+    border: 1px solid rgb(71 85 105 / 80%);
+    border-radius: 0.5rem;
+    background: rgb(15 23 42 / 88%);
+    color: rgb(203 213 225);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.6875rem;
+    line-height: 1;
+    opacity: 0;
+    padding: 0.45rem 0.6rem;
+    pointer-events: none;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, opacity 150ms ease, transform 150ms ease;
+  }
+
+  .nerdy-code-block:hover .nerdy-code-copy-button,
+  .nerdy-code-block:focus-within .nerdy-code-copy-button {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nerdy-code-copy-button:hover,
+  .nerdy-code-copy-button:focus-visible {
+    border-color: rgb(34 211 238 / 75%);
+    background: rgb(30 41 59 / 95%);
+    color: rgb(255 255 255);
+  }
+
+  .nerdy-code-copy-button:active {
+    transform: scale(0.96);
+  }
+
+  .nerdy-code-copy-button--copied {
+    border-color: rgb(52 211 153 / 75%);
+    color: rgb(110 231 183);
+  }
 }
