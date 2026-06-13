@@ -1,16 +1,18 @@
 {{ $sidebar := hugo.Data.sidebar }}
 {{ with $sidebar }}
-  <aside class="flex flex-col gap-6 lg:sticky lg:top-12 lg:col-span-4 lg:h-fit lg:self-start">
-    {{ with .profile }}
-      {{ partial "home/sidebar/profile.html" . }}
-    {{ end }}
-
-    {{ range .sections }}
-      {{ if eq .type "stats" }}
-        {{ partial "home/sidebar/stats.html" . }}
-      {{ else if eq .type "tags" }}
-        {{ partial "home/sidebar/tags.html" . }}
+  <aside class="home-sidebar-sticky lg:sticky lg:top-12 lg:col-span-4 lg:h-fit lg:self-start">
+    <div class="flex flex-col gap-6">
+      {{ with .profile }}
+        {{ partial "home/sidebar/profile.html" . }}
       {{ end }}
-    {{ end }}
+
+      {{ range .sections }}
+        {{ if eq .type "stats" }}
+          {{ partial "home/sidebar/stats.html" . }}
+        {{ else if eq .type "tags" }}
+          {{ partial "home/sidebar/tags.html" . }}
+        {{ end }}
+      {{ end }}
+    </div>
   </aside>
 {{ end }}

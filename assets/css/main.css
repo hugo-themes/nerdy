@@ -262,6 +262,14 @@
     @apply rounded-2xl border border-slate-300/70 bg-white/95 p-6 shadow-xl shadow-slate-200/70 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/75 dark:shadow-black/20;
   }
 
+  .home-sidebar-sticky {
+    isolation: isolate;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
   .nerdy-window {
     @apply overflow-hidden rounded-xl border border-slate-300/90 bg-white/95 font-mono text-xs shadow-2xl shadow-slate-300/30 dark:border-slate-700 dark:bg-slate-950/95 dark:shadow-black/30;
   }
