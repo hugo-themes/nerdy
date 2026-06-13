@@ -12,8 +12,12 @@
         <div class="flex flex-col gap-8 lg:col-span-8">
           {{ partial "terminal.html" . }}
 
-          {{ range $home.sections }}
-            {{ partial "home/main-section.html" . }}
+          {{ range $home.sections.items }}
+            {{ with index $home . }}
+              {{ partial "home/main-section.html" . }}
+            {{ else }}
+              {{ errorf "Missing home section data file: data/home/%s.yaml" . }}
+            {{ end }}
           {{ end }}
         </div>
       </div>

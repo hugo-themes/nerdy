@@ -7,11 +7,11 @@ intro: Let's build something awesome together!
 email: hello@yourdomain.com
 links:
   - label: GitHub
-    text: https://github.com/yourusername
-    url: https://github.com/yourusername
+    text: https://github.com/gopher
+    url: https://github.com/gopher
   - label: LinkedIn
-    text: https://linkedin.com/in/yourusername
-    url: https://linkedin.com/in/yourusername
+    text: https://linkedin.com/in/gopher
+    url: https://linkedin.com/in/gopher
   - label: Twitter
     text: "@yourhandle"
     url: https://twitter.com/yourhandle

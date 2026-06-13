@@ -11,7 +11,7 @@ items:
       - PostgreSQL
       - Docker
     description: A robust REST API for a scalable e-commerce platform featuring JWT authentication, Stripe integration, and advanced caching.
-    url: https://github.com/yourusername/ecommerce-api
+    url: https://github.com/gopher/ecommerce-api
   - name: Real-Time Collaboration Tool
     tech:
       - React
@@ -24,4 +24,4 @@ items:
       - Python
       - SQLite
     description: A terminal-based productivity tool to manage daily tasks, track time, and generate reports.
-    url: https://github.com/yourusername/cli-task
+    url: https://github.com/gopher/cli-task
