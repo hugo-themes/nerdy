@@ -55,6 +55,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
   history: [],
   input: '',
   isProcessing: false,
+  isFullscreen: false,
   bootCompleted: false,
   prompt: {
     user: config.user || 'guest',
@@ -134,6 +135,22 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
 
   async runQuickCommand(command) {
     await this.processCommand(command, true);
+  },
+
+  toggleFullscreen() {
+    this.isFullscreen = !this.isFullscreen;
+    this.updateFullscreenState();
+  },
+
+  exitFullscreen() {
+    if (!this.isFullscreen) return;
+    this.isFullscreen = false;
+    this.updateFullscreenState();
+  },
+
+  updateFullscreenState() {
+    document.body.classList.toggle('overflow-hidden', this.isFullscreen);
+    this.focusInput();
   },
 
   async processCommand(commandString, simulateTyping = false) {

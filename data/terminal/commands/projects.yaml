@@ -6,22 +6,24 @@ weight: 40
 items:
   - name: E-Commerce Platform API
     tech:
-      - Node.js
-      - Express
+      - Go
       - PostgreSQL
       - Docker
-    description: A robust REST API for a scalable e-commerce platform featuring JWT authentication, Stripe integration, and advanced caching.
+    description: A robust REST API for a scalable e-commerce platform featuring JWT
+      authentication, Stripe integration, and advanced caching.
     url: https://github.com/gopher/ecommerce-api
   - name: Real-Time Collaboration Tool
     tech:
       - React
       - WebSockets
       - Redis
-    description: A web-based workspace allowing multiple users to edit documents simultaneously with low latency.
+    description: A web-based workspace allowing multiple users to edit documents
+      simultaneously with low latency.
     url: https://demo.example.com/collab
   - name: CLI Task Manager
     tech:
-      - Python
+      - Go
       - SQLite
-    description: A terminal-based productivity tool to manage daily tasks, track time, and generate reports.
+    description: A terminal-based productivity tool to manage daily tasks, track
+      time, and generate reports.
     url: https://github.com/gopher/cli-task
