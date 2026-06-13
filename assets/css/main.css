@@ -31,22 +31,22 @@
 
 @layer base {
   :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --primary: oklch(0.488 0.243 264.376);
-    --primary-foreground: oklch(0.97 0.014 254.604);
-    --border: oklch(0.922 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --surface: oklch(0.985 0.006 247.858);
-    --surface-muted: oklch(0.96 0.012 247.858);
-    --surface-elevated: oklch(1 0 0);
-    --accent-cyan: oklch(0.52 0.105 223.128);
-    --accent-purple: oklch(0.496 0.265 301.924);
-    --accent-emerald: oklch(0.596 0.145 163.225);
-    --accent-amber: oklch(0.666 0.179 58.318);
+    --background: oklch(0.985 0.006 255);
+    --foreground: oklch(0.21 0.035 260);
+    --muted: oklch(0.94 0.016 255);
+    --muted-foreground: oklch(0.42 0.038 257);
+    --primary: oklch(0.47 0.105 224);
+    --primary-foreground: oklch(0.985 0.006 255);
+    --border: oklch(0.84 0.025 255);
+    --card: oklch(0.995 0.003 255);
+    --card-foreground: oklch(0.21 0.035 260);
+    --surface: oklch(0.965 0.012 255);
+    --surface-muted: oklch(0.93 0.018 255);
+    --surface-elevated: oklch(0.995 0.003 255);
+    --accent-cyan: oklch(0.47 0.105 224);
+    --accent-purple: oklch(0.48 0.18 300);
+    --accent-emerald: oklch(0.48 0.12 160);
+    --accent-amber: oklch(0.57 0.14 63);
   }
 
   .dark {
@@ -99,8 +99,8 @@
   .bg-grid,
   .nerdy-page-surface {
     background-image:
-      linear-gradient(to right, rgb(15 23 42 / 8%) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(15 23 42 / 8%) 1px, transparent 1px);
+      linear-gradient(to right, rgb(30 41 59 / 5%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(30 41 59 / 5%) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
@@ -142,15 +142,15 @@
 
 @layer components {
   .toc-card {
-    @apply flex max-h-[60vh] w-8 flex-col gap-0 overflow-y-auto overflow-x-hidden rounded-xl border border-transparent bg-white/20 px-2 py-5 shadow-none backdrop-blur-sm transition-[width,padding-left,padding-right,background-color,border-color,box-shadow] duration-500 ease-out hover:w-64 hover:border-slate-200/80 hover:bg-white/90 hover:px-4 hover:shadow-2xl hover:shadow-slate-900/10 dark:bg-slate-900/20 dark:hover:border-slate-700/80 dark:hover:bg-slate-800/90 dark:hover:shadow-black/30;
+    @apply flex max-h-[60vh] w-8 flex-col gap-0 overflow-y-auto overflow-x-hidden rounded-xl border border-transparent bg-white/60 px-2 py-5 shadow-none backdrop-blur-sm transition-[width,padding-left,padding-right,background-color,border-color,box-shadow] duration-500 ease-out hover:w-64 hover:border-slate-300/80 hover:bg-white/95 hover:px-4 hover:shadow-2xl hover:shadow-slate-900/10 dark:bg-slate-900/20 dark:hover:border-slate-700/80 dark:hover:bg-slate-800/90 dark:hover:shadow-black/30;
   }
 
   .toc-link {
-    @apply flex h-6 w-full items-center gap-3 rounded-md px-1.5 py-0 font-mono text-xs leading-none text-slate-600 transition-[background-color,color,padding] duration-200 hover:bg-slate-100/80 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-700/50 dark:hover:text-slate-100;
+    @apply flex h-6 w-full items-center gap-3 rounded-md px-1.5 py-0 font-mono text-xs leading-none text-slate-700 transition-[background-color,color,padding] duration-200 hover:bg-slate-100/90 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-700/50 dark:hover:text-slate-100;
   }
 
   .toc-heading {
-    @apply flex h-6 w-full items-center gap-3 rounded-md px-1.5 py-0 font-mono text-[10px] leading-none tracking-widest text-slate-500 transition-[gap] duration-300 ease-out group-hover:gap-0 dark:text-slate-400;
+    @apply flex h-6 w-full items-center gap-3 rounded-md px-1.5 py-0 font-mono text-[10px] leading-none tracking-widest text-slate-600 transition-[gap] duration-300 ease-out group-hover:gap-0 dark:text-slate-400;
   }
 
   .toc-link--child {
@@ -158,7 +158,7 @@
   }
 
   .toc-bar {
-    @apply h-px w-3 shrink-0 rounded-full bg-slate-400 transition-all duration-200 dark:bg-slate-500;
+    @apply h-px w-3 shrink-0 rounded-full bg-slate-500 transition-all duration-200 dark:bg-slate-500;
   }
 
   .toc-text {
@@ -178,7 +178,7 @@
   }
 
   .nerdy-page-surface {
-    @apply relative isolate min-h-screen overflow-x-clip bg-surface pb-20 text-slate-700 selection:bg-accent-cyan/30 selection:text-slate-950 dark:text-slate-300 dark:selection:text-white;
+    @apply relative isolate min-h-screen overflow-x-clip bg-surface pb-20 text-slate-800 selection:bg-accent-cyan/25 selection:text-slate-950 dark:text-slate-300 dark:selection:text-white;
   }
 
   .nerdy-page-surface--home {
@@ -187,8 +187,8 @@
 
   .nerdy-page-surface--post {
     background-image:
-      linear-gradient(to right, rgb(15 23 42 / 4%) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(15 23 42 / 4%) 1px, transparent 1px);
+      linear-gradient(to right, rgb(30 41 59 / 3.5%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(30 41 59 / 3.5%) 1px, transparent 1px);
   }
 
   .dark .nerdy-page-surface--post {
@@ -199,7 +199,7 @@
 
   .nerdy-page-surface--post .nerdy-ambient-bg,
   .nerdy-page-surface--post .nerdy-top-glow {
-    opacity: 0.65;
+    opacity: 0.42;
   }
 
   .dark .nerdy-page-surface--post .nerdy-ambient-bg,
@@ -209,9 +209,9 @@
 
   .nerdy-ambient-bg {
     background-image:
-      radial-gradient(circle at 50% 0%, rgb(14 165 233 / 14%), transparent 28rem),
-      radial-gradient(circle at 78% 12%, rgb(99 102 241 / 12%), transparent 30rem),
-      radial-gradient(circle at 16% 22%, rgb(217 70 239 / 8%), transparent 24rem);
+      radial-gradient(circle at 50% 0%, rgb(14 116 144 / 10%), transparent 28rem),
+      radial-gradient(circle at 78% 12%, rgb(99 102 241 / 7%), transparent 30rem),
+      radial-gradient(circle at 16% 22%, rgb(168 85 247 / 5%), transparent 24rem);
     @apply pointer-events-none absolute inset-0 -z-10;
   }
 
@@ -223,7 +223,7 @@
   }
 
   .nerdy-top-glow {
-    @apply pointer-events-none absolute left-1/2 top-0 -z-10 h-64 w-full max-w-4xl -translate-x-1/2 bg-accent-cyan/20 blur-[110px] dark:bg-accent-cyan/10;
+    @apply pointer-events-none absolute left-1/2 top-0 -z-10 h-64 w-full max-w-4xl -translate-x-1/2 bg-accent-cyan/10 blur-[110px] dark:bg-accent-cyan/10;
   }
 
   .nerdy-container {
@@ -231,7 +231,7 @@
   }
 
   .nerdy-card {
-    @apply rounded-xl border border-slate-200/80 bg-white/75 shadow-sm backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/50;
+    @apply rounded-xl border border-slate-300/70 bg-white/95 shadow-md shadow-slate-200/70 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/50 dark:shadow-none;
   }
 
   .nerdy-card-hover {
@@ -255,19 +255,19 @@
   }
 
   .nerdy-card-dashed {
-    @apply rounded-xl border border-dashed border-slate-300 bg-white/50 backdrop-blur-md transition-all duration-300 hover:border-accent-cyan/50 hover:bg-white/80 dark:border-slate-700/80 dark:bg-slate-800/20 dark:hover:bg-slate-800/45;
+    @apply rounded-xl border border-dashed border-slate-300 bg-white/75 backdrop-blur-md transition-all duration-300 hover:border-accent-cyan/50 hover:bg-white/90 dark:border-slate-700/80 dark:bg-slate-800/20 dark:hover:bg-slate-800/45;
   }
 
   .nerdy-sidebar-card {
-    @apply rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-xl shadow-slate-200/60 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/75 dark:shadow-black/20;
+    @apply rounded-2xl border border-slate-300/70 bg-white/95 p-6 shadow-xl shadow-slate-200/70 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/75 dark:shadow-black/20;
   }
 
   .nerdy-window {
-    @apply overflow-hidden rounded-xl border border-slate-300 bg-slate-50/95 font-mono text-xs shadow-2xl shadow-slate-300/30 dark:border-slate-700 dark:bg-slate-950/95 dark:shadow-black/30;
+    @apply overflow-hidden rounded-xl border border-slate-300/90 bg-white/95 font-mono text-xs shadow-2xl shadow-slate-300/30 dark:border-slate-700 dark:bg-slate-950/95 dark:shadow-black/30;
   }
 
   .nerdy-window-bar {
-    @apply flex items-center justify-between gap-4 border-b border-slate-300 bg-slate-200/80 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800;
+    @apply flex items-center justify-between gap-4 border-b border-slate-300/90 bg-slate-100/95 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800;
   }
 
   .nerdy-window-dot {
@@ -303,15 +303,15 @@
   }
 
   .nerdy-muted {
-    @apply text-slate-600 dark:text-slate-400;
+    @apply text-slate-700 dark:text-slate-400;
   }
 
   .nerdy-muted-soft {
-    @apply text-slate-500 dark:text-slate-500;
+    @apply text-slate-600 dark:text-slate-500;
   }
 
   .nerdy-link {
-    @apply text-accent-cyan transition-colors hover:underline;
+    @apply font-medium text-accent-cyan transition-colors hover:underline;
   }
 
   .nerdy-chip {
@@ -319,35 +319,35 @@
   }
 
   .nerdy-chip-cyan {
-    @apply border-accent-cyan/20 bg-accent-cyan/10 text-accent-cyan;
+    @apply border-accent-cyan/25 bg-accent-cyan/10 text-accent-cyan;
   }
 
   .nerdy-chip-purple {
-    @apply border-accent-purple/20 bg-accent-purple/10 text-accent-purple;
+    @apply border-accent-purple/25 bg-accent-purple/10 text-accent-purple;
   }
 
   .nerdy-chip-emerald {
-    @apply border-accent-emerald/20 bg-accent-emerald/10 text-accent-emerald;
+    @apply border-accent-emerald/25 bg-accent-emerald/10 text-accent-emerald;
   }
 
   .nerdy-chip-amber {
-    @apply border-accent-amber/20 bg-accent-amber/10 text-accent-amber;
+    @apply border-accent-amber/25 bg-accent-amber/10 text-accent-amber;
   }
 
   .nerdy-button {
-    @apply rounded-lg border border-slate-300 bg-white/70 px-4 py-2 font-mono text-xs text-slate-600 transition-all hover:border-slate-400 hover:text-slate-950 active:scale-95 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white;
+    @apply rounded-lg border border-slate-300 bg-white/90 px-4 py-2 font-mono text-xs text-slate-700 transition-all hover:border-slate-400 hover:text-slate-950 active:scale-95 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white;
   }
 
   .nerdy-icon-button {
-    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-white/80 text-slate-600 transition-all hover:border-slate-400 hover:text-slate-950 active:scale-95 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white;
+    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-white/95 text-slate-700 transition-all hover:border-slate-400 hover:text-slate-950 active:scale-95 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white;
   }
 
   .nerdy-nav-card {
-    @apply rounded-xl border border-slate-200/80 bg-white/70 p-4 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent-cyan/40 hover:bg-white dark:border-slate-700/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/70;
+    @apply rounded-xl border border-slate-300/70 bg-white/90 p-4 shadow-sm shadow-slate-200/70 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-accent-cyan/40 hover:bg-white dark:border-slate-700/80 dark:bg-slate-800/40 dark:shadow-none dark:hover:bg-slate-800/70;
   }
 
   .post-sidebar-subject {
-    @apply flex w-full items-center gap-2 rounded-lg px-2 py-1 font-mono text-sm font-bold text-slate-700 transition-colors hover:bg-slate-100/80 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-white;
+    @apply flex w-full items-center gap-2 rounded-lg px-2 py-1 font-mono text-sm font-bold text-slate-800 transition-colors hover:bg-slate-100/90 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-white;
   }
 
   .post-sidebar-subject[aria-expanded="true"] {
@@ -371,18 +371,18 @@
   }
 
   .nerdy-prose {
-    --tw-prose-body: rgb(71 85 105);
+    --tw-prose-body: rgb(51 65 85);
     --tw-prose-headings: rgb(15 23 42);
-    --tw-prose-lead: rgb(71 85 105);
+    --tw-prose-lead: rgb(51 65 85);
     --tw-prose-links: rgb(14 116 144);
     --tw-prose-bold: rgb(15 23 42);
     --tw-prose-counters: rgb(100 116 139);
     --tw-prose-bullets: rgb(8 145 178);
     --tw-prose-hr: rgb(203 213 225);
-    --tw-prose-quotes: rgb(71 85 105);
+    --tw-prose-quotes: rgb(51 65 85);
     --tw-prose-quote-borders: rgb(16 185 129);
-    --tw-prose-captions: rgb(100 116 139);
-    --tw-prose-code: rgb(190 24 93);
+    --tw-prose-captions: rgb(71 85 105);
+    --tw-prose-code: rgb(157 23 77);
     --tw-prose-pre-code: rgb(226 232 240);
     --tw-prose-pre-bg: rgb(2 6 23);
     --tw-prose-th-borders: rgb(203 213 225);
@@ -455,7 +455,7 @@
 
   .nerdy-prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *)) {
     border-radius: 0.25rem;
-    background-color: rgb(226 232 240 / 80%);
+    background-color: rgb(226 232 240 / 95%);
     padding: 0.2em 0.4em;
     font-weight: 400;
   }

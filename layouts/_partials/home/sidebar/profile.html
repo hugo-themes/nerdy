@@ -1,6 +1,6 @@
 <section class="nerdy-sidebar-card">
   <div class="mb-6 flex items-center gap-4">
-    <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-100/80 dark:border-slate-600 dark:bg-slate-900/70">
+    <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-300/80 bg-slate-100/90 dark:border-slate-600 dark:bg-slate-900/70">
       <span class="font-mono text-2xl text-accent-cyan">{{ .avatar | default "{}" }}</span>
     </div>
     <div>
@@ -12,10 +12,10 @@
   {{ with .description }}<p class="mb-6 text-sm leading-relaxed nerdy-muted">{{ . }}</p>{{ end }}
 
   {{ with .status }}
-    <div class="mb-6 flex flex-col gap-2 rounded-lg border border-slate-200 bg-slate-50/80 p-4 font-mono text-xs shadow-inner dark:border-slate-700 dark:bg-slate-900/45">
+    <div class="mb-6 flex flex-col gap-2 rounded-lg border border-slate-300/70 bg-slate-50/95 p-4 font-mono text-xs shadow-inner dark:border-slate-700 dark:bg-slate-900/45">
       <div class="flex items-center gap-3">
         <span class="h-2 w-2 animate-pulse rounded-full bg-accent-emerald shadow-[0_0_10px_rgba(16,185,129,0.75)]"></span>
-        <span class="text-slate-700 dark:text-slate-300">{{ .label }}: <span class="font-bold text-slate-950 dark:text-white">{{ .value }}</span></span>
+        <span class="text-slate-800 dark:text-slate-300">{{ .label }}: <span class="font-bold text-slate-950 dark:text-white">{{ .value }}</span></span>
       </div>
       <div class="pl-5 nerdy-muted">└─ {{ .preference_label }}: <span class="text-accent-cyan">{{ .preference }}</span></div>
     </div>

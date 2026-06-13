@@ -106,11 +106,11 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
     ];
 
     for (const message of bootMessages) {
-      this.pushOutput(`<div class="mb-1 text-xs text-slate-500 dark:text-slate-500">${this.escapeHtml(message)}</div>`);
+      this.pushOutput(`<div class="mb-1 text-xs text-slate-600 dark:text-slate-500">${this.escapeHtml(message)}</div>`);
       await this.wait(100);
     }
 
-    this.pushOutput('<div class="mb-4 mt-2 text-slate-600 dark:text-slate-400">Type <span class="font-bold text-accent-cyan">help</span> to see available commands.</div>');
+    this.pushOutput('<div class="mb-4 mt-2 text-slate-700 dark:text-slate-400">Type <span class="font-bold text-accent-cyan">help</span> to see available commands.</div>');
 
     this.isProcessing = false;
     this.bootCompleted = true;
@@ -124,7 +124,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
   recordThemeChange(isDark) {
     if (!this.bootCompleted) return;
     const mode = isDark ? 'Dark' : 'Light';
-    this.pushOutput(`<div class="mb-4 text-xs italic text-slate-600 dark:text-slate-400">[System] Theme switched to ${mode} mode.</div>`);
+    this.pushOutput(`<div class="mb-4 text-xs italic text-slate-700 dark:text-slate-400">[System] Theme switched to ${mode} mode.</div>`);
   },
 
   async submit() {
@@ -174,11 +174,11 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
     if (!command) return '';
 
     if (command === 'date') {
-      return `<div class="mb-4 text-slate-700 dark:text-slate-300">${this.escapeHtml(new Date().toString())}</div>`;
+      return `<div class="mb-4 text-slate-800 dark:text-slate-300">${this.escapeHtml(new Date().toString())}</div>`;
     }
 
     if (command === 'echo') {
-      return `<div class="mb-4 text-slate-700 dark:text-slate-300">${this.escapeHtml(args.slice(1).join(' '))}</div>`;
+      return `<div class="mb-4 text-slate-800 dark:text-slate-300">${this.escapeHtml(args.slice(1).join(' '))}</div>`;
     }
 
     if (command === 'sudo') {
@@ -186,7 +186,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
     }
 
     if (this.commands[command]) {
-      return `<div class="mb-4 text-slate-700 dark:text-slate-300">${this.commands[command].html}</div>`;
+      return `<div class="mb-4 text-slate-800 dark:text-slate-300">${this.commands[command].html}</div>`;
     }
 
     return `<div class="mb-4 text-red-400">bash: ${this.escapeHtml(command)}: command not found. Type 'help' to see available commands.</div>`;

@@ -7,19 +7,19 @@
 }}
 
 <div class="relative font-mono text-sm text-slate-900 dark:text-slate-100">
-  <div class="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-accent-cyan/20 via-indigo-300/15 to-fuchsia-300/15 blur-2xl dark:via-indigo-500/10 dark:to-fuchsia-500/15"></div>
+  <div class="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-accent-cyan/10 via-indigo-300/8 to-fuchsia-300/8 blur-2xl dark:from-accent-cyan/20 dark:via-indigo-500/10 dark:to-fuchsia-500/15"></div>
   <div
-    class="relative z-10 flex h-[540px] min-h-[540px] max-h-[540px] w-full flex-col overflow-hidden rounded-2xl border border-slate-300/90 bg-slate-50/95 shadow-2xl shadow-slate-300/40 ring-1 ring-slate-900/10 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-950/95 dark:shadow-black/30 dark:ring-black/50"
+    class="relative z-10 flex h-[540px] min-h-[540px] max-h-[540px] w-full flex-col overflow-hidden rounded-2xl border border-slate-300/90 bg-white/95 shadow-2xl shadow-slate-300/30 ring-1 ring-slate-900/10 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-950/95 dark:shadow-black/30 dark:ring-black/50"
     x-data='terminalPortfolio({{ $terminalConfig | jsonify }})'
     x-on:theme-changed.window="recordThemeChange($event.detail.dark)"
     x-on:click="focusInput()"
     x-cloak
   >
-    <div class="relative flex h-10 shrink-0 items-center gap-2 border-b border-slate-300 bg-slate-200/80 px-4 dark:border-slate-700/80 dark:bg-slate-800">
+    <div class="relative flex h-10 shrink-0 items-center gap-2 border-b border-slate-300/90 bg-slate-100/95 px-4 dark:border-slate-700/80 dark:bg-slate-800">
       <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#ff5f56] shadow-sm"></div>
       <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#ffbd2e] shadow-sm"></div>
       <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#27c93f] shadow-sm"></div>
-      <div class="pointer-events-none absolute inset-x-0 text-center font-sans text-xs font-medium tracking-wide text-slate-500 dark:text-slate-400">
+      <div class="pointer-events-none absolute inset-x-0 text-center font-sans text-xs font-medium tracking-wide text-slate-600 dark:text-slate-400">
         {{ $config.window_title | default "guest — -bash — 80x24" }}
       </div>
     </div>
@@ -62,11 +62,11 @@
       </div>
     </div>
 
-    <div class="hide-scrollbar flex h-12 shrink-0 items-center gap-2 overflow-x-auto whitespace-nowrap border-t border-slate-300 bg-slate-200/70 px-4 dark:border-slate-700/80 dark:bg-slate-800/50">
-      <div class="mr-2 hidden select-none font-sans text-[10px] font-bold uppercase tracking-widest text-slate-500 sm:block">Quick_Cmds:</div>
+    <div class="hide-scrollbar flex h-12 shrink-0 items-center gap-2 overflow-x-auto whitespace-nowrap border-t border-slate-300/90 bg-slate-100/95 px-4 dark:border-slate-700/80 dark:bg-slate-800/50">
+      <div class="mr-2 hidden select-none font-sans text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-500 sm:block">Quick_Cmds:</div>
       <template x-for="command in quickCommands" :key="command.name">
         <button
-          class="rounded border border-slate-300 bg-slate-100 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-700 transition-colors hover:border-accent-cyan/40 hover:bg-white hover:text-accent-cyan active:scale-95 dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-300 dark:hover:bg-slate-600"
+          class="rounded border border-slate-300 bg-white/80 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-700 transition-colors hover:border-accent-cyan/40 hover:bg-white hover:text-accent-cyan active:scale-95 dark:border-slate-600 dark:bg-slate-700/50 dark:text-slate-300 dark:hover:bg-slate-600"
           type="button"
           x-text="command.label"
           x-on:click.stop="runQuickCommand(command.name)"
