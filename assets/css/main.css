@@ -262,12 +262,27 @@
     @apply rounded-2xl border border-slate-300/70 bg-white/95 p-6 shadow-xl shadow-slate-200/70 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/75 dark:shadow-black/20;
   }
 
-  .home-sidebar-sticky {
+  .nerdy-sticky-sidebar {
     isolation: isolate;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+  }
+
+  @media (min-width: 1024px) {
+    .nerdy-sticky-sidebar {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    @media (min-width: 1024px) {
+      .nerdy-sticky-sidebar .nerdy-sidebar-card,
+      .nerdy-sticky-sidebar > .nerdy-sticky-sidebar-card {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+    }
   }
 
   .nerdy-window {
