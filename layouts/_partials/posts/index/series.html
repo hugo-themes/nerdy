@@ -9,7 +9,7 @@
   {{- $seriesPages := partial "posts/utils/series-pages.html" (dict "pages" $pages "seriesSection" $seriesSection) -}}
 
   {{- if gt (len $seriesPages) 0 -}}
-    {{- $seriesItems = $seriesItems | append (dict "key" $seriesTitle "pages" $seriesPages "weight" ($seriesSection.Weight | default 0)) -}}
+    {{- $seriesItems = $seriesItems | append (dict "key" $seriesTitle "pages" $seriesPages "status" ($seriesSection.Params.status | default "") "weight" ($seriesSection.Weight | default 0)) -}}
     {{- $seenSeriesKeys = $seenSeriesKeys | append $seriesKey -}}
   {{- end -}}
 {{- end -}}
@@ -30,16 +30,20 @@
     {{ range $seriesItem := (sort $seriesItems "weight" "asc") }}
         {{ $seriesPages := index $seriesItem "pages" }}
         {{ $firstPage := index $seriesPages 0 }}
+        {{ $seriesStatus := index $seriesItem "status" }}
+        {{ $totalReadingTime := 0 }}
+        {{ range $seriesPages }}
+          {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
+        {{ end }}
         <article class="group nerdy-card nerdy-card-hover nerdy-card-accent-purple relative overflow-hidden p-5">
-          <div class="absolute left-0 top-0 h-full w-0.5 bg-accent-purple"></div>
           <div class="mb-3 flex items-center justify-between gap-3">
-            <span class="nerdy-chip nerdy-chip-purple rounded-full px-2.5 py-1 font-bold">ACTIVE SERIES</span>
+            {{ with $seriesStatus }}<span class="nerdy-chip nerdy-chip-purple rounded-full px-2.5 py-1 font-bold">{{ . | upper }}</span>{{ end }}
             <span class="font-mono text-xs nerdy-muted-soft">{{ len $seriesPages }} Parts</span>
           </div>
           <h3 class="mb-2 text-lg font-bold nerdy-card-title nerdy-title-accent-purple">{{ index $seriesItem "key" }}</h3>
           {{ with $firstPage.Summary }}<p class="mb-4 text-xs leading-relaxed nerdy-muted">{{ . | plainify }}</p>{{ end }}
           <div class="flex items-center justify-between border-t border-slate-200 pt-2 font-mono text-xs dark:border-slate-800">
-            <span class="nerdy-muted-soft">Progress: <span class="font-bold text-slate-700 dark:text-slate-300">{{ len $seriesPages }} / {{ len $seriesPages }} posts</span></span>
+            <span class="nerdy-muted-soft">Total read: <span class="font-bold">{{ $totalReadingTime }} min</span></span>
             <a class="nerdy-link" href="{{ $firstPage.RelPermalink }}">Start Reading -&gt;</a>
           </div>
         </article>

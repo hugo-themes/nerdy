@@ -23,7 +23,6 @@
 
 {{- if gt (len $seriesPages) 0 -}}
   <section class="nerdy-card relative mb-12 overflow-hidden border-accent-purple/30 bg-white/85 p-5 shadow-none dark:bg-slate-950/80 dark:shadow-none" x-data="{ seriesNavOpen: false }">
-    <div class="absolute left-0 top-0 h-full w-0.5 bg-accent-purple"></div>
     <button class="flex w-full items-center justify-between gap-3 font-mono text-[10px] font-bold uppercase tracking-widest text-accent-purple lg:cursor-default" type="button" x-on:click="seriesNavOpen = !seriesNavOpen" x-bind:aria-expanded="(seriesNavOpen || window.matchMedia('(min-width: 1024px)').matches).toString()" aria-controls="series-navigation-list">
       <span>&gt;&gt; Series Navigation</span>
       <svg class="h-4 w-4 shrink-0 transition-transform lg:hidden" x-bind:class="seriesNavOpen ? 'rotate-0' : '-rotate-90'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
