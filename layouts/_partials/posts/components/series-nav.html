@@ -22,22 +22,27 @@
 {{- $seriesPages := partial "posts/utils/series-pages.html" (dict "pages" $candidatePages "series" $series "seriesSection" $seriesSection) -}}
 
 {{- if gt (len $seriesPages) 0 -}}
-  <section class="nerdy-card relative mb-12 overflow-hidden border-accent-purple/30 bg-white/85 p-5 shadow-lg dark:bg-slate-950/80">
-    <div class="absolute left-0 top-0 h-full w-1 bg-accent-purple"></div>
-    <div class="mb-3 font-mono text-[10px] font-bold uppercase tracking-widest text-accent-purple">&gt;&gt; Series Navigation</div>
-    <h2 class="mb-3 text-lg font-semibold text-slate-900 dark:text-slate-200">{{ $series }}</h2>
-    <ol class="flex flex-col gap-2 font-mono text-sm nerdy-muted">
-      {{ range $index, $seriesPage := $seriesPages }}
-        {{ $isCurrent := eq $seriesPage.RelPermalink $page.RelPermalink }}
-        <li class="flex items-center gap-3 {{ if $isCurrent }}-ml-2 rounded border border-slate-200 bg-slate-100 p-2 font-bold text-slate-950 dark:border-slate-700 dark:bg-slate-800/50 dark:text-white{{ else }}opacity-80 transition-opacity hover:opacity-100{{ end }}">
-          {{ if $isCurrent }}
-            <span class="animate-pulse text-accent-emerald">&gt;</span>
-            <span class="text-accent-cyan">{{ add $index 1 }}. {{ $seriesPage.LinkTitle }}</span>
-          {{ else }}
-            <a class="transition-colors hover:text-accent-purple" href="{{ $seriesPage.RelPermalink }}">{{ add $index 1 }}. {{ $seriesPage.LinkTitle }}</a>
-          {{ end }}
-        </li>
-      {{ end }}
-    </ol>
+  <section class="nerdy-card relative mb-12 overflow-hidden border-accent-purple/30 bg-white/85 p-5 shadow-none dark:bg-slate-950/80 dark:shadow-none" x-data="{ seriesNavOpen: false }">
+    <div class="absolute left-0 top-0 h-full w-0.5 bg-accent-purple"></div>
+    <button class="flex w-full items-center justify-between gap-3 font-mono text-[10px] font-bold uppercase tracking-widest text-accent-purple lg:cursor-default" type="button" x-on:click="seriesNavOpen = !seriesNavOpen" x-bind:aria-expanded="(seriesNavOpen || window.matchMedia('(min-width: 1024px)').matches).toString()" aria-controls="series-navigation-list">
+      <span>&gt;&gt; Series Navigation</span>
+      <svg class="h-4 w-4 shrink-0 transition-transform lg:hidden" x-bind:class="seriesNavOpen ? 'rotate-0' : '-rotate-90'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div id="series-navigation-list" class="mt-3" x-bind:class="seriesNavOpen ? 'block' : 'hidden lg:block'">
+      <h2 class="mb-3 text-lg font-semibold text-slate-900 dark:text-slate-200">{{ $series }}</h2>
+      <ol class="flex flex-col gap-2 font-mono text-sm nerdy-muted">
+        {{ range $index, $seriesPage := $seriesPages }}
+          {{ $isCurrent := eq $seriesPage.RelPermalink $page.RelPermalink }}
+          <li class="flex items-center gap-3 {{ if $isCurrent }}-ml-2 rounded border border-slate-200 bg-slate-100 p-2 font-bold text-slate-950 dark:border-slate-700 dark:bg-slate-800/50 dark:text-white{{ else }}opacity-80 transition-opacity hover:opacity-100{{ end }}">
+            {{ if $isCurrent }}
+              <span class="animate-pulse text-accent-emerald">&gt;</span>
+              <span class="text-accent-cyan">{{ add $index 1 }}. {{ $seriesPage.LinkTitle }}</span>
+            {{ else }}
+              <a class="transition-colors hover:text-accent-purple" href="{{ $seriesPage.RelPermalink }}">{{ add $index 1 }}. {{ $seriesPage.LinkTitle }}</a>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ol>
+    </div>
   </section>
 {{- end -}}
