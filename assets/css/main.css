@@ -362,7 +362,7 @@
     --tw-prose-captions: rgb(100 116 139);
     --tw-prose-code: rgb(190 24 93);
     --tw-prose-pre-code: rgb(226 232 240);
-    --tw-prose-pre-bg: rgb(15 23 42);
+    --tw-prose-pre-bg: rgb(2 6 23);
     --tw-prose-th-borders: rgb(203 213 225);
     --tw-prose-td-borders: rgb(226 232 240);
   }
@@ -381,7 +381,7 @@
     --tw-prose-captions: rgb(148 163 184);
     --tw-prose-code: rgb(244 114 182);
     --tw-prose-pre-code: rgb(226 232 240);
-    --tw-prose-pre-bg: rgb(15 23 42);
+    --tw-prose-pre-bg: rgb(2 6 23);
     --tw-prose-th-borders: rgb(51 65 85);
     --tw-prose-td-borders: rgb(30 41 59);
   }
@@ -394,6 +394,13 @@
 
   .nerdy-prose :where(a:hover):not(:where(.not-prose, .not-prose *)) {
     border-color: rgb(8 145 178 / 80%);
+  }
+
+  .nerdy-prose :where(mark):not(:where(.not-prose, .not-prose *)) {
+    border-radius: 0.125rem;
+    background-color: color-mix(in oklch, var(--accent-cyan) 30%, transparent);
+    color: inherit;
+    padding: 0.05em 0.15em;
   }
 
   .nerdy-prose :where(h2, h3):not(:where(.not-prose, .not-prose *)) {
@@ -443,10 +450,24 @@
   .nerdy-prose :where(pre):not(:where(.not-prose, .not-prose *)) {
     border: 1px solid rgb(51 65 85);
     border-radius: 0.75rem;
+    background-color: var(--tw-prose-pre-bg) !important;
+    background-image: none !important;
     box-shadow: 0 20px 40px rgb(15 23 42 / 12%);
   }
 
   .dark .nerdy-prose :where(pre):not(:where(.not-prose, .not-prose *)) {
+    background-color: var(--tw-prose-pre-bg) !important;
+    background-image: none !important;
     box-shadow: 0 20px 40px rgb(0 0 0 / 25%);
+  }
+
+  .dark .nerdy-prose :where(.highlight):not(:where(.not-prose, .not-prose *)) {
+    background-color: var(--tw-prose-pre-bg) !important;
+    background-image: none !important;
+  }
+
+  .dark .nerdy-prose :where(.highlight pre):not(:where(.not-prose, .not-prose *)) {
+    background-color: var(--tw-prose-pre-bg) !important;
+    background-image: none !important;
   }
 }
