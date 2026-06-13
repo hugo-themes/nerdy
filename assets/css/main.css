@@ -121,25 +121,62 @@
   }
 
   .toc-active .toc-bar {
-    width: 1.25rem;
+    width: 0.875rem;
     background-color: rgb(8 145 178);
   }
 
   .dark .toc-active .toc-bar {
     background-color: rgb(34 211 238);
+    box-shadow: 0 0 10px rgb(34 211 238 / 55%);
   }
 
   .toc-active .toc-text {
-    color: rgb(15 23 42);
-    font-weight: 700;
+    color: rgb(23 23 23);
+    font-weight: 500;
   }
 
   .dark .toc-active .toc-text {
-    color: rgb(248 250 252);
+    color: rgb(245 245 245);
   }
 }
 
 @layer components {
+  .toc-card {
+    @apply flex max-h-[60vh] w-8 flex-col gap-0 overflow-y-auto overflow-x-hidden rounded-xl border border-transparent bg-white/20 px-2 py-5 shadow-none backdrop-blur-sm transition-[width,padding-left,padding-right,background-color,border-color,box-shadow] duration-500 ease-out hover:w-64 hover:border-slate-200/80 hover:bg-white/90 hover:px-4 hover:shadow-2xl hover:shadow-slate-900/10 dark:bg-slate-900/20 dark:hover:border-slate-700/80 dark:hover:bg-slate-800/90 dark:hover:shadow-black/30;
+  }
+
+  .toc-link {
+    @apply flex h-6 w-full items-center gap-3 rounded-md px-1.5 py-0 font-mono text-xs leading-none text-slate-600 transition-[background-color,color,padding] duration-200 hover:bg-slate-100/80 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-slate-700/50 dark:hover:text-slate-100;
+  }
+
+  .toc-heading {
+    @apply flex h-6 w-full items-center gap-3 rounded-md px-1.5 py-0 font-mono text-[10px] leading-none tracking-widest text-slate-500 transition-[gap] duration-300 ease-out group-hover:gap-0 dark:text-slate-400;
+  }
+
+  .toc-link--child {
+    @apply pl-4;
+  }
+
+  .toc-bar {
+    @apply h-px w-3 shrink-0 rounded-full bg-slate-400 transition-all duration-200 dark:bg-slate-500;
+  }
+
+  .toc-text {
+    @apply min-w-0 max-w-0 overflow-hidden truncate whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 ease-out group-hover:max-w-52 group-hover:opacity-100;
+  }
+
+  .toc-label {
+    @apply min-w-0 max-w-0 overflow-hidden truncate whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 ease-out group-hover:max-w-52 group-hover:opacity-100;
+  }
+
+  .toc-heading .toc-bar {
+    @apply group-hover:w-0 group-hover:opacity-0;
+  }
+
+  .toc-link.toc-active {
+    @apply hover:bg-slate-200/70 dark:hover:bg-slate-700/60;
+  }
+
   .nerdy-page-surface {
     @apply relative isolate min-h-screen overflow-x-clip bg-surface pb-20 text-slate-700 selection:bg-accent-cyan/30 selection:text-slate-950 dark:text-slate-300 dark:selection:text-white;
   }

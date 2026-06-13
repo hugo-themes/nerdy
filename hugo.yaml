@@ -5,6 +5,9 @@ disableKinds:
   - taxonomy
   - term
 markup:
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
   goldmark:
     renderer:
       unsafe: true

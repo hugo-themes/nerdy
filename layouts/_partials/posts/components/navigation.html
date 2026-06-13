@@ -3,7 +3,7 @@
     <a class="group nerdy-nav-card" href="{{ .RelPermalink }}">
       <div class="mb-2 flex items-center gap-2 font-mono text-xs text-accent-cyan">
         <span class="transition-transform group-hover:-translate-x-1">&lt;-</span>
-        <span>Previous_Log</span>
+        <span>Previous Post</span>
       </div>
       <div class="font-bold leading-snug text-slate-950 dark:text-slate-100">{{ .Title }}</div>
       {{ if not .Date.IsZero }}<time class="mt-2 block font-mono text-[11px] nerdy-muted-soft" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
@@ -15,7 +15,7 @@
   {{ with .NextInSection }}
     <a class="group nerdy-nav-card text-right" href="{{ .RelPermalink }}">
       <div class="mb-2 flex items-center justify-end gap-2 font-mono text-xs text-accent-cyan">
-        <span>Next_Log</span>
+        <span>Next Post</span>
         <span class="transition-transform group-hover:translate-x-1">-&gt;</span>
       </div>
       <div class="font-bold leading-snug text-slate-950 dark:text-slate-100">{{ .Title }}</div>
