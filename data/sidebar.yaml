@@ -1,8 +1,9 @@
 profile:
-  name: "[Your Name]"
-  title: Full-Stack Developer
-  avatar: "{}"
-  description: Building scalable systems and elegant interfaces. Obsessed with clean code and modern web architectures.
+  name: "Mr. Gopher"
+  title: Backend Developer
+  avatar: "images/gopher.png"
+  description: Building scalable systems. Obsessed with clean code and modern web
+    architectures.
   status:
     label: Status
     value: Open to Senior Roles
@@ -10,14 +11,14 @@ profile:
     preference: 100% Remote / Async
   links:
     - icon: github
-      label: github.com/yourusername
-      url: https://github.com/yourusername
+      label: github.com/gopher
+      url: https://github.com/gopher
     - icon: linkedin
-      label: linkedin.com/in/yourusername
-      url: https://linkedin.com/in/yourusername
+      label: linkedin.com/in/gopher
+      url: https://linkedin.com/in/gopher
     - icon: mail
-      label: hello@yourdomain.com
-      url: mailto:hello@yourdomain.com
+      label: hello@gopher.dev
+      url: mailto:hello@gopher.dev
 
 sections:
   - id: profile-stats
@@ -40,9 +41,10 @@ sections:
     type: tags
     title: Core Stack
     items:
-      - React
-      - Node.js
-      - TypeScript
-      - Python
-      - PostgreSQL
+      - Go
       - Docker
+      - Kubernetes
+      - PostgreSQL
+      - AWS
+      - GCP
+      - Terraform
