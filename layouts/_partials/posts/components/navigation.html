@@ -6,7 +6,6 @@
         <span>Previous Post</span>
       </div>
       <div class="font-bold leading-snug text-slate-950 dark:text-slate-100">{{ .Title }}</div>
-      {{ if not .Date.IsZero }}<time class="mt-2 block font-mono text-[11px] nerdy-muted-soft" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
     </a>
   {{ else }}
     <div class="hidden md:block"></div>
@@ -19,7 +18,6 @@
         <span class="transition-transform group-hover:translate-x-1">-&gt;</span>
       </div>
       <div class="font-bold leading-snug text-slate-950 dark:text-slate-100">{{ .Title }}</div>
-      {{ if not .Date.IsZero }}<time class="mt-2 block font-mono text-[11px] nerdy-muted-soft" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
     </a>
   {{ end }}
 </nav>

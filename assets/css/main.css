@@ -185,6 +185,28 @@
     @apply pb-12;
   }
 
+  .nerdy-page-surface--post {
+    background-image:
+      linear-gradient(to right, rgb(15 23 42 / 4%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(15 23 42 / 4%) 1px, transparent 1px);
+  }
+
+  .dark .nerdy-page-surface--post {
+    background-image:
+      linear-gradient(to right, rgb(51 65 85 / 10%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(51 65 85 / 10%) 1px, transparent 1px);
+  }
+
+  .nerdy-page-surface--post .nerdy-ambient-bg,
+  .nerdy-page-surface--post .nerdy-top-glow {
+    opacity: 0.65;
+  }
+
+  .dark .nerdy-page-surface--post .nerdy-ambient-bg,
+  .dark .nerdy-page-surface--post .nerdy-top-glow {
+    opacity: 0.55;
+  }
+
   .nerdy-ambient-bg {
     background-image:
       radial-gradient(circle at 50% 0%, rgb(14 165 233 / 14%), transparent 28rem),
