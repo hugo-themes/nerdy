@@ -24,6 +24,10 @@ function prefersDarkTheme() {
   return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
 }
 
+function prefersReducedMotion() {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+}
+
 function applyTheme(dark) {
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
@@ -57,6 +61,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
   isProcessing: false,
   isFullscreen: false,
   bootCompleted: false,
+  reducedMotion: false,
   prompt: {
     user: config.user || 'guest',
     host: config.host || 'MacBook-Pro',
@@ -65,6 +70,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
   autoCommand: config.autoCommand || 'help',
 
   init() {
+    this.reducedMotion = prefersReducedMotion();
     this.$nextTick(() => {
       this.loadCommands();
       this.boot();
@@ -108,7 +114,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
 
     for (const message of bootMessages) {
       this.pushOutput(`<div class="mb-1 text-xs text-slate-600 dark:text-slate-500">${this.escapeHtml(message)}</div>`);
-      await this.wait(100);
+      await this.wait(this.reducedMotion ? 0 : 100);
     }
 
     this.pushOutput('<div class="mb-4 mt-2 text-slate-700 dark:text-slate-400">Type <span class="font-bold text-accent-cyan">help</span> to see available commands.</div>');
@@ -161,7 +167,7 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
     if (simulateTyping) {
       this.input = '';
       await this.typeCommand(commandString);
-      await this.wait(150);
+      await this.wait(this.reducedMotion ? 0 : 150);
     }
 
     this.pushCommand(commandString);
@@ -220,6 +226,12 @@ Alpine.data('terminalPortfolio', (config = {}) => ({
   },
 
   async typeCommand(command) {
+    if (this.reducedMotion) {
+      this.input = command;
+      this.scrollToBottom();
+      return;
+    }
+
     for (const char of command) {
       this.input += char;
       this.scrollToBottom();

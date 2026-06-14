@@ -3,11 +3,17 @@
     <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-300/80 bg-slate-100/90 dark:border-slate-600 dark:bg-slate-900/70">
       {{- with .avatar }}
         {{- $avatarURL := . -}}
+        {{- $avatarWidth := 64 -}}
+        {{- $avatarHeight := 64 -}}
         {{- if not (hasPrefix . "http") }}
           {{- $avatarURL = . | relURL }}
-          {{- with resources.Get . }}{{ $avatarURL = .RelPermalink }}{{ end }}
+          {{- with resources.Get . -}}
+            {{- $avatarURL = .RelPermalink -}}
+            {{- $avatarWidth = .Width -}}
+            {{- $avatarHeight = .Height -}}
+          {{- end }}
         {{- end }}
-        <img class="h-full w-full object-cover" src="{{ $avatarURL }}" alt="{{ $.name | default "Profile avatar" }}">
+        <img class="h-full w-full object-cover" src="{{ $avatarURL }}" alt="{{ $.name | default "Profile avatar" }}" width="{{ $avatarWidth }}" height="{{ $avatarHeight }}" loading="eager" decoding="async" fetchpriority="high">
       {{- else }}
         <span class="font-mono text-2xl text-accent-cyan">{}</span>
       {{- end }}
