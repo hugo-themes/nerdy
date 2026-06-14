@@ -71,6 +71,16 @@ Then manually spot-check the generated home page, posts index, post detail, docs
 
 Production stylesheet and JavaScript assets are built through Hugo Pipes and fingerprinted. Development builds intentionally favor simpler, watch-friendly asset URLs.
 
+## Security notes
+
+Nerdy's example site keeps Goldmark raw HTML rendering disabled by default. If your own site enables `markup.goldmark.renderer.unsafe`, treat Markdown and data files as trusted author input and review the risks in Hugo's Goldmark documentation.
+
+Remaining trusted rendering paths in the theme are intentionally limited:
+
+- SVG icons are loaded from theme-owned files in `assets/icons/` and rendered with `safeHTML` after normalizing color attributes.
+- A small posts heading helper uses `safeHTMLAttr` for theme-generated Alpine attributes in the posts index breadcrumb.
+- Terminal command output uses Alpine `x-html` to replay hidden, theme-rendered `<template>` content. User-entered terminal text is rendered with `x-text`, not `x-html`.
+
 ## Customization overview
 
 - Site content and demo data live under `exampleSite/content/` and `exampleSite/data/`.

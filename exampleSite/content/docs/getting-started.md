@@ -37,6 +37,12 @@ PATH="$(pwd)/node_modules/.bin:$PATH" hugo --source exampleSite --panicOnWarning
 
 After building, spot-check the generated home page, posts index, post detail, docs page, terminal interactions, theme toggle, sidebar, table of contents, and code-copy behavior in both light and dark modes.
 
+## Security defaults
+
+The example site disables Goldmark raw HTML rendering by default. Prefer Markdown, data files, or template partial overrides for custom content. If your own site enables `markup.goldmark.renderer.unsafe`, only do so for trusted authors and document that choice for contributors.
+
+Nerdy keeps the remaining trusted HTML paths narrow: theme-owned SVG icons, theme-generated posts breadcrumb attributes, and terminal output that comes from hidden Hugo-rendered command templates. Terminal text typed by visitors is escaped with Alpine `x-text`.
+
 ## Project layout
 
 - `exampleSite/content/` contains demo pages and posts.

@@ -10,7 +10,8 @@ markup:
     endLevel: 3
   goldmark:
     renderer:
-      unsafe: true
+      # Keep raw HTML disabled by default so copied demo config is safe for public sites.
+      unsafe: false
 build:
   buildStats:
     enable: true

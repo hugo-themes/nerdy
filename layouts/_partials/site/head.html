@@ -5,10 +5,14 @@
 {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
 {{ with resources.Get "js/theme-scheme.js" }}
   {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
-  {{ with . | js.Build $opts | fingerprint }}
-    <script integrity="{{ .Data.Integrity }}">
-      {{ .Content | safeJS }}
-    </script>
+  {{ with . | js.Build $opts }}
+    {{ if hugo.IsDevelopment }}
+      <script src="{{ .RelPermalink }}"></script>
+    {{ else }}
+      {{ with . | fingerprint }}
+        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{ end }}
+    {{ end }}
   {{ end }}
 {{ end }}
 {{ partial "site/assets/css.html" . }}

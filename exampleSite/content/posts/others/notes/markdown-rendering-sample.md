@@ -158,11 +158,11 @@ This sentence includes a footnote reference.[^note]
 
 [^note]: Footnotes are useful for extra context without interrupting the main paragraph.
 
-## HTML Inside Markdown
+## Raw HTML Policy
 
-<kbd>Ctrl</kbd> + <kbd>K</kbd> can represent a keyboard shortcut.
+Raw HTML is disabled in the example site by default. Prefer Markdown or theme partials for authored content.
 
-<mark>Highlighted text</mark> can be useful for calling attention to small details.
+For example, write keyboard shortcuts as text like `Ctrl` + `K` instead of inline `<kbd>` tags unless your own site explicitly opts into trusted raw HTML.
 
 ## Escaped Characters
 
