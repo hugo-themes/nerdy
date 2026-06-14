@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "hugo server",
-    "build": "hugo --minify"
+    "build": "hugo --source exampleSite --minify --gc",
+    "server": "hugo server --source exampleSite --buildDrafts --watch",
+    "dev": "npm run server"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",

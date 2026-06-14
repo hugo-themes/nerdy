@@ -4,18 +4,21 @@ hugo = "latest"
 node = "latest"
 npm = "latest"
 
+[env]
+_.path = ["./node_modules/.bin"]
+
 [tasks.install]
 description = "Install dependencies"
 run = "npm install"
 
 [tasks.build]
-description = "Build site"
-run = "hugo --minify --gc"
+description = "Build example site"
+run = "hugo --source exampleSite --minify --gc"
 depends = ["install"]
 
 [tasks.server]
-description = "Run Hugo server in watch mode"
-run = "hugo server --buildDrafts --watch"
+description = "Run example site server in watch mode"
+run = "hugo server --source exampleSite --buildDrafts --watch"
 depends = ["install"]
 
 [tasks.update]

@@ -20,18 +20,15 @@ build:
     - source: '(postcss|tailwind)\.config\.(js|mjs|ts)'
       target: css
 module:
+  # Resolve the theme import to this repository's parent theme checkout.
+  replacements: github.com/hugo-themes/nerdy -> ../..
+  imports:
+    - path: github.com/hugo-themes/nerdy
   mounts:
-    - source: assets
-      target: assets
-    - source: layouts
-      target: layouts
-    - source: archetypes
-      target: archetypes
+    - source: content
+      target: content
+    - source: data
+      target: data
     - disableWatch: true
       source: hugo_stats.json
       target: assets/notwatching/hugo_stats.json
-menus:
-  main:
-    - name: Home
-      pageRef: /
-      weight: 10
