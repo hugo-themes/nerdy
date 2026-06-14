@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "hugo --source exampleSite --minify --gc",
-    "server": "hugo server --source exampleSite --buildDrafts --watch",
+    "build": "hugo --source exampleSite --renderToMemory && hugo --source exampleSite --minify --gc --cleanDestinationDir",
+    "server": "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch",
     "dev": "npm run server"
   },
   "devDependencies": {

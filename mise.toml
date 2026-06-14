@@ -13,12 +13,12 @@ run = "npm install"
 
 [tasks.build]
 description = "Build example site"
-run = "hugo --source exampleSite --minify --gc"
+run = "hugo --source exampleSite --renderToMemory && hugo --source exampleSite --minify --gc --cleanDestinationDir"
 depends = ["install"]
 
 [tasks.server]
 description = "Run example site server in watch mode"
-run = "hugo server --source exampleSite --buildDrafts --watch"
+run = "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch"
 depends = ["install"]
 
 [tasks.update]

@@ -25,7 +25,7 @@ Build the example site:
 npm run build
 ```
 
-The npm scripts target `exampleSite/` and expect `node_modules/.bin` to be available so Hugo can find the Tailwind CSS CLI.
+The npm scripts target `exampleSite/`. The build command runs a lightweight in-memory Hugo pass first so `hugo_stats.json` exists before Tailwind compiles the final stylesheet.
 
 ## Development
 
@@ -50,6 +50,7 @@ mise run build
 ```
 
 The `server` and `build` tasks run the `exampleSite` and install npm dependencies automatically. They also add `node_modules/.bin` to `PATH` so Hugo can find the Tailwind CSS CLI.
+Both tasks run a lightweight in-memory Hugo pass first so `hugo_stats.json` exists before Tailwind compiles CSS.
 The theme uses Hugo's Tailwind integration with build stats enabled so Tailwind can discover classes in Hugo templates.
 
 ## Cloudflare deployment
