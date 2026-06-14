@@ -1,4 +1,5 @@
-{{ $config := hugo.Data.terminal.config }}
+{{ $terminalData := hugo.Data.terminal | default dict }}
+{{ $config := index $terminalData "config" | default dict }}
 {{ $terminalConfig := dict
   "user" ($config.user | default "guest")
   "host" ($config.host | default "MacBook-Pro")
@@ -91,6 +92,6 @@
       >Clear</button>
     </div>
 
-    {{ partial "terminal/command-manager.html" . }}
+    {{ partial "terminal/command-manager.html" (dict "terminal" $terminalData) }}
   </div>
 </div>

@@ -1,12 +1,14 @@
-{{ $commands := hugo.Data.terminal.commands }}
-{{ $config := hugo.Data.terminal.config }}
+{{ $terminalData := .terminal | default (hugo.Data.terminal | default dict) }}
+{{ $commands := index $terminalData "commands" | default dict }}
+{{ $config := index $terminalData "config" | default dict }}
+{{ $builtins := $config.builtins | default slice }}
 <div class="hidden" aria-hidden="true">
   <template
     data-terminal-command="help"
     data-label="Help"
     data-description="List available commands"
     data-weight="0"
-  >{{ partial "terminal/commands/help.html" (dict "commands" $commands "builtins" $config.builtins) }}</template>
+  >{{ partial "terminal/commands/help.html" (dict "commands" $commands "builtins" $builtins) }}</template>
 
   <template
     data-terminal-command="whoami"

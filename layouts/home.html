@@ -1,5 +1,7 @@
 {{ define "main" }}
-  {{ $home := hugo.Data.home }}
+  {{ $home := hugo.Data.home | default dict }}
+  {{ $sectionsConfig := index $home "sections" | default dict }}
+  {{ $sectionItems := $sectionsConfig.items | default slice }}
 
   <div class="nerdy-page-surface nerdy-page-surface--home">
     <div class="nerdy-ambient-bg"></div>
@@ -12,12 +14,16 @@
         <div class="flex flex-col gap-8 lg:col-span-8">
           {{ partial "terminal.html" . }}
 
-          {{ range $home.sections.items }}
-            {{ with index $home . }}
-              {{ partial "home/main-section.html" . }}
-            {{ else }}
-              {{ errorf "Missing home section data file: data/home/%s.yaml" . }}
+          {{ if gt (len $sectionItems) 0 }}
+            {{ range $sectionItems }}
+              {{ with index $home . }}
+                {{ partial "home/main-section.html" . }}
+              {{ else }}
+                {{ errorf "Missing home section data file: data/home/%s.yaml" . }}
+              {{ end }}
             {{ end }}
+          {{ else }}
+            {{ partial "components/empty-state.html" (dict "message" "No home sections configured yet. Add section entries under <code class=\"font-mono text-slate-900 dark:text-slate-200\">data/home/sections.yaml</code> to populate this area.") }}
           {{ end }}
         </div>
       </div>

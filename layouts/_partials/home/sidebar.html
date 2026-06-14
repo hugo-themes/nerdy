@@ -1,12 +1,12 @@
-{{ $sidebar := hugo.Data.sidebar }}
-{{ with $sidebar }}
+{{ $sidebar := hugo.Data.sidebar | default dict }}
+{{ if or $sidebar.profile $sidebar.sections }}
   <aside class="nerdy-sticky-sidebar lg:sticky lg:top-12 lg:col-span-4 lg:h-fit lg:self-start">
     <div class="flex flex-col gap-6">
-      {{ with .profile }}
+      {{ with $sidebar.profile }}
         {{ partial "home/sidebar/profile.html" . }}
       {{ end }}
 
-      {{ range .sections }}
+      {{ range ($sidebar.sections | default slice) }}
         {{ if eq .type "stats" }}
           {{ partial "home/sidebar/stats.html" . }}
         {{ else if eq .type "tags" }}
