@@ -52,6 +52,23 @@ mise run build
 The `server` and `build` tasks run the `exampleSite` and install npm dependencies automatically. They also add `node_modules/.bin` to `PATH` so Hugo can find the Tailwind CSS CLI.
 The theme uses Hugo's Tailwind integration with build stats enabled so Tailwind can discover classes in Hugo templates.
 
+## Cloudflare deployment
+
+The live demo/documentation site is built from `exampleSite`.
+
+For Cloudflare Pages, use the repository root as the build root and configure:
+
+- Build command: `npm ci && npm run build`
+- Build output directory: `exampleSite/public`
+
+For Cloudflare Workers static assets, point Wrangler at the generated example site output:
+
+```toml
+assets = { directory = "./exampleSite/public" }
+```
+
+Use `npm run build` in Cloudflare instead of calling `hugo` directly. npm automatically adds `node_modules/.bin` to `PATH`, which lets Hugo find the Tailwind CSS CLI.
+
 Equivalent npm commands are available:
 
 ```sh
