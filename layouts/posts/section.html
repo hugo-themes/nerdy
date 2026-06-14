@@ -48,14 +48,14 @@
                   {{ $topicID := printf "subject-%s-topic-%s" ($subjectName | urlize) ($topicName | urlize) }}
                   {{ $topicPages := partial "posts/utils/topic-pages.html" (dict "topic" $topic) }}
                   <div class="flex flex-col gap-10" x-show="activeTopic === {{ $topicID | jsonify }}" x-cloak>
-                    {{ partial "posts/index/content.html" (dict "pages" $topicPages "seriesSections" $topic.Sections.ByWeight "tablePath" (printf "./%s/%s/" $subjectName $topicName)) }}
+                    {{ partial "posts/index/content.html" (dict "pages" $topicPages "seriesSections" $topic.Sections.ByWeight "tablePath" (printf "~/%s/%s/%s/" $section $subjectName $topicName)) }}
                   </div>
                 {{ end }}
               {{ end }}
             </div>
 
             <div class="flex flex-col gap-10" x-show="!activeTopic">
-              {{ partial "posts/index/content.html" (dict "pages" $posts "seriesSections" $seriesSections "tablePath" "./") }}
+              {{ partial "posts/index/content.html" (dict "pages" $posts "seriesSections" $seriesSections "tablePath" (printf "~/%s/" $section)) }}
             </div>
           </main>
         </div>
