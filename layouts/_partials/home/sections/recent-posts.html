@@ -17,7 +17,11 @@
         {{ partial "home/cards/post.html" (dict "item" .) }}
       {{ end }}
     {{ else }}
-      {{ partial "components/empty-state.html" (dict "class" "sm:col-span-2" "message" (printf "No logs yet. Add Markdown files under <code class=\"font-mono text-slate-900 dark:text-slate-200\">content/%s</code> and they will appear here automatically." $section)) }}
+      {{ partial "components/empty-state.html" (dict "class" "sm:col-span-2" "parts" (slice
+        (dict "text" "No logs yet. Add Markdown files under ")
+        (dict "type" "code" "text" (printf "content/%s" $section))
+        (dict "text" " and they will appear here automatically.")
+      )) }}
     {{ end }}
 
     {{ if or $hasPosts $hasFallbackPosts }}

@@ -1,0 +1,10 @@
+{{- $info := .info | default dict -}}
+{{- $repo := $info.repo | default "" -}}
+{{- $repoURL := replaceRE "/$" "" $repo -}}
+{{- $repoLabel := replaceRE `^https?://(www\.)?` "" $repoURL -}}
+{{- $version := $info.version | default "" -}}
+{{- $releaseURL := $info.url | default "" -}}
+Released
+{{- if $version }} <a class="font-bold text-slate-900 underline decoration-slate-400/50 underline-offset-4 transition-colors hover:text-accent-cyan dark:text-slate-200" href="{{ $releaseURL }}">{{ $version }}</a>{{ end -}}
+{{- with $repo }} of <a class="nerdy-link" href="{{ . }}">{{ $repoLabel }}</a>{{ end -}}
+.

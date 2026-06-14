@@ -23,7 +23,11 @@
               {{ end }}
             {{ end }}
           {{ else }}
-            {{ partial "components/empty-state.html" (dict "message" "No home sections configured yet. Add section entries under <code class=\"font-mono text-slate-900 dark:text-slate-200\">data/home/sections.yaml</code> to populate this area.") }}
+            {{ partial "components/empty-state.html" (dict "parts" (slice
+              (dict "text" "No home sections configured yet. Add section entries under ")
+              (dict "type" "code" "text" "data/home/sections.yaml")
+              (dict "text" " to populate this area.")
+            )) }}
           {{ end }}
         </div>
       </div>

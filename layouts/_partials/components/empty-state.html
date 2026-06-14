@@ -1,6 +1,19 @@
 {{- $message := .message | default "Nothing to show yet." -}}
+{{- $parts := .parts | default slice -}}
 {{- $class := .class | default "" -}}
 
 <div class="nerdy-card-dashed p-5 text-sm nerdy-muted {{ $class }}">
-  {{ $message | safeHTML }}
+  {{- if gt (len $parts) 0 -}}
+    {{- range $parts -}}
+      {{- if eq .type "code" -}}
+        <code class="{{ .class | default "font-mono text-slate-900 dark:text-slate-200" }}">{{ .text }}</code>
+      {{- else if eq .type "link" -}}
+        <a class="{{ .class | default "nerdy-link" }}" href="{{ .url }}">{{ .text | default .url }}</a>
+      {{- else -}}
+        {{- .text -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{ $message }}
+  {{- end -}}
 </div>

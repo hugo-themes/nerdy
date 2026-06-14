@@ -49,7 +49,11 @@
         </article>
     {{ end }}
     {{ if eq (len $seriesItems) 0 }}
-      {{ partial "components/empty-state.html" (dict "class" "md:col-span-2" "message" "No post series detected. Add a series folder with <code class=\"font-mono\">_index.md</code> and matching posts to populate this area.") }}
+      {{ partial "components/empty-state.html" (dict "class" "md:col-span-2" "parts" (slice
+        (dict "text" "No post series detected. Add a series folder with ")
+        (dict "type" "code" "text" "_index.md" "class" "font-mono")
+        (dict "text" " and matching posts to populate this area.")
+      )) }}
     {{ end }}
   </div>
 </section>

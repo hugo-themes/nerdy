@@ -1,0 +1,11 @@
+{{- $info := .info | default dict -}}
+{{- $repo := $info.repo | default "" -}}
+{{- $repoURL := replaceRE "/$" "" $repo -}}
+{{- $repoLabel := replaceRE `^https?://(www\.)?` "" $repoURL -}}
+{{- $number := $info.number | default "" -}}
+{{- $prURL := $info.url | default "" -}}
+Merged PR
+{{- if $number }} <a class="nerdy-link" href="{{ $prURL }}">#{{ $number }}</a>{{ end -}}
+{{- with $repo }} in <a class="font-mono text-accent-purple underline decoration-accent-purple/40 underline-offset-4 transition-colors hover:text-accent-cyan" href="{{ . }}">{{ $repoLabel }}</a>{{ end -}}
+{{- with $info.title }}: {{ . }}{{ end -}}
+.

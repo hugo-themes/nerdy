@@ -1,6 +1,6 @@
 <pre class="font-mono whitespace-pre-wrap leading-relaxed">{{ range $index, $project := .items }}<span class="text-accent-purple">{{ add $index 1 }}.</span> <span class="font-bold text-accent-cyan">{{ $project.name }}</span>
    <span class="text-accent-cyan">Tech:</span> {{ delimit $project.tech ", " }}
    <span class="text-accent-cyan">Desc:</span> {{ $project.description }}
-   <span class="text-accent-cyan">Link:</span> <a class="pointer-events-auto relative z-50 nerdy-link underline" href="{{ $project.url | safeURL }}" target="_blank" rel="noopener noreferrer">{{ $project.url }}</a>
+   <span class="text-accent-cyan">Link:</span> <a class="pointer-events-auto relative z-50 nerdy-link underline" href="{{ $project.url }}" target="_blank" rel="noopener noreferrer">{{ $project.url }}</a>
 
 {{ end }}</pre>

@@ -5,16 +5,15 @@ title: Activity Log
 items:
   - date: Today
     active: true
-    html: 'Merged PR <a href="#" class="nerdy-link">#1042</a> in <span
-      class="font-mono text-accent-purple bg-accent-purple/10 px-1
-      rounded">facebook/react</span>: Improved hook dependency bailout
-      optimization for edge cases.'
+    type: merged-pr
+    info:
+      number: 1042
+      title: Improved hook dependency bailout optimization for edge cases
+      url: https://github.com/facebook/react/pull/1042
+      repo: https://github.com/facebook/react
   - date: 3 Days Ago
-    html: 'Released <span class="font-bold text-slate-900
-      dark:text-slate-200">v2.3.5</span> of <a href="#"
-      class="nerdy-link">cli-task-manager</a>. Added cloud synchronization
-      and AES-256 encryption for local storage.'
-  - date: Last Month
-    html: 'Speaker at <span class="font-bold text-accent-cyan">NodeConf 2026</span>.
-      Gave a talk on: <span class="italic">"Scaling Event Loops to the
-      Moon"</span>.'
+    type: release
+    info:
+      version: v2.3.5
+      url: https://github.com/gopher/cli-task-manager/releases/tag/v2.3.5
+      repo: https://github.com/gopher/cli-task-manager
