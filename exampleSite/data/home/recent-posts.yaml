@@ -1,7 +1,7 @@
 id: recent-posts
 type: recent-posts
 icon: document
-title: Recent Posts
+title: Recent Docs
 limit: 3
-section: posts
-view_all_label: View All Posts ->
+section: docs
+view_all_label: Read the Docs ->

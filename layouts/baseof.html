@@ -4,7 +4,7 @@
     {{ partial "site/head.html" . }}
   </head>
   <body class="min-h-screen bg-background text-foreground">
-    {{ $isPostsSurface := eq .Section "posts" }}
+    {{ $isPostsSurface := or (eq .Section "posts") (eq .Type "posts") }}
     <a class="nerdy-skip-link" href="#main-content">Skip to main content</a>
     {{ partial "site/theme-toggle-float.html" . }}
     {{ if and (not .IsHome) (not $isPostsSurface) }}{{ partial "site/header.html" . }}{{ end }}

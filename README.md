@@ -11,6 +11,7 @@ A responsive Hugo theme for personal sites, blogs, and portfolios. Nerdy uses Hu
 ## Quick start
 
 Use Nerdy as a normal Hugo theme or module in your site. The bundled demo lives in `exampleSite/`; the repository root contains reusable theme code only.
+The example site also serves as the theme documentation, with the main guide under `exampleSite/content/docs/`.
 
 For local development against this checkout, run the example site:
 
