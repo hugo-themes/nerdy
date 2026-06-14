@@ -5,9 +5,10 @@
   </head>
   <body class="min-h-screen bg-background text-foreground">
     {{ $isPostsSurface := eq .Section "posts" }}
+    <a class="nerdy-skip-link" href="#main-content">Skip to main content</a>
     {{ partial "site/theme-toggle-float.html" . }}
     {{ if and (not .IsHome) (not $isPostsSurface) }}{{ partial "site/header.html" . }}{{ end }}
-    <main class="{{ if or .IsHome $isPostsSurface }}w-full{{ else }}mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8{{ end }}">
+    <main id="main-content" tabindex="-1" class="{{ if or .IsHome $isPostsSurface }}w-full{{ else }}mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8{{ end }}">
       {{ block "main" . }}{{ end }}
     </main>
     {{ if and (not .IsHome) (not $isPostsSurface) }}{{ partial "site/footer.html" . }}{{ end }}

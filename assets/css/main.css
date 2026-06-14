@@ -72,6 +72,15 @@
     @apply bg-background text-foreground antialiased;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 3px;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
   [x-cloak] {
     display: none !important;
   }
@@ -335,6 +344,10 @@
 
   .nerdy-link {
     @apply font-medium text-accent-cyan transition-colors hover:underline;
+  }
+
+  .nerdy-skip-link {
+    @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg border border-accent-cyan/50 bg-white px-4 py-2 font-mono text-sm font-bold text-slate-950 shadow-xl shadow-slate-300/40 transition-transform focus:translate-y-0 dark:bg-slate-950 dark:text-white dark:shadow-black/40;
   }
 
   .nerdy-chip {

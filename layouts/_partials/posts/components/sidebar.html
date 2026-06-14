@@ -17,14 +17,15 @@
         {{ $subjectID := $subjectName | urlize }}
         {{ $isSubjectExpanded := and $isPageMode (eq $subjectID $activeSubjectID) }}
         <div>
-          <button class="post-sidebar-subject" type="button" aria-expanded="{{ $isSubjectExpanded }}" x-on:click="openSubject({{ $subjectID | jsonify }})" x-bind:aria-expanded="expandedSubject === {{ $subjectID | jsonify }}">
+          {{ $panelID := printf "workspace-subject-%s" $subjectID }}
+          <button class="post-sidebar-subject" type="button" aria-expanded="{{ $isSubjectExpanded }}" aria-controls="{{ $panelID }}" x-on:click="openSubject({{ $subjectID | jsonify }})" x-bind:aria-expanded="expandedSubject === {{ $subjectID | jsonify }}">
             <svg class="post-sidebar-subject-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             {{ partial "components/icon.html" (dict "name" "folder" "class" "h-5 w-5 shrink-0") }}
             <span>{{ $subjectName | humanize }}</span>
             <span class="post-sidebar-subject-count">{{ len $subject.RegularPagesRecursive }}</span>
           </button>
 
-          <div class="ml-4 mt-1 space-y-1 border-l border-slate-300/80 pl-3 dark:border-slate-700/60" x-show="expandedSubject === {{ $subjectID | jsonify }}"{{ if not $isSubjectExpanded }} x-cloak{{ end }}>
+          <div id="{{ $panelID }}" class="ml-4 mt-1 space-y-1 border-l border-slate-300/80 pl-3 dark:border-slate-700/60" x-show="expandedSubject === {{ $subjectID | jsonify }}"{{ if not $isSubjectExpanded }} x-cloak{{ end }}>
             {{ $topics := $subject.Sections.ByWeight }}
             {{ range $topicIndex, $topic := $topics }}
               {{ $topicName := $topic.LinkTitle | default $topic.Title }}
