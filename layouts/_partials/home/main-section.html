@@ -1,7 +1,14 @@
-{{ if eq .type "projects" }}
-  {{ partial "home/sections/projects.html" . }}
-{{ else if eq .type "recent_posts" }}
-  {{ partial "home/sections/recent-posts.html" . }}
-{{ else if eq .type "activity" }}
-  {{ partial "home/sections/activity.html" . }}
-{{ end }}
+{{- $rawType := .type | default "" -}}
+{{- $sectionType := replace ($rawType | lower) "_" "-" -}}
+{{- $safeType := replaceRE `[^a-z0-9-]` "" $sectionType -}}
+{{- if or (eq $sectionType "") (ne $sectionType $safeType) -}}
+  {{- errorf "Invalid home section type %q. Use lowercase letters, numbers, hyphens, or underscores." $rawType -}}
+{{- else -}}
+  {{- $partial := printf "home/sections/%s.html" $sectionType -}}
+  {{- $template := printf "_partials/%s" $partial -}}
+  {{- if not (templates.Exists $template) -}}
+    {{- errorf "Unknown home section type %q. Expected partial: layouts/_partials/%s" $rawType $partial -}}
+  {{- else -}}
+    {{ partial $partial . }}
+  {{- end -}}
+{{- end -}}

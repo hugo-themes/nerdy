@@ -54,4 +54,34 @@ Use normal Hugo overrides from your site when you need to customize the theme:
 - Copy and adapt the example data files under your site's `data/` directory to configure the home page, sidebar, and terminal content.
 - Override colors and backgrounds by targeting the CSS variables defined in `assets/css/main.css`.
 
-The current built-in home/sidebar section types are intentionally data-driven. A later release-readiness step will document guarded custom section partials; for now, customize by changing data or overriding existing partials.
+## Colors and custom CSS
+
+Create `assets/css/custom.css` in your site to load custom styles after Nerdy's main stylesheet. The custom file is processed through Hugo Pipes and fingerprinted in production, matching the theme asset pipeline.
+
+Prefer overriding the stable CSS tokens instead of editing theme CSS directly:
+
+```css
+:root {
+  --background: oklch(0.985 0.006 255);
+  --foreground: oklch(0.21 0.035 260);
+  --surface: oklch(0.965 0.012 255);
+  --accent-cyan: oklch(0.47 0.105 224);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --surface: oklch(0.155 0.045 265.08);
+  --accent-cyan: oklch(0.865 0.127 207.078);
+}
+```
+
+Supported tokens include `--background`, `--foreground`, `--muted`, `--muted-foreground`, `--primary`, `--primary-foreground`, `--border`, `--card`, `--card-foreground`, `--surface`, `--surface-muted`, `--surface-elevated`, `--accent-cyan`, `--accent-purple`, `--accent-emerald`, and `--accent-amber`.
+
+## Home and sidebar sections
+
+Home sections are listed in `data/home/sections.yaml`. Each item points to a data file under `data/home/`; that file's `type` selects the partial under `layouts/_partials/home/sections/`. For example, `type: recent_posts` and `type: recent-posts` both render `layouts/_partials/home/sections/recent-posts.html`.
+
+Sidebar sections in `data/sidebar.yaml` work the same way: `type: stats` renders `layouts/_partials/home/sidebar/stats.html`.
+
+To add a custom section from your site, add the data entry and provide the matching partial in your site's `layouts/_partials/` directory. Section types may contain lowercase letters, numbers, hyphens, and underscores; underscores are normalized to hyphens. Unknown or invalid section types fail the build with the expected partial path.

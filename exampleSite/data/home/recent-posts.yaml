@@ -1,5 +1,5 @@
 id: recent-posts
-type: recent_posts
+type: recent-posts
 icon: document
 title: Recent Posts
 limit: 3

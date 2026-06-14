@@ -76,11 +76,36 @@ Production stylesheet and JavaScript assets are built through Hugo Pipes and fin
 - Site content and demo data live under `exampleSite/content/` and `exampleSite/data/`.
 - Theme templates live under `layouts/` and can be overridden from a user's Hugo site using normal Hugo lookup order.
 - Design tokens and reusable component classes live in `assets/css/main.css`, including colors, backgrounds, cards, chips, surfaces, and prose styling.
-- Home page sections are configured by `data/home/sections.yaml` in the example site and currently render the built-in section types provided by the theme.
-- Sidebar profile and sections are configured by `data/sidebar.yaml` in the example site.
+- Optional site-level CSS can be added at `assets/css/custom.css`. It loads after the main theme stylesheet and is processed/fingerprinted in production.
+- Home page sections are configured by `data/home/sections.yaml` in the example site. A section data file with `type: recent_posts` or `type: recent-posts` maps to `layouts/_partials/home/sections/recent-posts.html`; custom types can be added by providing a matching partial from your site.
+- Sidebar profile and sections are configured by `data/sidebar.yaml` in the example site. Sidebar section types map to `layouts/_partials/home/sidebar/<type>.html` with underscores normalized to hyphens.
 - Terminal content is configured by `data/terminal/config.yaml` and `data/terminal/commands/*.yaml` in the example site.
 
-Future work in this release-readiness pass will make custom home/sidebar section partials a documented extension point. Until then, prefer overriding existing partials or data files rather than editing theme internals directly.
+Section types are restricted to lowercase letters, numbers, hyphens, and underscores. Unknown section types fail the build with the expected partial path so configuration mistakes are visible during validation.
+
+### Color and background overrides
+
+The supported CSS customization contract is the token set defined on `:root` and `.dark` in `assets/css/main.css`:
+
+- `--background`, `--foreground`, `--muted`, `--muted-foreground`
+- `--primary`, `--primary-foreground`, `--border`
+- `--card`, `--card-foreground`
+- `--surface`, `--surface-muted`, `--surface-elevated`
+- `--accent-cyan`, `--accent-purple`, `--accent-emerald`, `--accent-amber`
+
+To customize without editing the theme, create `assets/css/custom.css` in your site and override only the tokens you need:
+
+```css
+:root {
+  --accent-cyan: oklch(0.55 0.14 230);
+  --surface: oklch(0.97 0.01 250);
+}
+
+.dark {
+  --accent-cyan: oklch(0.86 0.13 210);
+  --surface: oklch(0.16 0.04 265);
+}
+```
 
 ## Partial structure
 
