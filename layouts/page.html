@@ -1,6 +1,11 @@
 {{ define "main" }}
-  <article class="nerdy-prose prose prose-slate mx-auto max-w-3xl dark:prose-invert">
-    <h1>{{ .Title }}</h1>
-    {{ .Content }}
-  </article>
+  <div class="mx-auto max-w-4xl">
+    {{ partial "components/page-heading.html" (dict "title" .Title "description" .Description "eyebrow" "~/page" "accent" "cyan") }}
+
+    <article class="nerdy-card p-5 sm:p-8">
+      <div class="nerdy-prose prose prose-slate max-w-none dark:prose-invert">
+        {{ .Content }}
+      </div>
+    </article>
+  </div>
 {{ end }}

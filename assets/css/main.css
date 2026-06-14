@@ -271,6 +271,10 @@
     @apply rounded-2xl border border-slate-300/70 bg-white/95 p-6 shadow-xl shadow-slate-200/70 backdrop-blur-md dark:border-slate-700/80 dark:bg-slate-800/75 dark:shadow-black/20;
   }
 
+  .nerdy-sticky-sidebar-card {
+    @apply rounded-2xl border border-slate-300/70 bg-white/95 p-4 shadow-xl shadow-slate-200/70 backdrop-blur-md dark:border-slate-700 dark:bg-slate-800/40 dark:shadow-black/20;
+  }
+
   .nerdy-sticky-sidebar {
     isolation: isolate;
     -webkit-backface-visibility: hidden;
@@ -312,6 +316,18 @@
 
   .nerdy-section-title {
     @apply font-mono text-xl font-bold text-slate-950 dark:text-white;
+  }
+
+  .nerdy-page-heading {
+    @apply mb-8 border-b border-slate-300/70 pb-6 dark:border-slate-700;
+  }
+
+  .nerdy-page-title {
+    @apply mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white md:text-4xl;
+  }
+
+  .nerdy-page-description {
+    @apply mt-3 max-w-2xl text-sm leading-6 text-slate-700 dark:text-slate-400;
   }
 
   .nerdy-card-title {

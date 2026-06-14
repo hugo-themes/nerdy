@@ -1,14 +1,19 @@
 {{ define "main" }}
-  <header class="mb-8">
-    <h1 class="text-3xl font-bold tracking-tight">{{ .Title }}</h1>
-    {{ with .Description }}<p class="mt-2 text-muted-foreground">{{ . }}</p>{{ end }}
-  </header>
-  <div class="grid gap-4">
-    {{ range .Pages }}
-      <a class="group nerdy-card nerdy-card-hover nerdy-card-accent-cyan p-5 text-card-foreground" href="{{ .RelPermalink }}">
-        <h2 class="text-xl font-semibold">{{ .Title }}</h2>
-        {{ with .Summary }}<p class="mt-2 text-muted-foreground">{{ . }}</p>{{ end }}
-      </a>
-    {{ end }}
+  <div class="mx-auto max-w-5xl">
+    {{ partial "components/page-heading.html" (dict "title" .Title "description" .Description "eyebrow" "~/section" "accent" "emerald") }}
+
+    <div class="grid gap-4">
+      {{ range .Pages }}
+        <a class="group nerdy-card nerdy-card-hover nerdy-card-accent-cyan block p-5 text-card-foreground" href="{{ .RelPermalink }}">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h2 class="nerdy-card-title nerdy-title-accent-cyan text-xl font-semibold">{{ .Title }}</h2>
+            <span class="nerdy-chip nerdy-chip-cyan">{{ .Kind }}</span>
+          </div>
+          {{ with .Summary }}<p class="mt-3 line-clamp-3 text-sm leading-6 nerdy-muted">{{ . | plainify }}</p>{{ end }}
+        </a>
+      {{ else }}
+        {{ partial "components/empty-state.html" (dict "message" "No pages found in this section yet.") }}
+      {{ end }}
+    </div>
   </div>
 {{ end }}

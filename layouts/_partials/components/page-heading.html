@@ -1,0 +1,13 @@
+{{- $title := .title | default "Page" -}}
+{{- $description := .description -}}
+{{- $eyebrow := .eyebrow | default "~/content" -}}
+{{- $accent := .accent | default "cyan" -}}
+{{- $accentClasses := partial "components/accent-classes.html" $accent -}}
+
+<header class="nerdy-page-heading">
+  <div class="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest nerdy-muted-soft">
+    <span class="{{ $accentClasses.icon }}">{{ $eyebrow }}</span>
+  </div>
+  <h1 class="nerdy-page-title">{{ $title }}</h1>
+  {{ with $description }}<p class="nerdy-page-description">{{ . }}</p>{{ end }}
+</header>
