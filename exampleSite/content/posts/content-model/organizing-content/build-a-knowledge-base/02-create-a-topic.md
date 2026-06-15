@@ -11,7 +11,7 @@ tags:
 summary: Add a second-level section so readers can filter a subject into focused topic groups.
 ---
 
-A topic lives inside a subject and becomes a clickable item in the workspace explorer.
+A topic lives inside a subject. It becomes a clickable filter in the workspace explorer.
 
 ```txt
 content/posts/go/testing/_index.md
@@ -27,7 +27,7 @@ weight: 30
 ---
 ```
 
-Pages inside the topic can include matching metadata for clearer cards:
+Posts inside the topic can include matching metadata for clearer cards:
 
 ```yaml
 subject: Go

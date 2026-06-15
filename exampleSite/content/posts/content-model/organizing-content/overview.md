@@ -1,5 +1,5 @@
 ---
-title: Subjects, Topics, and Series
+title: Organize Posts
 date: 2026-06-13
 subject: Content Model
 topic: Organizing Content
@@ -7,50 +7,73 @@ weight: 1
 tags:
   - content
   - structure
-summary: Understand the folder-based model that powers Nerdy's workspace explorer and series navigation.
+summary: Use folders to group posts into subjects, topics, and optional series.
 ---
 
-Nerdy does not model subjects, topics, or series as Hugo taxonomies. They are mostly folder structure.
+Nerdy uses folders to organize posts. You do not need custom Hugo taxonomies for subjects, topics, or series.
+
+Think of the structure like this:
+
+- **Subject**: a broad area, like `Go` or `Kubernetes`
+- **Topic**: a focused group inside a subject, like `Testing`
+- **Series**: an optional ordered set of posts inside a topic
 
 ```txt
-content/docs/
-  subject/
-    topic/
-      page.md
-      series-name/
+content/posts/
+  go/                         # subject
+    _index.md
+    testing/                  # topic
+      _index.md
+      table-driven-tests.md   # regular post
+      testing-in-go/          # optional series
         _index.md
         01-part-one.md
 ```
 
 ## Subject
 
-A subject is a first-level section under the publishing section. In this documentation, `Start`, `Content Model`, `Customize`, and `Reference` are subjects.
+A subject is a first-level folder under `content/posts/`.
 
-Subjects appear as folders in the workspace explorer.
-
-## Topic
-
-A topic is a second-level section under a subject. Selecting a topic filters the index to only that topic's pages.
-
-## Series
-
-A series is an optional section inside a topic. Its `_index.md` provides the series title, weight, and optional status label. Pages inside that folder appear in series navigation ordered by `weight`.
-
-## Reuse the workspace layout
-
-The built-in workspace layout lives under `layouts/posts/`, but it can power another section too. This documentation does that by setting `type: posts` on `content/docs/_index.md` and cascading the same type to regular pages:
+Create an `_index.md` file for its title and order:
 
 ```yaml
 ---
-title: Documentation
-type: posts
-cascade:
-  - type: posts
-    target:
-      kind: page
+title: Go
+weight: 10
+---
+```
+
+## Topic
+
+A topic is a second-level folder inside a subject. Topics appear in the workspace explorer and let readers filter posts.
+
+```txt
+content/posts/go/testing/_index.md
+content/posts/go/testing/table-driven-tests.md
+```
+
+## Series
+
+A series is optional. Use it only when posts should be read in order.
+
+```txt
+content/posts/go/testing/testing-in-go/_index.md
+content/posts/go/testing/testing-in-go/01-basics.md
+content/posts/go/testing/testing-in-go/02-table-tests.md
+```
+
+The series `_index.md` provides the title, order, and optional status label:
+
+```yaml
+---
+title: Testing in Go
+status: Active Series
+weight: 10
 ---
 ```
 
 ## Ordering
 
 Use `weight` on subjects, topics, series, and pages. Lower weights appear first.
+
+If a post is not part of a series, put it directly inside a topic folder.

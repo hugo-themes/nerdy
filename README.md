@@ -13,6 +13,7 @@ The demo site also serves as the documentation site.
 - Card-style sidebar for an at-a-glance author overview.
 - Group posts by subject, topic, and series.
 - Data-driven configuration.
+- Light and dark theme.
 
 ## Requirements
 

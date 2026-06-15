@@ -11,9 +11,9 @@ tags:
 summary: Start a new high-level area by adding a first-level section with an index file.
 ---
 
-A subject is the top-level grouping shown in the workspace explorer.
+A subject is the top-level group shown in the workspace explorer.
 
-Create a folder and an `_index.md` file:
+Create one folder and one `_index.md` file:
 
 ```txt
 content/posts/go/_index.md

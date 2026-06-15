@@ -1,5 +1,6 @@
 ---
 title: Build a Knowledge Base
-status: Guide Series
+description: A short example that creates one subject, one topic, and one ordered series.
+status: Completed
 weight: 20
 ---

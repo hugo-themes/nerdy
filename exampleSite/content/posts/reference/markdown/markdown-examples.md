@@ -1,5 +1,5 @@
 ---
-title: "Markdown Rendering Sample"
+title: "Markdown Examples"
 date: 2026-06-13
 subject: Reference
 topic: Markdown
@@ -8,10 +8,10 @@ tags:
   - markdown
   - reference
   - design
-summary: A reference post for checking how common Markdown elements render in the theme.
+summary: See how common Markdown elements look in Nerdy.
 ---
 
-Use this page as a visual reference when changing prose styles, spacing, colors, or table-of-contents behavior.
+Use this page as a quick preview of headings, lists, code blocks, tables, images, and other common Markdown elements.
 
 ## Headings
 
@@ -60,10 +60,10 @@ Longer paragraphs should remain readable across line lengths. The theme should k
 
 ### Task List
 
-- [x] Render headings
-- [x] Render lists
-- [ ] Verify code block colors
-- [ ] Check table overflow on small screens
+- [x] Write the outline
+- [x] Add examples
+- [ ] Review the draft
+- [ ] Publish the post
 
 ## Blockquotes
 
@@ -118,11 +118,11 @@ hugo server --disableFastRender
 
 ## Tables
 
-| Component | Purpose | Status |
+| Element | Purpose | Example status |
 | --- | --- | --- |
 | Headings | Page structure and TOC anchors | Ready |
 | Paragraphs | Main reading experience | Ready |
-| Tables | Structured comparison data | Needs responsive check |
+| Tables | Structured comparison data | Ready |
 | Code blocks | Technical examples | Ready |
 
 | Align Left | Align Center | Align Right |
@@ -168,12 +168,8 @@ For example, write keyboard shortcuts as text like `Ctrl` + `K` instead of inlin
 
 Use a backslash when you need literal Markdown characters: \*not italic\*, \`not code\`, and \[not a link\].
 
-## Final Checklist
+## Writing Tips
 
-When reviewing this page, verify:
-
-- spacing between sections feels consistent
-- inline elements have enough contrast
-- code blocks are readable in light and dark mode
-- tables remain usable on narrow screens
-- the TOC ignores the page title and only lists content headings
+- Use `summary` in front matter so cards have helpful preview text.
+- Use level 2 headings for major sections; they appear in the table of contents.
+- Keep tables compact so they are easier to read on small screens.

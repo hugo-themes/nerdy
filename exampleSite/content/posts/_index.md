@@ -1,6 +1,6 @@
 ---
 title: Documentation
-description: Learn Nerdy by reading a documentation site built with Nerdy.
+description: Learn how to install, organize, and customize a Nerdy site.
 type: posts
 cascade:
   - type: posts
@@ -8,4 +8,4 @@ cascade:
       kind: page
 ---
 
-Nerdy's documentation is intentionally organized as Nerdy content: subjects, topics, pages, and one short series. Use the workspace explorer to see how the content model works while you read the guide.
+Start with the quick start, then use the guides for content organization, home page customization, terminal commands, colors, and reference examples.

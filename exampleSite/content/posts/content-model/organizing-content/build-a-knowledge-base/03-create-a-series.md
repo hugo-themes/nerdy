@@ -11,7 +11,7 @@ tags:
 summary: Group ordered posts inside a topic and let Nerdy render the series card and navigation automatically.
 ---
 
-A series is a folder inside a topic.
+A series is a folder inside a topic. Use one when a group of posts should be read in order.
 
 ```txt
 content/posts/go/web-server/building-production-go-web-servers/_index.md
@@ -29,4 +29,4 @@ weight: 10
 ---
 ```
 
-Each part should have a `weight`. Add `series` in page front matter when you want the relationship to remain visible even if files move later.
+Each part should have a `weight`. Add `series` in page front matter when you want the relationship to stay visible on cards and breadcrumbs.
