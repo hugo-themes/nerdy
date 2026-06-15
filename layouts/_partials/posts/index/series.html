@@ -35,7 +35,7 @@
         {{ range $seriesPages }}
           {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
         {{ end }}
-        <article class="group nerdy-card nerdy-card-hover nerdy-card-accent-purple relative overflow-hidden p-5">
+        <a class="group nerdy-card nerdy-card-hover nerdy-card-accent-purple relative block overflow-hidden p-5" href="{{ $firstPage.RelPermalink }}">
           <div class="mb-3 flex items-center justify-between gap-3">
             {{ with $seriesStatus }}<span class="nerdy-chip nerdy-chip-purple rounded-full px-2.5 py-1 font-bold">{{ . | upper }}</span>{{ end }}
             <span class="font-mono text-xs nerdy-muted-soft">{{ len $seriesPages }} Parts</span>
@@ -44,9 +44,9 @@
           {{ with $firstPage.Summary }}<p class="mb-4 text-xs leading-relaxed nerdy-muted">{{ . | plainify }}</p>{{ end }}
           <div class="flex items-center justify-between border-t border-slate-200 pt-2 font-mono text-xs dark:border-slate-800">
             <span class="nerdy-muted-soft">Total read: <span class="font-bold">{{ $totalReadingTime }} min</span></span>
-            <a class="nerdy-link" href="{{ $firstPage.RelPermalink }}">Start Reading -&gt;</a>
+            <span class="nerdy-link">Start Reading -&gt;</span>
           </div>
-        </article>
+        </a>
     {{ end }}
     {{ if eq (len $seriesItems) 0 }}
       {{ partial "components/empty-state.html" (dict "class" "md:col-span-2" "parts" (slice
