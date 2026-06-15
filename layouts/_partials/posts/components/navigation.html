@@ -1,5 +1,21 @@
+{{- $page := .page -}}
+{{- $pages := .pages | default slice -}}
+{{- $previousPost := "" -}}
+{{- $nextPost := "" -}}
+
+{{- range $index, $candidate := $pages -}}
+  {{- if eq $candidate.RelPermalink $page.RelPermalink -}}
+    {{- if gt $index 0 -}}
+      {{- $previousPost = index $pages (sub $index 1) -}}
+    {{- end -}}
+    {{- if lt (add $index 1) (len $pages) -}}
+      {{- $nextPost = index $pages (add $index 1) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 <nav class="mt-16 grid gap-4 border-t border-slate-200 pt-8 dark:border-slate-700 md:grid-cols-2" aria-label="Post navigation">
-  {{ with .PrevInSection }}
+  {{ with $previousPost }}
     <a class="group nerdy-nav-card" href="{{ .RelPermalink }}">
       <div class="mb-2 flex items-center gap-2 font-mono text-xs text-accent-cyan">
         <span class="transition-transform group-hover:-translate-x-1">&lt;-</span>
@@ -11,7 +27,7 @@
     <div class="hidden md:block"></div>
   {{ end }}
 
-  {{ with .NextInSection }}
+  {{ with $nextPost }}
     <a class="group nerdy-nav-card text-right" href="{{ .RelPermalink }}">
       <div class="mb-2 flex items-center justify-end gap-2 font-mono text-xs text-accent-cyan">
         <span>Next Post</span>

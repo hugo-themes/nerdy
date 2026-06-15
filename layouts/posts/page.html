@@ -2,6 +2,7 @@
   {{ $page := . }}
   {{ $section := .Section | default "posts" }}
   {{ $sectionPage := site.GetPage (printf "/%s" $section) }}
+  {{ $sectionPages := partial "posts/utils/weighted-pages.html" (dict "sectionPage" $sectionPage "section" $section) }}
   {{ $subjects := slice }}
   {{ with $sectionPage }}
     {{ $subjects = .Sections.ByWeight }}
@@ -94,7 +95,7 @@
           {{ .Content }}
         </article>
 
-        {{ partial "posts/components/navigation.html" . }}
+        {{ partial "posts/components/navigation.html" (dict "page" $page "pages" $sectionPages) }}
       </main>
     </div>
 
