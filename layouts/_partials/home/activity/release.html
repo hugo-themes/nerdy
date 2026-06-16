@@ -2,6 +2,7 @@
 {{- $repo := $info.repo | default "" -}}
 {{- $repoURL := replaceRE "/$" "" $repo -}}
 {{- $repoLabel := replaceRE `^https?://(www\.)?` "" $repoURL -}}
+{{- $repoLabel = replaceRE `^github\.com/` "" $repoLabel -}}
 {{- $version := $info.version | default "" -}}
 {{- $releaseURL := $info.url | default "" -}}
 Released

@@ -1,6 +1,6 @@
 id: recent-posts
 type: recent-posts
-icon: document
+icon: article
 title: Recent Posts
 limit: 3
 section: posts

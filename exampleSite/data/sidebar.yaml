@@ -10,12 +10,18 @@ profile:
     preference_label: Pref
     preference: 100% Remote / Async
   links:
+    - icon: website
+      label: nerdy.hugo-themes.com
+      url: https://nerdy.hugo-themes.com
     - icon: github
       label: github.com/gopher
       url: https://github.com/gopher
     - icon: linkedin
       label: linkedin.com/in/gopher
       url: https://linkedin.com/in/gopher
+    - icon: x
+      label: "@gopher"
+      url: https://x.com/gopher
     - icon: mail
       label: hello@gopher.dev
       url: mailto:hello@gopher.dev

@@ -2,6 +2,7 @@
 {{- $repo := $info.repo | default "" -}}
 {{- $repoURL := replaceRE "/$" "" $repo -}}
 {{- $repoLabel := replaceRE `^https?://(www\.)?` "" $repoURL -}}
+{{- $repoLabel = replaceRE `^github\.com/` "" $repoLabel -}}
 {{- $number := $info.number | default "" -}}
 {{- $prURL := $info.url | default "" -}}
 Merged PR

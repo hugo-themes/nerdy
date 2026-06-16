@@ -9,7 +9,17 @@
 
 {{- $svg := $icon.Content -}}
 {{- $svg = replaceRE `(?s)^.*?(<svg\b)` `$1` $svg -}}
+{{- $svgTag := index (findRE `<svg[^>]*>` $svg 1) 0 -}}
+{{- $cleanSvgTag := replaceRE `\s(width|height)="[^"]*"` `` $svgTag -}}
+{{- $cleanSvgTag = replaceRE `\sclass="[^"]*"` `` $cleanSvgTag -}}
+{{- $svg = replace $svg $svgTag $cleanSvgTag 1 -}}
 {{- $svg = replaceRE `fill="#[A-Fa-f0-9]+"` `fill="currentColor"` $svg -}}
 {{- $svg = replaceRE `stroke="#[A-Fa-f0-9]+"` `stroke="currentColor"` $svg -}}
+{{- $svg = replaceRE `fill:\s*#[A-Fa-f0-9]+` `fill:currentColor` $svg -}}
+{{- $svg = replaceRE `stroke:\s*#[A-Fa-f0-9]+` `stroke:currentColor` $svg -}}
+{{- $svgTag = index (findRE `<svg[^>]*>` $svg 1) 0 -}}
+{{- if not (findRE `\sfill=` $svgTag) -}}
+  {{- $svg = replaceRE `<svg` `<svg fill="currentColor"` $svg 1 -}}
+{{- end -}}
 {{- $svg = replaceRE `<svg([^>]*)>` (printf `<svg class="%s" aria-hidden="true"$1>` $class) $svg -}}
 {{- $svg | safeHTML -}}

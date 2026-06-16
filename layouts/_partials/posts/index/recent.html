@@ -1,7 +1,7 @@
 {{- $pages := sort (.pages | default slice) "Date" "desc" -}}
 
 <section>
-  {{ partial "components/section-heading.html" (dict "icon" "document" "title" "Recent Posts") }}
+  {{ partial "components/section-heading.html" (dict "icon" "article" "title" "Recent Posts" "iconClass" "h-5 w-5") }}
 
   <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
     {{ range first 3 $pages }}

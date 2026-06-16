@@ -24,7 +24,7 @@
 {{- end -}}
 
 <section>
-  {{ partial "components/section-heading.html" (dict "icon" "collection" "title" "Post Serieses" "accent" "amber") }}
+  {{ partial "components/section-heading.html" (dict "icon" "collection" "title" "Post Serieses" "iconClass" "h-5 w-5") }}
 
   <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
     {{ range $seriesItem := (sort $seriesItems "weight" "asc") }}

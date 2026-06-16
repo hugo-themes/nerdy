@@ -5,11 +5,13 @@
   <h3 class="mb-2 text-lg font-bold nerdy-card-title {{ $accentClasses.title }}">{{ .title }}</h3>
   <p class="mb-4 line-clamp-2 text-sm leading-6 nerdy-muted">{{ .description }}</p>
   {{ with .links }}
-    <div class="flex flex-wrap gap-4">
+    <div class="flex flex-wrap items-center gap-4">
       {{ range . }}
-        <a class="flex items-center gap-1 font-mono text-xs nerdy-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
-          {{ partial "components/icon.html" (dict "name" .icon "class" "h-3 w-3") }}
-          {{ .label }}
+        <a class="inline-flex h-3 items-center gap-1 font-mono text-xs nerdy-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+          <span class="flex h-3 w-3 shrink-0 items-center justify-center">
+            {{ partial "components/icon.html" (dict "name" .icon "class" "block h-3 w-3") }}
+          </span>
+          <span class="block h-3 mt-auto mb-auto">{{ .label }}</span>
         </a>
       {{ end }}
     </div>

@@ -23,13 +23,14 @@
         <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#ff5f56] shadow-sm"></div>
         <div class="h-3.5 w-3.5 rounded-full border border-black/20 bg-[#ffbd2e] shadow-sm"></div>
         <button
-          class="relative h-3.5 w-3.5 rounded-full border border-black/20 bg-[#27c93f] text-black/0 shadow-sm transition-colors hover:text-black/70 group-hover/traffic:text-black/70"
+          class="group/maximize relative h-3.5 w-3.5 rounded-full border border-black/20 bg-[#27c93f] shadow-sm"
           type="button"
           x-bind:title="isFullscreen ? 'Exit fullscreen' : 'Maximize terminal'"
           x-bind:aria-label="isFullscreen ? 'Exit fullscreen' : 'Maximize terminal'"
           x-on:click.stop="toggleFullscreen()"
         >
-          <span class="absolute inset-0 flex items-center justify-center text-[10px] font-black leading-none" x-text="isFullscreen ? '−' : '+'"></span>
+          <span class="absolute left-1/2 top-1/2 h-[1.5px] w-1.5 -translate-x-1/2 -translate-y-1/2 rounded bg-transparent transition-colors group-hover/traffic:bg-black/70 group-hover/maximize:bg-black/70"></span>
+          <span class="absolute left-1/2 top-1/2 h-1.5 w-[1.5px] -translate-x-1/2 -translate-y-1/2 rounded bg-transparent transition-colors group-hover/traffic:bg-black/70 group-hover/maximize:bg-black/70" x-show="!isFullscreen"></span>
         </button>
       </div>
       <div class="pointer-events-none absolute inset-x-0 text-center font-sans text-xs font-medium tracking-wide text-slate-600 dark:text-slate-400">
