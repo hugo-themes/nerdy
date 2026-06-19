@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "build": "hugo --source exampleSite --renderToMemory && hugo --source exampleSite --minify --gc --cleanDestinationDir",
-    "server": "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch",
+    "server": "PORTLESS_STATE_DIR=\"${PORTLESS_STATE_DIR:-$HOME/.portless}\" portless nerdy npm run server:portless",
+    "server:local": "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch",
+    "server:portless": "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch --port \"${PORT:-1313}\" --baseURL \"${PORTLESS_URL:-https://nerdy.localhost}\" --appendPort=false --liveReloadPort=443",
+    "portless:trust": "PORTLESS_STATE_DIR=\"${PORTLESS_STATE_DIR:-$HOME/.portless}\" portless trust",
     "dev": "npm run server"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",
+    "portless": "^0.14.0",
     "tailwindcss": "^4.3.0"
   },
   "dependencies": {

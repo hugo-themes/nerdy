@@ -1,6 +1,23 @@
+{{- $labelWidth := len "Email" -}}
+{{- range .links -}}
+  {{- if gt (len .label) $labelWidth -}}
+    {{- $labelWidth = len .label -}}
+  {{- end -}}
+{{- end -}}
 <pre class="font-mono whitespace-pre-wrap leading-relaxed">{{ .intro }}
 
-{{ with .email }}<span class="text-accent-cyan">Email:</span>      <a class="pointer-events-auto relative z-50 text-accent-amber underline" href="mailto:{{ . }}">{{ . }}</a>
-{{ end }}{{ range .links }}<span class="text-accent-cyan">{{ .label }}:</span>     <a class="pointer-events-auto relative z-50 nerdy-link underline" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .text | default .url }}</a>
+{{ with .email -}}
+<span class="text-accent-cyan">{{ printf "%*s : " $labelWidth "Email" }}</span><a
+  class="pointer-events-auto relative z-50 text-accent-amber underline"
+  href="mailto:{{ . }}"
+>{{ . }}</a>
+{{ end -}}
+{{ range .links -}}
+<span class="text-accent-cyan">{{ printf "%*s : " $labelWidth .label }}</span><a
+  class="pointer-events-auto relative z-50 nerdy-link underline"
+  href="{{ .url }}"
+  target="_blank"
+  rel="noopener noreferrer"
+>{{ .text | default .url }}</a>
 {{ end }}
 {{ .outro }}</pre>

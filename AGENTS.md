@@ -2,11 +2,12 @@
 
 ## Commands
 
-- Install deps: `npm install` (or `mise run build/server`, which depends on `install`).
-- Dev server: `npm run server` runs `hugo --source exampleSite --renderToMemory` first, then `hugo server --source exampleSite --buildDrafts --watch`.
+- Install deps: `npm install` (or `mise run build/server/server-local`, which depends on `install`).
+- Dev server: `npm run server` runs the example site through Portless at `https://nerdy.localhost`.
+- Direct Hugo server without Portless: `npm run server:local` serves `http://localhost:1313`.
 - Production verification: `npm run build`; there are no separate lint/test scripts in `package.json`.
 - Prefer npm scripts over raw `hugo` so `node_modules/.bin` is on `PATH` and `hugo_stats.json` exists before Tailwind compiles.
-- Optional mise equivalents: `mise run server`, `mise run build`; mise also prepends `./node_modules/.bin` to `PATH`.
+- Optional mise equivalents: `mise run server`, `mise run server-local`, `mise run build`; mise also prepends `./node_modules/.bin` to `PATH`.
 
 ## Repo shape
 

@@ -18,7 +18,7 @@ The demo site also serves as the documentation site.
 ## Requirements
 
 - Hugo `0.162.1` or newer
-- Node.js and npm for Tailwind CSS and JavaScript dependencies
+- Node.js 24 or newer and npm for Tailwind CSS, Portless, and JavaScript dependencies
 - Go for Hugo Modules; the example site and recommended install path both use them
 - Optional: [mise](https://mise.jdx.dev/) for local tool and task management
 
@@ -55,6 +55,18 @@ npm install
 npm run server
 ```
 
+Then open <https://nerdy.localhost>.
+
+[Portless](https://portless.sh/) is installed as a development dependency and provides the stable local DNS name. On first run, it may ask to trust its local HTTPS certificate. If your browser still marks the page as not secure, run `npm run portless:trust`, restart the browser, and open `https://nerdy.localhost` again.
+
+If `https://nerdy.localhost` shows a Portless 404, stop any stale Portless proxy with `portless proxy stop`, then run `npm run server` again. If the proxy was started with elevated privileges, use `sudo portless proxy stop` once before restarting.
+
+To bypass Portless and run Hugo directly instead:
+
+```sh
+npm run server:local
+```
+
 Then open <http://localhost:1313>.
 
 The repository root contains the reusable theme. The demo and documentation site lives in `exampleSite/` and is what the local server runs.
@@ -71,11 +83,12 @@ Use the npm scripts instead of calling `hugo` directly. They add `node_modules/.
 
 ## npm scripts
 
-| Command          | Description                                         |
-| ---------------- | --------------------------------------------------- |
-| `npm run server` | Start the example/documentation site in watch mode. |
-| `npm run dev`    | Alias for `npm run server`.                         |
-| `npm run build`  | Build the production example/documentation site.    |
+| Command                | Description                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| `npm run server`       | Start the example/documentation site through Portless at `https://nerdy.localhost`. |
+| `npm run dev`          | Alias for `npm run server`.                                                    |
+| `npm run server:local` | Start the example/documentation site directly on `http://localhost:1313`.      |
+| `npm run build`        | Build the production example/documentation site.                               |
 
 ## Optional mise workflow
 
@@ -87,7 +100,9 @@ mise run server
 mise run build
 ```
 
-The mise tasks install npm dependencies automatically before running the server or build.
+`mise run server` uses the same Portless-backed flow as `npm run server`. Use `mise run server-local` to bypass Portless and serve directly on `http://localhost:1313`.
+
+The mise tasks install npm dependencies automatically before running server or build commands.
 
 ## Project layout
 

@@ -17,8 +17,13 @@ run = "hugo --source exampleSite --renderToMemory && hugo --source exampleSite -
 depends = ["install"]
 
 [tasks.server]
-description = "Run example site server in watch mode"
-run = "hugo --source exampleSite --renderToMemory && hugo server --source exampleSite --buildDrafts --watch"
+description = "Run example site server through portless"
+run = "npm run server"
+depends = ["install"]
+
+[tasks.server-local]
+description = "Run example site server directly on localhost:1313"
+run = "npm run server:local"
 depends = ["install"]
 
 [tasks.update]
