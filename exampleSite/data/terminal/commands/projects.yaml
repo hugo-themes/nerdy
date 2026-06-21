@@ -5,6 +5,7 @@ quick: true
 weight: 40
 items:
   - name: E-Commerce Platform API
+    type: Work
     tech:
       - Go
       - PostgreSQL
@@ -13,6 +14,7 @@ items:
       authentication, Stripe integration, and advanced caching.
     url: https://github.com/gopher/ecommerce-api
   - name: Real-Time Collaboration Tool
+    type: Work
     tech:
       - React
       - WebSockets
@@ -21,6 +23,7 @@ items:
       simultaneously with low latency.
     url: https://demo.example.com/collab
   - name: CLI Task Manager
+    type: Personal
     tech:
       - Go
       - SQLite

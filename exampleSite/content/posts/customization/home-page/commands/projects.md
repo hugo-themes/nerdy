@@ -23,6 +23,7 @@ quick: true
 weight: 40
 items:
   - name: E-Commerce Platform API
+    type: Work
     tech:
       - Go
       - PostgreSQL
@@ -30,6 +31,7 @@ items:
     description: A REST API with authentication, payments, and caching.
     url: https://github.com/gopher/ecommerce-api
   - name: CLI Task Manager
+    type: Personal
     tech:
       - Go
       - SQLite
@@ -40,6 +42,7 @@ items:
 Each project supports:
 
 - `name`: project title.
+- `type`: optional project category such as `Work` or `Personal`.
 - `tech`: short list of technologies.
 - `description`: one-line project summary.
 - `url`: link to code, demo, case study, or docs.

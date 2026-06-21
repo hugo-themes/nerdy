@@ -7,6 +7,8 @@ items:
     description: A high-performance API gateway built in Go, capable of handling
       50k+ req/sec with dynamic routing and rate limiting.
     accent: purple
+    type: Work
+    stars: 2.4k
     links:
       - label: Code
         url: https://github.com/gopher/nexus-api-gateway
@@ -18,6 +20,8 @@ items:
     description: A terminal-based toolkit written in Rust for diagnosing network
       latencies and container connectivity.
     accent: cyan
+    type: Personal
+    stars: 890
     links:
       - label: Code
         url: https://github.com/gopher/netops-cli
