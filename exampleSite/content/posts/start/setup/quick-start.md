@@ -63,26 +63,76 @@ Use the npm scripts instead of calling `hugo` directly. They add `node_modules/.
 
 ## Use Nerdy in your site
 
-Add the theme as a Hugo module import:
+Run these steps from your Hugo site's root directory, not from the Nerdy theme checkout.
 
-```yaml
-module:
-  imports:
-    - path: github.com/hugo-themes/nerdy
+If your site is not already a Hugo module, initialize one first:
+
+```sh
+hugo mod init github.com/you/your-site
 ```
 
-Enable Hugo build stats so Tailwind can discover classes emitted by templates:
+Add the theme import and Tailwind build-stat wiring to `hugo.yaml`:
 
 ```yaml
 build:
   buildStats:
     enable: true
+  cachebusters:
+    - source: 'assets/notwatching/hugo_stats\.json'
+      target: css
+
+module:
+  imports:
+    - path: github.com/hugo-themes/nerdy
+  mounts:
+    - source: assets
+      target: assets
+    - disableWatch: true
+      source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
 ```
 
-Then copy only the data files and content structure you want from `exampleSite/`.
+If your site already has `module.imports` or `module.mounts`, merge these entries instead of replacing your existing configuration. The `hugo_stats.json` mount gives Tailwind a stable file to scan without making Hugo watch its own generated build-stat file.
+
+Create or update `package.json` with scripts for local development, production builds, and theme dependency refreshes:
+
+```json
+{
+  "name": "your-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "hugo --renderToMemory && hugo --minify --gc --cleanDestinationDir",
+    "server": "hugo --renderToMemory && hugo server --buildDrafts --watch",
+    "dev": "npm run server",
+    "theme:update": "hugo mod get github.com/hugo-themes/nerdy@latest && hugo mod tidy && hugo mod npm pack && npm install",
+    "theme:update-to-main": "hugo mod get github.com/hugo-themes/nerdy@main && hugo mod tidy && hugo mod npm pack && npm install"
+  }
+}
+```
+
+Install the theme module and npm dependencies:
+
+```sh
+hugo mod get github.com/hugo-themes/nerdy@latest
+hugo mod tidy
+hugo mod npm pack
+npm install
+```
+
+`hugo mod npm pack` reads Nerdy's `package.hugo.json`, creates `packages/hugoautogen/package.json`, and adds that generated package as an npm workspace. This keeps Tailwind, Alpine.js, and other theme asset dependencies in sync without copying them by hand.
+
+Then copy only the data files, assets, and content structure you want from `exampleSite/`, such as `data/sidebar.yaml`, `data/home/`, `data/terminal/`, and `content/posts/`.
 
 If you copy from `exampleSite/hugo.yaml`, do not copy the `module.replacements` line. That line is only for this repository so the demo site can point at the local theme checkout.
 
-Your site also needs the npm dependencies used by Nerdy's asset pipeline. Use this repository's `package.json` as the reference set for Tailwind and Alpine.js. Add Portless too only if you want the same stable local HTTPS workflow.
+Start your site with:
+
+```sh
+npm run server
+```
+
+Run `npm run theme:update` whenever you want to pull the latest Nerdy release and refresh the generated npm workspace. If you want the newest commit from the `main` branch instead, run `npm run theme:update-to-main`.
 
 Next, read the content organization and customization guides for the parts of the site you want to change.
