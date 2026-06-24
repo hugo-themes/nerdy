@@ -1,0 +1,4 @@
+{{- $info := .info | default dict -}}
+{{- $title := $info.title | default "Untitled post" -}}
+{{- $url := $info.url | default "#" -}}
+Published post <a class="nerdy-link" href="{{ $url }}">{{ $title }}</a>.

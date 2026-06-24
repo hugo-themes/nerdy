@@ -1,27 +1,116 @@
+{{- $dateFormat := .dateFormat | default "Jan 2, 2006" -}}
+{{- $lookbackDays := int (.lookbackDays | default 0) -}}
+{{- $activityLimit := int (.activityLimit | default 0) -}}
+{{- $includePosts := .includePosts | default false -}}
+{{- $postSection := .postSection | default "posts" -}}
+{{- $cutoffUnix := 0 -}}
+{{- if gt $lookbackDays 0 -}}
+  {{- $cutoffUnix = (now.AddDate 0 0 (mul $lookbackDays -1)).Unix -}}
+{{- end -}}
+
+{{- $activities := slice -}}
+{{- range $index, $item := (.items | default slice) -}}
+  {{- $rawActivityDate := $item.activityDate | default "" -}}
+  {{- if not $rawActivityDate -}}
+    {{- errorf "Activity item %d in %q requires activityDate." (add $index 1) $.id -}}
+  {{- end -}}
+
+  {{- $sortDate := time.AsTime $rawActivityDate -}}
+  {{- $dateLabel := $sortDate.Format $dateFormat -}}
+  {{- $datetime := $sortDate.Format "2006-01-02" -}}
+  {{- $sortKey := sub (mul $sortDate.Unix 100000) $index -}}
+
+  {{- $includeItem := true -}}
+  {{- if gt $lookbackDays 0 -}}
+    {{- $includeItem = false -}}
+    {{- if and $sortDate (ge $sortDate.Unix $cutoffUnix) -}}
+      {{- $includeItem = true -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $includeItem -}}
+    {{- $activities = $activities | append (merge $item (dict "dateLabel" $dateLabel "datetime" $datetime "sortKey" $sortKey)) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $includePosts -}}
+  {{- range $index, $post := (where site.RegularPages "Section" $postSection).ByDate.Reverse -}}
+    {{- if not $post.Date.IsZero -}}
+      {{- $includePost := true -}}
+      {{- if and (gt $lookbackDays 0) (lt $post.Date.Unix $cutoffUnix) -}}
+        {{- $includePost = false -}}
+      {{- end -}}
+
+      {{- if $includePost -}}
+        {{- $activities = $activities | append (dict
+          "dateLabel" ($post.Date.Format $dateFormat)
+          "datetime" ($post.Date.Format "2006-01-02")
+          "info" (dict "page" $post "section" $postSection "title" $post.Title "url" $post.RelPermalink)
+          "sortKey" (sub (mul $post.Date.Unix 100000) (add $index 10000))
+          "type" "published-post"
+        ) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $visibleActivities := sort $activities "sortKey" "desc" -}}
+{{- if gt $activityLimit 0 -}}
+  {{- $visibleActivities = first $activityLimit $visibleActivities -}}
+{{- end -}}
+
+{{- $activityGroups := slice -}}
+{{- $currentDate := "" -}}
+{{- $currentLabel := "" -}}
+{{- $currentItems := slice -}}
+{{- range $visibleActivities -}}
+  {{- if and $currentDate (ne .datetime $currentDate) -}}
+    {{- $activityGroups = $activityGroups | append (dict "dateLabel" $currentLabel "datetime" $currentDate "items" $currentItems) -}}
+    {{- $currentItems = slice -}}
+  {{- end -}}
+  {{- if or (not $currentDate) (ne .datetime $currentDate) -}}
+    {{- $currentDate = .datetime -}}
+    {{- $currentLabel = .dateLabel -}}
+  {{- end -}}
+  {{- $currentItems = $currentItems | append . -}}
+{{- end -}}
+{{- if gt (len $currentItems) 0 -}}
+  {{- $activityGroups = $activityGroups | append (dict "dateLabel" $currentLabel "datetime" $currentDate "items" $currentItems) -}}
+{{- end -}}
+
 <section class="mb-4 mt-8" id="{{ .id }}">
   {{ partial "components/section-heading.html" (dict "icon" .icon "title" .title "prefix" "<<" "suffix" ">>") }}
   <div class="relative ml-2 space-y-6 border-l-2 border-slate-300 pl-6 dark:border-slate-700">
-    {{ range .items }}
+    {{ range $groupIndex, $group := $activityGroups }}
       <article class="relative">
-        {{ if .active }}
+        {{- $datetime := .datetime -}}
+        {{ if eq $groupIndex 0 }}
           <span class="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-accent-emerald shadow-[0_0_10px_rgba(16,185,129,0.75)]"></span>
         {{ else }}
           <span class="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border border-slate-400 bg-slate-300 dark:bg-slate-600"></span>
         {{ end }}
-        <time class="rounded border border-slate-200 bg-white/80 px-2 py-0.5 font-mono text-xs nerdy-muted-soft dark:border-slate-700 dark:bg-slate-800">{{ .date }}</time>
-        <p class="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-          {{- $activityType := .type | default "" | lower | replaceRE "_" "-" -}}
-          {{- $partialPath := printf "home/activity/%s.html" $activityType -}}
-          {{- $templatePath := printf "_partials/%s" $partialPath -}}
-          {{- if not (findRE `^[a-z0-9-]+$` $activityType) -}}
-            {{- errorf "Invalid activity type %q. Activity types may contain lowercase letters, numbers, and hyphens." .type -}}
-          {{- else if templates.Exists $templatePath -}}
-            {{- partial $partialPath . -}}
-          {{- else -}}
-            {{- errorf "Unknown activity type %q. Expected partial at layouts/%s." .type $templatePath -}}
+        {{ with .dateLabel }}<time class="rounded border border-slate-200 bg-white/80 px-2 py-0.5 font-mono text-xs nerdy-muted-soft dark:border-slate-700 dark:bg-slate-800"{{ with $datetime }} datetime="{{ . }}"{{ end }}>{{ . }}</time>{{ end }}
+        <div class="mt-2 space-y-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
+          {{ range .items }}
+            <p>
+              {{- $activityType := .type | default "" | lower | replaceRE "_" "-" -}}
+              {{- $partialPath := printf "home/activity/%s.html" $activityType -}}
+              {{- $templatePath := printf "_partials/%s" $partialPath -}}
+              {{- if not (findRE `^[a-z0-9-]+$` $activityType) -}}
+                {{- errorf "Invalid activity type %q. Activity types may contain lowercase letters, numbers, and hyphens." .type -}}
+              {{- else if templates.Exists $templatePath -}}
+                {{- partial $partialPath . -}}
+              {{- else -}}
+                {{- errorf "Unknown activity type %q. Expected partial at layouts/%s." .type $templatePath -}}
+              {{- end -}}
+            </p>
           {{- end -}}
-        </p>
+        </div>
       </article>
+    {{ else }}
+      {{ partial "components/empty-state.html" (dict "parts" (slice
+        (dict "text" "No activity found for the current filters.")
+      )) }}
     {{ end }}
   </div>
 </section>

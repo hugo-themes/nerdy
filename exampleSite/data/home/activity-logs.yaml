@@ -2,16 +2,19 @@ id: activity-logs
 type: activity
 icon: clock
 title: Activity Log
+activityLimit: 20
+lookbackDays: 15
+includePosts: true
+postSection: posts
 items:
-  - date: Today
-    active: true
+  - activityDate: 2026-06-24
     type: merged-pr
     info:
       number: 1042
       title: Improved hook dependency bailout optimization for edge cases
       url: https://github.com/facebook/react/pull/1042
       repo: https://github.com/facebook/react
-  - date: 3 Days Ago
+  - activityDate: 2026-06-21
     type: release
     info:
       version: v2.3.5
