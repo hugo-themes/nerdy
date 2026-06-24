@@ -1,0 +1,25 @@
+name: Package sync
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  package-hugo-sync:
+    name: package.hugo.json dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+
+      - name: Verify package dependency sync
+        run: node scripts/check-package-hugo-sync.mjs
