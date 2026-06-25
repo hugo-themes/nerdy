@@ -5,3 +5,10 @@ public/
 resources/_gen/
 .agent-task
 .reasonix/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
