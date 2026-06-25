@@ -15,7 +15,7 @@ const DEPENDENCY_FIELDS = [
 // Dependencies that are useful only for this repository's local workflow should
 // stay out of package.hugo.json, which is consumed by downstream Hugo sites.
 const PACKAGE_JSON_ONLY = {
-  devDependencies: new Set(['portless']),
+  devDependencies: new Set(['portless', 'wrangler']),
 };
 
 function readJson(path) {
