@@ -1,5 +1,6 @@
 <pre class="font-mono whitespace-pre-wrap leading-relaxed">{{ range $index, $project := .items }}{{ $projectType := $project.type | default ($project.label | default "") }}{{ $projectTypeLower := lower $projectType }}{{ $typeAccent := "purple" }}{{ if eq $projectTypeLower "personal" }}{{ $typeAccent = "cyan" }}{{ end }}{{ $typeClasses := partial "components/accent-classes.html" $typeAccent }}<span class="text-accent-purple">{{ add $index 1 }}.</span> <span class="font-bold text-accent-cyan">{{ $project.name }}</span>{{ with $projectType }} <span class="{{ $typeClasses.chip }} align-middle uppercase">{{ . }}</span>{{ end }}
-   <span class="text-accent-cyan">Tech:</span> {{ delimit $project.tech ", " }}
+{{ with $project.role }}   <span class="text-accent-cyan">Role:</span> {{ . }}
+{{ end }}   <span class="text-accent-cyan">Tech:</span> {{ delimit $project.tech ", " }}
    <span class="text-accent-cyan">Desc:</span> {{ $project.description }}
    <span class="text-accent-cyan">Link:</span> <a class="pointer-events-auto relative z-50 nerdy-link underline" href="{{ $project.url }}" target="_blank" rel="noopener noreferrer">{{ $project.url }}</a>
 

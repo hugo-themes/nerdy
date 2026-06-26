@@ -24,6 +24,7 @@ weight: 40
 items:
   - name: E-Commerce Platform API
     type: Work
+    role: Technical lead — initial design and development
     tech:
       - Go
       - PostgreSQL
@@ -43,6 +44,7 @@ Each project supports:
 
 - `name`: project title.
 - `type`: optional project category such as `Work` or `Personal`.
+- `role`: optional note describing your role or contribution.
 - `tech`: short list of technologies.
 - `description`: one-line project summary.
 - `url`: link to code, demo, case study, or docs.
