@@ -6,6 +6,7 @@ weight: 40
 items:
   - name: E-Commerce Platform API
     type: Work
+    role: Technical lead — initial design and development
     tech:
       - Go
       - PostgreSQL
@@ -15,6 +16,7 @@ items:
     url: https://github.com/gopher/ecommerce-api
   - name: Real-Time Collaboration Tool
     type: Work
+    role: Co-maintainer
     tech:
       - React
       - WebSockets
@@ -24,6 +26,7 @@ items:
     url: https://demo.example.com/collab
   - name: CLI Task Manager
     type: Personal
+    role: Creator & maintianer
     tech:
       - Go
       - SQLite
