@@ -5,7 +5,6 @@ quick: true
 weight: 10
 greeting: Hello, World!
 person_name: "Mr. Gopher"
-role: Backend Developer
 summary: I specialize in writing clean, efficient, and robust code.
 details:
   - My journey in software development started with a fascination for how things

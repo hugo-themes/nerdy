@@ -23,7 +23,6 @@ quick: true
 weight: 10
 greeting: Hello, World!
 person_name: "Mr. Gopher"
-role: Backend Developer
 summary: I specialize in writing clean, efficient, and robust code.
 details:
   - I build scalable web applications and RESTful APIs.
@@ -37,7 +36,6 @@ Useful fields:
 
 - `greeting`: first highlighted phrase.
 - `person_name`: your name.
-- `role`: your role or title.
 - `summary`: one-sentence overview.
 - `details`: extra lines below the summary.
 - `quote`: optional quote with `text` and `author`.

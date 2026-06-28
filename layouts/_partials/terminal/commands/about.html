@@ -1,5 +1,4 @@
-<pre class="font-mono whitespace-pre-wrap leading-relaxed"><span class="text-accent-purple">{{ .greeting }}</span> I'm <span class="font-bold text-accent-emerald">{{ .person_name }}</span>, a passionate <span class="text-accent-cyan">{{ .role }}</span>.
-{{ .summary }}
+<pre class="font-mono whitespace-pre-wrap leading-relaxed"><span class="text-accent-purple">{{ .greeting }}</span> I'm <span class="font-bold text-accent-emerald">{{ .person_name }}</span>. {{ .summary }}
 
 {{ range .details -}}
 {{ . }}
