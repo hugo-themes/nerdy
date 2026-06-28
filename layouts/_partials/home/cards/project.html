@@ -3,8 +3,13 @@
 {{- $projectType := or .type .label -}}
 
 <article class="group nerdy-card nerdy-card-hover {{ $accentClasses.card }} relative flex flex-col overflow-hidden p-5">
-  <div class="mb-2 flex items-start justify-between gap-3">
-    <h3 class="min-w-0 text-lg font-bold nerdy-card-title {{ $accentClasses.title }}">{{ .title }}</h3>
+  <div class="mb-3 flex items-start justify-between gap-3">
+    <div class="min-w-0">
+      <h3 class="text-lg font-bold nerdy-card-title {{ $accentClasses.title }}">{{ .title }}</h3>
+      {{ with .role }}
+        <p class="mt-1 line-clamp-2 text-xs font-medium leading-5 nerdy-muted-soft">{{ . }}</p>
+      {{ end }}
+    </div>
     {{ with $projectType }}
       <span class="{{ $accentClasses.chip }} shrink-0 uppercase">{{ . }}</span>
     {{ end }}

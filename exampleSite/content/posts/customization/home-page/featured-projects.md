@@ -44,6 +44,7 @@ icon: code
 title: Featured Projects
 items:
   - title: CLI Task Manager
+    role: Creator & maintainer
     description: A terminal app for tasks, time tracking, and reports.
     type: Personal
     accent: cyan
@@ -66,6 +67,7 @@ Useful section fields:
 Each project card supports:
 
 - `title`: project name.
+- `role`: optional project role. It will be shown as subtitle below the project title.
 - `description`: short summary. Keep it concise because cards clamp long text.
 - `type`: optional category label such as `Work`, `Open Source`, or `Personal`.
 - `label`: fallback category label if `type` is omitted.
@@ -82,6 +84,7 @@ icon: repository
 title: Selected Work
 items:
   - title: Nexus API Gateway
+    role: Technical lead
     description: A high-performance API gateway with dynamic routing, rate limiting, and observability hooks.
     accent: purple
     type: Work
@@ -95,6 +98,7 @@ items:
         icon: external
 
   - title: NetOps CLI
+    role: Creator & maintainer
     description: A terminal-based toolkit for diagnosing network latency and container connectivity.
     accent: emerald
     type: Open Source
