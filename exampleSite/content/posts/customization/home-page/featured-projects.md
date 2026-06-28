@@ -46,6 +46,9 @@ items:
   - title: CLI Task Manager
     role: Creator & maintainer
     description: A terminal app for tasks, time tracking, and reports.
+    tech:
+      - Go
+      - SQLite
     type: Personal
     accent: cyan
     links:
@@ -69,6 +72,7 @@ Each project card supports:
 - `title`: project name.
 - `role`: optional project role. It will be shown as subtitle below the project title.
 - `description`: short summary. Keep it concise because cards clamp long text.
+- `tech`: optional list of technologies. The first three are shown as compact tags.
 - `type`: optional category label such as `Work`, `Open Source`, or `Personal`.
 - `label`: fallback category label if `type` is omitted.
 - `accent`: card color. Built-in accents are `cyan`, `purple`, `emerald`, and `amber`.
@@ -86,6 +90,10 @@ items:
   - title: Nexus API Gateway
     role: Technical lead
     description: A high-performance API gateway with dynamic routing, rate limiting, and observability hooks.
+    tech:
+      - Go
+      - Redis
+      - Docker
     accent: purple
     type: Work
     stars: 2.4k
@@ -100,6 +108,10 @@ items:
   - title: NetOps CLI
     role: Creator & maintainer
     description: A terminal-based toolkit for diagnosing network latency and container connectivity.
+    tech:
+      - Rust
+      - Tokio
+      - Docker
     accent: emerald
     type: Open Source
     stars: 890

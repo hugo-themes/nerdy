@@ -6,7 +6,11 @@ items:
   - title: Nexus API Gateway
     role: Technical lead
     description: A high-performance API gateway built in Go, capable of handling
-      50k+ req/sec with dynamic routing and rate limiting.
+      50k+ req/sec with dynamic routing, rate limiting, and real-time observability.
+    tech:
+      - Go
+      - Redis
+      - Docker
     accent: purple
     type: Work
     stars: 2.4k
@@ -20,7 +24,11 @@ items:
   - title: NetOps CLI
     role: Creator & maintainer
     description: A terminal-based toolkit written in Rust for diagnosing network
-      latencies and container connectivity.
+      latencies and container orchestration bottlenecks.
+    tech:
+      - Rust
+      - Tokio
+      - Docker
     accent: cyan
     type: Personal
     stars: 890
