@@ -6,7 +6,8 @@ items:
   - title: Nexus API Gateway
     role: Technical lead
     description: A high-performance API gateway built in Go, capable of handling
-      50k+ req/sec with dynamic routing, rate limiting, and real-time observability.
+      50k+ req/sec with dynamic routing, rate limiting, and real-time
+      observability.
     tech:
       - Go
       - Redis

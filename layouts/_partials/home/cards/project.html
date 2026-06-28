@@ -23,25 +23,27 @@
     </div>
   {{ end }}
   {{ if or .links .stars }}
-    <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-slate-300/60 pt-4 dark:border-slate-700/70">
-      {{ with .links }}
-        <div class="flex flex-wrap items-center gap-4">
-          {{ range . }}
-            <a class="inline-flex items-center gap-2 text-sm nerdy-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
-              <span class="flex h-4 w-4 shrink-0 items-center justify-center">
-                {{ partial "components/icon.html" (dict "name" .icon "class" "block h-4 w-4") }}
-              </span>
-              <span>{{ .label }}</span>
-            </a>
-          {{ end }}
-        </div>
-      {{ end }}
-      {{ with .stars }}
-        <span class="ml-auto inline-flex shrink-0 items-center gap-1.5 text-sm leading-5 nerdy-muted-soft" aria-label="{{ . }} GitHub stars">
-          {{ partial "components/icon.html" (dict "name" "star" "class" "block h-4 w-4") }}
-          <span>{{ . }}</span>
-        </span>
-      {{ end }}
+    <div class="mt-auto pt-3">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-slate-300/60 pt-4 dark:border-slate-700/70">
+        {{ with .links }}
+          <div class="flex flex-wrap items-center gap-4">
+            {{ range . }}
+              <a class="inline-flex items-center gap-2 text-sm nerdy-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+                <span class="flex h-4 w-4 shrink-0 items-center justify-center">
+                  {{ partial "components/icon.html" (dict "name" .icon "class" "block h-4 w-4") }}
+                </span>
+                <span>{{ .label }}</span>
+              </a>
+            {{ end }}
+          </div>
+        {{ end }}
+        {{ with .stars }}
+          <span class="ml-auto inline-flex shrink-0 items-center gap-1.5 text-sm leading-5 nerdy-muted-soft" aria-label="{{ . }} GitHub stars">
+            {{ partial "components/icon.html" (dict "name" "star" "class" "block h-4 w-4") }}
+            <span>{{ . }}</span>
+          </span>
+        {{ end }}
+      </div>
     </div>
   {{ end }}
 </article>
