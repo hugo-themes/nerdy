@@ -4,6 +4,15 @@ title: Nerdy
 disableKinds:
   - taxonomy
   - term
+security:
+  exec:
+    allow:
+      - '^(dart-)?sass(-embedded)?$'
+      - '^go$'
+      - '^git$'
+      - '^node$'
+      - '^postcss$'
+      - '^tailwindcss$'
 markup:
   tableOfContents:
     startLevel: 2

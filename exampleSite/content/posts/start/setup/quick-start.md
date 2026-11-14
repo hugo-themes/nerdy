@@ -74,6 +74,16 @@ hugo mod init github.com/you/your-site
 Add the theme import and Tailwind build-stat wiring to `hugo.yaml`:
 
 ```yaml
+security:
+  exec:
+    allow:
+      - '^(dart-)?sass(-embedded)?$'
+      - '^go$'
+      - '^git$'
+      - '^node$'
+      - '^postcss$'
+      - '^tailwindcss$'
+
 build:
   buildStats:
     enable: true
@@ -92,7 +102,7 @@ module:
       target: assets/notwatching/hugo_stats.json
 ```
 
-If your site already has `module.imports` or `module.mounts`, merge these entries instead of replacing your existing configuration. The `hugo_stats.json` mount gives Tailwind a stable file to scan without making Hugo watch its own generated build-stat file.
+If your site already has `security.exec.allow`, add `^node$` and `^tailwindcss$` to that list without removing your existing entries. Likewise, merge `module.imports` and `module.mounts` with any existing entries instead of replacing them. The `hugo_stats.json` mount gives Tailwind a stable file to scan without making Hugo watch its own generated build-stat file.
 
 Create or update `package.json` with scripts for local development, production builds, and theme dependency refreshes:
 
