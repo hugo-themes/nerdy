@@ -74,6 +74,16 @@ hugo mod init github.com/you/your-site
 Add the theme import and Tailwind build-stat wiring to `hugo.yaml`:
 
 ```yaml
+security:
+  exec:
+    allow:
+      - '^(dart-)?sass(-embedded)?$'
+      - '^go$'
+      - '^git$'
+      - '^node$'
+      - '^postcss$'
+      - '^tailwindcss$'
+
 build:
   buildStats:
     enable: true
@@ -92,7 +102,7 @@ module:
       target: assets/notwatching/hugo_stats.json
 ```
 
-If your site already has `module.imports` or `module.mounts`, merge these entries instead of replacing your existing configuration. The `hugo_stats.json` mount gives Tailwind a stable file to scan without making Hugo watch its own generated build-stat file.
+If your site already has `security.exec.allow`, add `^node$` and `^tailwindcss$` to that list without removing your existing entries. Likewise, merge `module.imports` and `module.mounts` with any existing entries instead of replacing them. The `hugo_stats.json` mount gives Tailwind a stable file to scan without making Hugo watch its own generated build-stat file.
 
 Create or update `package.json` with scripts for local development, production builds, and theme dependency refreshes:
 
@@ -102,6 +112,11 @@ Create or update `package.json` with scripts for local development, production b
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "overrides": {
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "6.1.6"
+    }
+  },
   "scripts": {
     "build": "hugo --renderToMemory && hugo --minify --gc --cleanDestinationDir",
     "server": "hugo --renderToMemory && hugo server --buildDrafts --watch",
@@ -122,6 +137,8 @@ npm install
 ```
 
 `hugo mod npm pack` reads Nerdy's `package.hugo.json`, creates `packages/hugoautogen/package.json`, and adds that generated package as an npm workspace. This keeps Tailwind, Alpine.js, and other theme asset dependencies in sync without copying them by hand.
+
+The root `overrides` entry replaces typography's vulnerable pinned selector parser with a patched version. Add it to an existing site's root `package.json` too, then run `npm install`; npm does not apply overrides from workspace packages.
 
 Then copy only the data files, assets, and content structure you want from `exampleSite/`, such as `data/sidebar.yaml`, `data/home/`, `data/terminal/`, and `content/posts/`.
 
