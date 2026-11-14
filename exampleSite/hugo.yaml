@@ -13,6 +13,11 @@ security:
       - '^node$'
       - '^postcss$'
       - '^tailwindcss$'
+  node:
+    permissions:
+      allowRead:
+        - '.'
+        - '../node_modules'
 markup:
   tableOfContents:
     startLevel: 2
